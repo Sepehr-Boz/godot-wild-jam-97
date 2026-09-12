@@ -10,6 +10,10 @@ const CHARACTER_ATLAS_INDEX: Dictionary[Character, Vector2i] = {
 	Character.MAGE: Vector2i(0, 7),
 	Character.ARCHER: Vector2i(4, 9)
 }
+const MOVE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(0, 5)
+const MOVE_DIRECTIONS: Array[Vector2i] = [
+	Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2(0, 1)
+]
 
 var character_positions: Dictionary[Character, Vector2i] = {
 	Character.KNIGHT: Vector2i(8, 4),
@@ -30,6 +34,11 @@ func _ready() -> void:
 	clear()
 	for type in Character.values():
 		set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
+	for move_dir in MOVE_DIRECTIONS:
+		var target_position: Vector2i = character_positions[current_character] + move_dir
+		if not intersects_character(target_position):
+			set_cell(target_position, 0, MOVE_MARKER_ATLAS_INDEX)
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -68,6 +77,10 @@ func move_characters(dir: Vector2i) -> void:
 			character_positions[type] = prev_char_position
 		prev_char_position = char_position
 		set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
+	for move_dir in MOVE_DIRECTIONS:
+		var target_position: Vector2i = character_positions[current_character] + move_dir
+		if not intersects_character(target_position):
+			set_cell(target_position, 0, MOVE_MARKER_ATLAS_INDEX)
 
 func switch_characters(direction: SwitchDirection) -> void:
 	clear()
@@ -91,3 +104,13 @@ func switch_characters(direction: SwitchDirection) -> void:
 			character_positions[character_queue[i]] = curr_position
 			curr_position = character_position
 			set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
+	for move_dir in MOVE_DIRECTIONS:
+		var target_position: Vector2i = character_positions[current_character] + move_dir
+		if not intersects_character(target_position):
+			set_cell(target_position, 0, MOVE_MARKER_ATLAS_INDEX)
+
+func intersects_character(coord: Vector2i) -> bool:
+	for type in Character.values():
+		if coord == character_positions[type]:
+			return true
+	return false
