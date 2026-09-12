@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" format=3 uid="uid://bm2asjndof166"]
 
-[ext_resource type="Texture2D" uid="uid://bcrhbavmfodme" path="res://textures/tiny_dungeon/tilemap.png" id="1_bfx85"]
+[ext_resource type="Texture2D" uid="uid://bcrhbavmfodme" path="res://textures/tiny_dungeon/tilemap.png" id="1_3d2at"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
-texture = ExtResource("1_bfx85")
+texture = ExtResource("1_3d2at")
 separation = Vector2i(1, 1)
 0:0/0 = 0
 1:0/0 = 0
@@ -139,4 +139,5 @@ separation = Vector2i(1, 1)
 11:10/0 = 0
 
 [resource]
+tile_size = Vector2i(17, 17)
 sources/0 = SubResource("TileSetAtlasSource_yqjtg")
