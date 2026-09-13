@@ -12,6 +12,7 @@ const CHARACTER_ATLAS_INDEX: Dictionary[Character, Vector2i] = {
 }
 const MOVE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(0, 5)
 
+@export var current_character_outline_color: Color = Color.WHITE
 var character_positions: Dictionary[Character, Vector2i] = {
 	Character.KNIGHT: Vector2i(8, 4),
 	Character.TANK: Vector2i(7, 4),
@@ -37,6 +38,7 @@ func _ready() -> void:
 	for type in Character.values():
 		set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
 	spawn_move_markers()
+	_scale_current_character_animation()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -97,20 +99,23 @@ func switch_characters(direction: SwitchDirection) -> void:
 	_scale_current_character_animation()
 
 func _scale_current_character_animation() -> void:
-	var _scale_current_character = func (value: Vector2):
+	var _current_character_animation = func (value: Vector2):
 		var shader: ShaderMaterial = get_cell_tile_data(character_positions[current_character]).material as ShaderMaterial
 		shader.set_shader_parameter("scale_addition", value)
+		shader.set_shader_parameter("remap_outline", true)
+		shader.set_shader_parameter("remapped_outline_color", current_character_outline_color)
 	
 	# if another tween is already running then stop it and reset the scale of ALL the characters
 	if _current_character_tween != null and _current_character_tween.is_running():
 		_current_character_tween.kill()
-		for character in Character.values():
-			var shader: ShaderMaterial = get_cell_tile_data(character_positions[character]).material as ShaderMaterial
-			shader.set_shader_parameter("scale_addition", Vector2.ZERO)
+	for character in Character.values():
+		var shader: ShaderMaterial = get_cell_tile_data(character_positions[character]).material as ShaderMaterial
+		shader.set_shader_parameter("scale_addition", Vector2.ZERO)
+		shader.set_shader_parameter("remap_outline", false)
 	
 	_current_character_tween = get_tree().create_tween()
-	_current_character_tween.tween_method(_scale_current_character, Vector2.ZERO, Vector2(96, 96), 0.1)
-	_current_character_tween.tween_method(_scale_current_character, Vector2(96, 96), Vector2.ZERO, 0.1)
+	_current_character_tween.tween_method(_current_character_animation, Vector2.ZERO, Vector2(96, 96), 0.1)
+	_current_character_tween.tween_method(_current_character_animation, Vector2(96, 96), Vector2.ZERO, 0.1)
 
 func spawn_move_markers() -> void:
 	for target_position in move_positions:

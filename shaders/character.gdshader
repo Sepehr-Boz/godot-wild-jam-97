@@ -13,14 +13,18 @@ uniform float max_rot_offset: hint_range(1.0, 2.0, 0.1) = 1.05;
 uniform bool shine_active = true;
 uniform float shine_speed = 1.0;
 uniform float shine_width: hint_range(0.0, 1.0, 0.0001) = 0.01;
-uniform vec3 shine_color = vec3(1, 1, 1);
+uniform vec3 shine_color: source_color = vec3(1, 1, 1);
 
 uniform vec2 scale_addition = vec2(0.0, 0.0);
+
+uniform bool remap_outline = false;
+uniform vec3 remapped_outline_color: source_color = vec3(1, 1, 1);
 
 uniform ivec2 atlas_index;
 
 const ivec2 ATLAS_SIZE = ivec2(12, 11);
 const vec2 tile_size = vec2(1.0, 1.0) / vec2(ATLAS_SIZE);
+const vec3 OUTLINE_COLOR = vec3(63.0 / 255.0, 38.0 / 255.0, 49.0 / 255.0);
 
 varying vec2 center_of_tile;
 varying vec2 start_of_tile;
@@ -74,12 +78,17 @@ void fragment() {
 	// check if should shine
 	// since in a tilemap can then loop time 0-1 and check if that overlaps
 	// with the uv so check for if should shine at that time
-	if (shine_active){
+	// dont shine over the outline
+	if (shine_active && COLOR.rgb != OUTLINE_COLOR){
 		float shine_time = mod(TIME * shine_speed + float(atlas_index.x) / float(atlas_index.y), 1.0);
 		float distance_to_shine = distance(UV.x, shine_time);
 		if (distance_to_shine <= shine_width){
 			COLOR.rgb = shine_color;
 		}
+	}
+	
+	if (remap_outline && COLOR.rgb == OUTLINE_COLOR){
+		COLOR.rgb = remapped_outline_color;
 	}
 }
 
