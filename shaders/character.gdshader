@@ -15,6 +15,8 @@ uniform float shine_speed = 1.0;
 uniform float shine_width: hint_range(0.0, 1.0, 0.0001) = 0.01;
 uniform vec3 shine_color = vec3(1, 1, 1);
 
+uniform vec2 scale_addition = vec2(0.0, 0.0);
+
 uniform ivec2 atlas_index;
 
 const ivec2 ATLAS_SIZE = ivec2(12, 11);
@@ -25,6 +27,7 @@ varying vec2 start_of_tile;
 varying vec2 end_of_tile;
 varying float time_offset;
 
+// from https://godotshaders.com/shader/rotate-texture/
 vec2 rotate(vec2 uv, vec2 pivot, float angle)
 {
 	mat2 rotation = mat2(vec2(sin(angle), -cos(angle)),
@@ -42,6 +45,10 @@ void vertex() {
 	center_of_tile = start_of_tile + tile_size / 2.0;
 	end_of_tile = start_of_tile + tile_size;
 	time_offset = float(atlas_index.x * atlas_index.y);
+	
+	vec2 diff = (center_of_tile - UV) * scale_addition;
+	VERTEX -= diff;
+	//VERTEX *= 1.0 + scale_addition;
 	
 	// move x over time
 	if (move_active){

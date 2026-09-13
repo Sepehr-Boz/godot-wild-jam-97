@@ -17,6 +17,7 @@ shader_parameter/shine_active = true
 shader_parameter/shine_speed = 0.2
 shader_parameter/shine_width = 0.01
 shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/atlas_index = Vector2i(0, 7)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cq0ts"]
@@ -33,6 +34,7 @@ shader_parameter/shine_active = true
 shader_parameter/shine_speed = 0.2
 shader_parameter/shine_width = 0.009999999747
 shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/atlas_index = Vector2i(0, 8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6jbuy"]
@@ -49,6 +51,7 @@ shader_parameter/shine_active = true
 shader_parameter/shine_speed = 0.2
 shader_parameter/shine_width = 0.009999999747
 shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/atlas_index = Vector2i(1, 7)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ykv4q"]
@@ -65,6 +68,7 @@ shader_parameter/shine_active = true
 shader_parameter/shine_speed = 0.2
 shader_parameter/shine_width = 0.009999999747
 shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/atlas_index = Vector2i(1, 8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yadhn"]
@@ -81,6 +85,7 @@ shader_parameter/shine_active = true
 shader_parameter/shine_speed = 0.2
 shader_parameter/shine_width = 0.009999999747
 shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/atlas_index = Vector2i(2, 7)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_68653"]
@@ -97,6 +102,7 @@ shader_parameter/shine_active = true
 shader_parameter/shine_speed = 0.2
 shader_parameter/shine_width = 0.009999999747
 shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/atlas_index = Vector2i(2, 8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_olx6g"]
@@ -113,6 +119,7 @@ shader_parameter/shine_active = true
 shader_parameter/shine_speed = 0.2
 shader_parameter/shine_width = 0.009999999747
 shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/atlas_index = Vector2i(3, 7)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x68c2"]
@@ -129,6 +136,7 @@ shader_parameter/shine_active = true
 shader_parameter/shine_speed = 0.2
 shader_parameter/shine_width = 0.009999999747
 shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/atlas_index = Vector2i(3, 8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6kqm8"]
@@ -145,6 +153,7 @@ shader_parameter/shine_active = true
 shader_parameter/shine_speed = 0.2
 shader_parameter/shine_width = 0.009999999747
 shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/atlas_index = Vector2i(4, 7)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w3mi8"]
@@ -161,6 +170,7 @@ shader_parameter/shine_active = true
 shader_parameter/shine_speed = 0.2
 shader_parameter/shine_width = 0.009999999747
 shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/atlas_index = Vector2i(4, 8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3p23j"]
@@ -177,6 +187,7 @@ shader_parameter/shine_active = true
 shader_parameter/shine_speed = 0.2
 shader_parameter/shine_width = 0.009999999747
 shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/atlas_index = Vector2i(4, 9)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]

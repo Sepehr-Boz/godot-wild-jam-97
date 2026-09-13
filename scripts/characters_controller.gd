@@ -22,6 +22,8 @@ var character_positions: Dictionary[Character, Vector2i] = {
 var character_queue: Array[Character] = [
 	Character.KNIGHT, Character.TANK, Character.MAGE, Character.ARCHER
 ]
+var _current_character_tween: Tween
+
 var current_character: Character:
 	get:
 		return character_queue[0]
@@ -92,6 +94,23 @@ func switch_characters(direction: SwitchDirection) -> void:
 			curr_position = character_position
 			set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
 	spawn_move_markers()
+	_scale_current_character_animation()
+
+func _scale_current_character_animation() -> void:
+	var _scale_current_character = func (value: Vector2):
+		var shader: ShaderMaterial = get_cell_tile_data(character_positions[current_character]).material as ShaderMaterial
+		shader.set_shader_parameter("scale_addition", value)
+	
+	# if another tween is already running then stop it and reset the scale of ALL the characters
+	if _current_character_tween != null and _current_character_tween.is_running():
+		_current_character_tween.kill()
+		for character in Character.values():
+			var shader: ShaderMaterial = get_cell_tile_data(character_positions[character]).material as ShaderMaterial
+			shader.set_shader_parameter("scale_addition", Vector2.ZERO)
+	
+	_current_character_tween = get_tree().create_tween()
+	_current_character_tween.tween_method(_scale_current_character, Vector2.ZERO, Vector2(96, 96), 0.1)
+	_current_character_tween.tween_method(_scale_current_character, Vector2(96, 96), Vector2.ZERO, 0.1)
 
 func spawn_move_markers() -> void:
 	for target_position in move_positions:
