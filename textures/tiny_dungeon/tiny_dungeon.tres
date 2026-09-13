@@ -1,6 +1,183 @@
 [gd_resource type="TileSet" format=3 uid="uid://bm2asjndof166"]
 
 [ext_resource type="Texture2D" uid="uid://bcrhbavmfodme" path="res://textures/tiny_dungeon/tilemap.png" id="1_3d2at"]
+[ext_resource type="Shader" uid="uid://4wp7icq1jn2o" path="res://shaders/character.gdshader" id="1_3p23j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jotrs"]
+shader = ExtResource("1_3p23j")
+shader_parameter/move_active = true
+shader_parameter/position_speed = 1.0
+shader_parameter/min_pos_offset = -0.5
+shader_parameter/max_pos_offset = 0.5
+shader_parameter/rotate_active = true
+shader_parameter/rotation_speed = 1.0
+shader_parameter/min_rot_offset = 0.95
+shader_parameter/max_rot_offset = 1.05
+shader_parameter/shine_active = true
+shader_parameter/shine_speed = 0.2
+shader_parameter/shine_width = 0.01
+shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/atlas_index = Vector2i(0, 7)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cq0ts"]
+shader = ExtResource("1_3p23j")
+shader_parameter/move_active = true
+shader_parameter/position_speed = 1.0
+shader_parameter/min_pos_offset = -0.5
+shader_parameter/max_pos_offset = 0.5
+shader_parameter/rotate_active = true
+shader_parameter/rotation_speed = 1.0
+shader_parameter/min_rot_offset = 0.95
+shader_parameter/max_rot_offset = 1.05
+shader_parameter/shine_active = true
+shader_parameter/shine_speed = 0.2
+shader_parameter/shine_width = 0.009999999747
+shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/atlas_index = Vector2i(0, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6jbuy"]
+shader = ExtResource("1_3p23j")
+shader_parameter/move_active = true
+shader_parameter/position_speed = 1.0
+shader_parameter/min_pos_offset = -0.5
+shader_parameter/max_pos_offset = 0.5
+shader_parameter/rotate_active = true
+shader_parameter/rotation_speed = 1.0
+shader_parameter/min_rot_offset = 0.95
+shader_parameter/max_rot_offset = 1.05
+shader_parameter/shine_active = true
+shader_parameter/shine_speed = 0.2
+shader_parameter/shine_width = 0.009999999747
+shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/atlas_index = Vector2i(1, 7)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ykv4q"]
+shader = ExtResource("1_3p23j")
+shader_parameter/move_active = true
+shader_parameter/position_speed = 1.0
+shader_parameter/min_pos_offset = -0.5
+shader_parameter/max_pos_offset = 0.5
+shader_parameter/rotate_active = true
+shader_parameter/rotation_speed = 1.0
+shader_parameter/min_rot_offset = 0.95
+shader_parameter/max_rot_offset = 1.05
+shader_parameter/shine_active = true
+shader_parameter/shine_speed = 0.2
+shader_parameter/shine_width = 0.009999999747
+shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/atlas_index = Vector2i(1, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yadhn"]
+shader = ExtResource("1_3p23j")
+shader_parameter/move_active = true
+shader_parameter/position_speed = 1.0
+shader_parameter/min_pos_offset = -0.5
+shader_parameter/max_pos_offset = 0.5
+shader_parameter/rotate_active = true
+shader_parameter/rotation_speed = 1.0
+shader_parameter/min_rot_offset = 0.95
+shader_parameter/max_rot_offset = 1.05
+shader_parameter/shine_active = true
+shader_parameter/shine_speed = 0.2
+shader_parameter/shine_width = 0.009999999747
+shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/atlas_index = Vector2i(2, 7)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_68653"]
+shader = ExtResource("1_3p23j")
+shader_parameter/move_active = true
+shader_parameter/position_speed = 1.0
+shader_parameter/min_pos_offset = -0.5
+shader_parameter/max_pos_offset = 0.5
+shader_parameter/rotate_active = true
+shader_parameter/rotation_speed = 1.0
+shader_parameter/min_rot_offset = 0.95
+shader_parameter/max_rot_offset = 1.05
+shader_parameter/shine_active = true
+shader_parameter/shine_speed = 0.2
+shader_parameter/shine_width = 0.009999999747
+shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/atlas_index = Vector2i(2, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_olx6g"]
+shader = ExtResource("1_3p23j")
+shader_parameter/move_active = true
+shader_parameter/position_speed = 1.0
+shader_parameter/min_pos_offset = -0.5
+shader_parameter/max_pos_offset = 0.5
+shader_parameter/rotate_active = true
+shader_parameter/rotation_speed = 1.0
+shader_parameter/min_rot_offset = 0.95
+shader_parameter/max_rot_offset = 1.05
+shader_parameter/shine_active = true
+shader_parameter/shine_speed = 0.2
+shader_parameter/shine_width = 0.009999999747
+shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/atlas_index = Vector2i(3, 7)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x68c2"]
+shader = ExtResource("1_3p23j")
+shader_parameter/move_active = true
+shader_parameter/position_speed = 1.0
+shader_parameter/min_pos_offset = -0.5
+shader_parameter/max_pos_offset = 0.5
+shader_parameter/rotate_active = true
+shader_parameter/rotation_speed = 1.0
+shader_parameter/min_rot_offset = 0.95
+shader_parameter/max_rot_offset = 1.05
+shader_parameter/shine_active = true
+shader_parameter/shine_speed = 0.2
+shader_parameter/shine_width = 0.009999999747
+shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/atlas_index = Vector2i(3, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6kqm8"]
+shader = ExtResource("1_3p23j")
+shader_parameter/move_active = true
+shader_parameter/position_speed = 1.0
+shader_parameter/min_pos_offset = -0.5
+shader_parameter/max_pos_offset = 0.5
+shader_parameter/rotate_active = true
+shader_parameter/rotation_speed = 1.0
+shader_parameter/min_rot_offset = 0.95
+shader_parameter/max_rot_offset = 1.05
+shader_parameter/shine_active = true
+shader_parameter/shine_speed = 0.2
+shader_parameter/shine_width = 0.009999999747
+shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/atlas_index = Vector2i(4, 7)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3mi8"]
+shader = ExtResource("1_3p23j")
+shader_parameter/move_active = true
+shader_parameter/position_speed = 1.0
+shader_parameter/min_pos_offset = -0.5
+shader_parameter/max_pos_offset = 0.5
+shader_parameter/rotate_active = true
+shader_parameter/rotation_speed = 1.0
+shader_parameter/min_rot_offset = 0.95
+shader_parameter/max_rot_offset = 1.05
+shader_parameter/shine_active = true
+shader_parameter/shine_speed = 0.2
+shader_parameter/shine_width = 0.009999999747
+shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/atlas_index = Vector2i(4, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3p23j"]
+shader = ExtResource("1_3p23j")
+shader_parameter/move_active = true
+shader_parameter/position_speed = 1.0
+shader_parameter/min_pos_offset = -0.5
+shader_parameter/max_pos_offset = 0.5
+shader_parameter/rotate_active = true
+shader_parameter/rotation_speed = 1.0
+shader_parameter/min_rot_offset = 0.95
+shader_parameter/max_rot_offset = 1.05
+shader_parameter/shine_active = true
+shader_parameter/shine_speed = 0.2
+shader_parameter/shine_width = 0.009999999747
+shader_parameter/shine_color = Vector3(1, 1, 1)
+shader_parameter/atlas_index = Vector2i(4, 9)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("1_3d2at")
@@ -90,10 +267,15 @@ separation = Vector2i(1, 1)
 10:6/0 = 0
 11:6/0 = 0
 0:7/0 = 0
+0:7/0/material = SubResource("ShaderMaterial_jotrs")
 1:7/0 = 0
+1:7/0/material = SubResource("ShaderMaterial_6jbuy")
 2:7/0 = 0
+2:7/0/material = SubResource("ShaderMaterial_yadhn")
 3:7/0 = 0
+3:7/0/material = SubResource("ShaderMaterial_olx6g")
 4:7/0 = 0
+4:7/0/material = SubResource("ShaderMaterial_6kqm8")
 5:7/0 = 0
 6:7/0 = 0
 7:7/0 = 0
@@ -102,10 +284,15 @@ separation = Vector2i(1, 1)
 10:7/0 = 0
 11:7/0 = 0
 0:8/0 = 0
+0:8/0/material = SubResource("ShaderMaterial_cq0ts")
 1:8/0 = 0
+1:8/0/material = SubResource("ShaderMaterial_ykv4q")
 2:8/0 = 0
+2:8/0/material = SubResource("ShaderMaterial_68653")
 3:8/0 = 0
+3:8/0/material = SubResource("ShaderMaterial_x68c2")
 4:8/0 = 0
+4:8/0/material = SubResource("ShaderMaterial_w3mi8")
 5:8/0 = 0
 6:8/0 = 0
 7:8/0 = 0
@@ -118,6 +305,7 @@ separation = Vector2i(1, 1)
 2:9/0 = 0
 3:9/0 = 0
 4:9/0 = 0
+4:9/0/material = SubResource("ShaderMaterial_3p23j")
 5:9/0 = 0
 6:9/0 = 0
 7:9/0 = 0
