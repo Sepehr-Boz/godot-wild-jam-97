@@ -48,14 +48,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				if clicked_cell == character_positions[type]:
 					return
 			var current_character_position: Vector2i = character_positions[current_character]
-			if clicked_cell == current_character_position - Vector2i(1, 0):
-				move_characters(Vector2i(-1, 0))
-			elif clicked_cell == current_character_position + Vector2i(1, 0):
-				move_characters(Vector2i(1, 0))
-			elif clicked_cell == current_character_position - Vector2i(0, 1):
-				move_characters(Vector2i(0, -1))
-			elif clicked_cell == current_character_position + Vector2i(0, 1):
-				move_characters(Vector2i(0, 1))
+			if clicked_cell in move_positions:
+				move_characters(clicked_cell - current_character_position)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP and not event.pressed:
 			switch_characters(SwitchDirection.FRONT)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and not event.pressed:
