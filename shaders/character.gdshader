@@ -22,8 +22,13 @@ uniform vec3 remapped_outline_color: source_color = vec3(1, 1, 1);
 
 uniform ivec2 atlas_index;
 
-const ivec2 ATLAS_SIZE = ivec2(12, 11);
-const vec2 tile_size = vec2(1.0, 1.0) / vec2(ATLAS_SIZE);
+const ivec2 TEXTURE_SIZE = ivec2(203, 186);
+const ivec2 TILE_SIZE = ivec2(16, 16);
+const ivec2 TILE_SEPARATION = ivec2(1, 1);
+const ivec2 MARGIN_SIZE = ivec2(0, 0);
+const vec2 NORMALIZED_TILE_SIZE = vec2(TILE_SIZE) / vec2(TEXTURE_SIZE);
+const vec2 NORMALIZED_SEPARATION_SIZE = vec2(TILE_SEPARATION) / vec2(TEXTURE_SIZE);
+const vec2 NORMALIZED_MARGIN_SIZE = vec2(MARGIN_SIZE) / vec2(TEXTURE_SIZE);
 const vec3 OUTLINE_COLOR = vec3(63.0 / 255.0, 38.0 / 255.0, 49.0 / 255.0);
 
 varying vec2 center_of_tile;
@@ -45,14 +50,15 @@ vec2 rotate(vec2 uv, vec2 pivot, float angle)
 
 void vertex() {
 	// Called for every vertex the material is visible on.
-	start_of_tile = tile_size * vec2(atlas_index);
-	center_of_tile = start_of_tile + tile_size / 2.0;
-	end_of_tile = start_of_tile + tile_size;
+	start_of_tile = NORMALIZED_MARGIN_SIZE
+		+ (NORMALIZED_TILE_SIZE * vec2(atlas_index))
+		+ (vec2(NORMALIZED_SEPARATION_SIZE) * vec2(atlas_index));
+	center_of_tile = start_of_tile + NORMALIZED_TILE_SIZE / 2.0;
+	end_of_tile = start_of_tile + NORMALIZED_TILE_SIZE;
 	time_offset = float(atlas_index.x * atlas_index.y);
 	
 	vec2 diff = (center_of_tile - UV) * scale_addition;
 	VERTEX -= diff;
-	//VERTEX *= 1.0 + scale_addition;
 	
 	// move x over time
 	if (move_active){
