@@ -45,7 +45,6 @@ func _ready() -> void:
 	for type in Character.values():
 		_character_tilemap.set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
 	spawn_move_markers()
-	spawn_index_markers()
 	_scale_current_character_animation()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -66,10 +65,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			switch_characters(SwitchDirection.FRONT)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and not event.pressed:
 			switch_characters(SwitchDirection.BACK)
+	elif event.is_action_pressed("show_number"):
+		spawn_index_markers()
+	elif event.is_action_released("show_number"):
+		clear_index_markers()
 
 func move_characters(dir: Vector2i) -> void:
 	_character_tilemap.clear()
-	_marker_tilemap.clear()
+	clear_move_markers()
 	var prev_char_position: Vector2i
 	for i in len(character_queue):
 		var type: Character = character_queue[i]
@@ -81,11 +84,10 @@ func move_characters(dir: Vector2i) -> void:
 		prev_char_position = char_position
 		_character_tilemap.set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
 	spawn_move_markers()
-	spawn_index_markers()
 
 func switch_characters(direction: SwitchDirection) -> void:
 	_character_tilemap.clear()
-	_marker_tilemap.clear()
+	clear_move_markers()
 	if direction == SwitchDirection.FRONT:
 		# move the current character to the back and push everything up
 		var character: Character = character_queue.pop_front()
@@ -107,7 +109,6 @@ func switch_characters(direction: SwitchDirection) -> void:
 			curr_position = character_position
 			_character_tilemap.set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
 	spawn_move_markers()
-	spawn_index_markers()
 	_scale_current_character_animation()
 
 func _scale_current_character_animation() -> void:
@@ -143,6 +144,15 @@ func spawn_index_markers() -> void:
 			2: _marker_tilemap.set_cell(position, 0, TWO_MARKER_ATLAS_INDEX)
 			3: _marker_tilemap.set_cell(position, 0, THREE_MARKER_ATLAS_INDEX)
 			4: _marker_tilemap.set_cell(position, 0, FOUR_MARKER_ATLAS_INDEX)
+
+func clear_move_markers() -> void:
+	for position: Vector2i in _marker_tilemap.get_surrounding_cells(character_positions[current_character]):
+		if _marker_tilemap.get_cell_atlas_coords(position) == MOVE_MARKER_ATLAS_INDEX:
+			_marker_tilemap.erase_cell(position)
+
+func clear_index_markers() -> void:
+	for position: Vector2i in character_positions.values():
+		_marker_tilemap.erase_cell(position)
 
 func intersects_character(coord: Vector2i) -> bool:
 	for type in Character.values():
