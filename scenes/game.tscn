@@ -2,6 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://bm2asjndof166" path="res://textures/tiny_dungeon/tiny_dungeon.tres" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://b8rutvltj8dok" path="res://scripts/characters_controller.gd" id="2_yqjtg"]
+[ext_resource type="TileSet" uid="uid://iieoex3k564" path="res://textures/tiny_battle/tiny_battle.tres" id="3_lnu2h"]
 
 [node name="Node2D" type="Node2D" unique_id=1351537289]
 
@@ -20,3 +21,7 @@ current_character_outline_color = Color(0.57254905, 0.92941177, 0.9607843, 1)
 [node name="Characters" type="TileMapLayer" parent="Character Manager" unique_id=662563618]
 tile_map_data = PackedByteArray("AAAGAAQAAAAAAAcAAAAHAAQAAAAAAAgAAAAIAAQAAAADAAcAAAAFAAQAAAAEAAkAAAA=")
 tile_set = ExtResource("1_uwrxv")
+
+[node name="Markers" type="TileMapLayer" parent="Character Manager" unique_id=1685389557]
+tile_map_data = PackedByteArray("AAAIAAQAAAABAAoAAAAHAAQAAAACAAoAAAAGAAQAAAADAAoAAAAFAAQAAAAEAAoAAAAIAAMAAAAHAAMAAAAJAAQAAAAHAAMAAAAIAAUAAAAHAAMAAAA=")
+tile_set = ExtResource("3_lnu2h")

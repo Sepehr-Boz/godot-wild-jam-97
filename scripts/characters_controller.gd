@@ -10,10 +10,15 @@ const CHARACTER_ATLAS_INDEX: Dictionary[Character, Vector2i] = {
 	Character.MAGE: Vector2i(0, 7),
 	Character.ARCHER: Vector2i(4, 9)
 }
-const MOVE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(0, 5)
+const MOVE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(7, 3)
+const ONE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(1, 10)
+const TWO_MARKER_ATLAS_INDEX: Vector2i = Vector2i(2, 10)
+const THREE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(3, 10)
+const FOUR_MARKER_ATLAS_INDEX: Vector2i = Vector2i(4, 10)
 
 @export var current_character_outline_color: Color = Color.WHITE
 @onready var _character_tilemap: TileMapLayer = $Characters
+@onready var _marker_tilemap: TileMapLayer = $Markers
 var character_positions: Dictionary[Character, Vector2i] = {
 	Character.KNIGHT: Vector2i(8, 4),
 	Character.TANK: Vector2i(7, 4),
@@ -36,9 +41,11 @@ var move_positions: Array[Vector2i]:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_character_tilemap.clear()
+	_marker_tilemap.clear()
 	for type in Character.values():
 		_character_tilemap.set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
 	spawn_move_markers()
+	spawn_index_markers()
 	_scale_current_character_animation()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -62,6 +69,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func move_characters(dir: Vector2i) -> void:
 	_character_tilemap.clear()
+	_marker_tilemap.clear()
 	var prev_char_position: Vector2i
 	for i in len(character_queue):
 		var type: Character = character_queue[i]
@@ -73,9 +81,11 @@ func move_characters(dir: Vector2i) -> void:
 		prev_char_position = char_position
 		_character_tilemap.set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
 	spawn_move_markers()
+	spawn_index_markers()
 
 func switch_characters(direction: SwitchDirection) -> void:
 	_character_tilemap.clear()
+	_marker_tilemap.clear()
 	if direction == SwitchDirection.FRONT:
 		# move the current character to the back and push everything up
 		var character: Character = character_queue.pop_front()
@@ -97,6 +107,7 @@ func switch_characters(direction: SwitchDirection) -> void:
 			curr_position = character_position
 			_character_tilemap.set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
 	spawn_move_markers()
+	spawn_index_markers()
 	_scale_current_character_animation()
 
 func _scale_current_character_animation() -> void:
@@ -121,7 +132,17 @@ func _scale_current_character_animation() -> void:
 func spawn_move_markers() -> void:
 	for target_position in move_positions:
 		if not intersects_character(target_position):
-			_character_tilemap.set_cell(target_position, 0, MOVE_MARKER_ATLAS_INDEX)
+			_marker_tilemap.set_cell(target_position, 0, MOVE_MARKER_ATLAS_INDEX)
+
+func spawn_index_markers() -> void:
+	for i in len(character_queue):
+		var index: int = i + 1
+		var position: Vector2i = character_positions[character_queue[i]]
+		match index:
+			1: _marker_tilemap.set_cell(position, 0, ONE_MARKER_ATLAS_INDEX)
+			2: _marker_tilemap.set_cell(position, 0, TWO_MARKER_ATLAS_INDEX)
+			3: _marker_tilemap.set_cell(position, 0, THREE_MARKER_ATLAS_INDEX)
+			4: _marker_tilemap.set_cell(position, 0, FOUR_MARKER_ATLAS_INDEX)
 
 func intersects_character(coord: Vector2i) -> bool:
 	for type in Character.values():
