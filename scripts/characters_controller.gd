@@ -1,4 +1,4 @@
-extends TileMapLayer
+extends Node
 
 # SPECIFICALLY ORDERED THIS WAY BECAUSE ARCHER FOLLOWS MAGE WHICH FOLLOWS TANK
 # WHICH FOLLOWS THE KNIGHT
@@ -13,6 +13,7 @@ const CHARACTER_ATLAS_INDEX: Dictionary[Character, Vector2i] = {
 const MOVE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(0, 5)
 
 @export var current_character_outline_color: Color = Color.WHITE
+@onready var _character_tilemap: TileMapLayer = $Characters
 var character_positions: Dictionary[Character, Vector2i] = {
 	Character.KNIGHT: Vector2i(8, 4),
 	Character.TANK: Vector2i(7, 4),
@@ -30,13 +31,13 @@ var current_character: Character:
 		return character_queue[0]
 var move_positions: Array[Vector2i]:
 	get:
-		return get_surrounding_cells(character_positions[current_character])
+		return _character_tilemap.get_surrounding_cells(character_positions[current_character])
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	clear()
+	_character_tilemap.clear()
 	for type in Character.values():
-		set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
+		_character_tilemap.set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
 	spawn_move_markers()
 	_scale_current_character_animation()
 
@@ -46,7 +47,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			# check if pressed on any cell surrounding the CURRENT character position
 			# and if so then move it and all the companions to that position also
-			var clicked_cell: Vector2i = local_to_map(get_local_mouse_position())
+			var clicked_cell: Vector2i = _character_tilemap.local_to_map(_character_tilemap.get_local_mouse_position())
 			# DONT ALLOW moving back onto other companions
 			for type in Character.values():
 				if clicked_cell == character_positions[type]:
@@ -60,7 +61,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			switch_characters(SwitchDirection.BACK)
 
 func move_characters(dir: Vector2i) -> void:
-	clear()
+	_character_tilemap.clear()
 	var prev_char_position: Vector2i
 	for i in len(character_queue):
 		var type: Character = character_queue[i]
@@ -70,11 +71,11 @@ func move_characters(dir: Vector2i) -> void:
 		else:
 			character_positions[type] = prev_char_position
 		prev_char_position = char_position
-		set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
+		_character_tilemap.set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
 	spawn_move_markers()
 
 func switch_characters(direction: SwitchDirection) -> void:
-	clear()
+	_character_tilemap.clear()
 	if direction == SwitchDirection.FRONT:
 		# move the current character to the back and push everything up
 		var character: Character = character_queue.pop_front()
@@ -84,7 +85,7 @@ func switch_characters(direction: SwitchDirection) -> void:
 			var character_position: Vector2i = character_positions[character_queue[i]]
 			character_positions[character_queue[i]] = curr_position
 			curr_position = character_position
-			set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
+			_character_tilemap.set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
 	else:
 		# push the current character back and the tail to the front
 		var character: Character = character_queue.pop_back()
@@ -94,13 +95,13 @@ func switch_characters(direction: SwitchDirection) -> void:
 			var character_position: Vector2i = character_positions[character_queue[i]]
 			character_positions[character_queue[i]] = curr_position
 			curr_position = character_position
-			set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
+			_character_tilemap.set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
 	spawn_move_markers()
 	_scale_current_character_animation()
 
 func _scale_current_character_animation() -> void:
 	var _current_character_animation = func (value: Vector2):
-		var shader: ShaderMaterial = get_cell_tile_data(character_positions[current_character]).material as ShaderMaterial
+		var shader: ShaderMaterial = _character_tilemap.get_cell_tile_data(character_positions[current_character]).material as ShaderMaterial
 		shader.set_shader_parameter("scale_addition", value)
 		shader.set_shader_parameter("remap_outline", true)
 		shader.set_shader_parameter("remapped_outline_color", current_character_outline_color)
@@ -109,7 +110,7 @@ func _scale_current_character_animation() -> void:
 	if _current_character_tween != null and _current_character_tween.is_running():
 		_current_character_tween.kill()
 	for character in Character.values():
-		var shader: ShaderMaterial = get_cell_tile_data(character_positions[character]).material as ShaderMaterial
+		var shader: ShaderMaterial = _character_tilemap.get_cell_tile_data(character_positions[character]).material as ShaderMaterial
 		shader.set_shader_parameter("scale_addition", Vector2.ZERO)
 		shader.set_shader_parameter("remap_outline", false)
 	
@@ -120,7 +121,7 @@ func _scale_current_character_animation() -> void:
 func spawn_move_markers() -> void:
 	for target_position in move_positions:
 		if not intersects_character(target_position):
-			set_cell(target_position, 0, MOVE_MARKER_ATLAS_INDEX)
+			_character_tilemap.set_cell(target_position, 0, MOVE_MARKER_ATLAS_INDEX)
 
 func intersects_character(coord: Vector2i) -> bool:
 	for type in Character.values():
