@@ -84,6 +84,7 @@ func move_characters(dir: Vector2i) -> void:
 		prev_char_position = char_position
 		_character_tilemap.set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
 	spawn_move_markers()
+	_scale_current_character_animation()
 
 func switch_characters(direction: SwitchDirection) -> void:
 	_character_tilemap.clear()
