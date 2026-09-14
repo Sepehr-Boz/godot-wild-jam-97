@@ -1,3 +1,4 @@
+class_name CharacterController
 extends Node
 
 # SPECIFICALLY ORDERED THIS WAY BECAUSE ARCHER FOLLOWS MAGE WHICH FOLLOWS TANK
@@ -15,6 +16,9 @@ const ONE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(1, 10)
 const TWO_MARKER_ATLAS_INDEX: Vector2i = Vector2i(2, 10)
 const THREE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(3, 10)
 const FOUR_MARKER_ATLAS_INDEX: Vector2i = Vector2i(4, 10)
+
+static var instance: CharacterController
+signal increment_time()
 
 @export var current_character_outline_color: Color = Color.WHITE
 @onready var _character_tilemap: TileMapLayer = $Characters
@@ -40,6 +44,7 @@ var move_positions: Array[Vector2i]:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	instance = self
 	_character_tilemap.clear()
 	_marker_tilemap.clear()
 	for type in Character.values():
@@ -85,6 +90,7 @@ func move_characters(dir: Vector2i) -> void:
 		_character_tilemap.set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
 	spawn_move_markers()
 	_scale_current_character_animation()
+	increment_time.emit()
 
 func switch_characters(direction: SwitchDirection) -> void:
 	_character_tilemap.clear()
@@ -111,6 +117,7 @@ func switch_characters(direction: SwitchDirection) -> void:
 			_character_tilemap.set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
 	spawn_move_markers()
 	_scale_current_character_animation()
+	increment_time.emit()
 
 func _scale_current_character_animation() -> void:
 	var _current_character_animation = func (value: Vector2):
