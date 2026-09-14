@@ -2,6 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://bcrhbavmfodme" path="res://textures/tiny_dungeon/tilemap.png" id="1_3d2at"]
 [ext_resource type="Shader" uid="uid://4wp7icq1jn2o" path="res://shaders/character.gdshader" id="1_3p23j"]
+[ext_resource type="Shader" uid="uid://bqygprak6n8w3" path="res://shaders/ground.gdshader" id="1_jotrs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ax4kx"]
+shader = ExtResource("1_jotrs")
+shader_parameter/has_inline = true
+shader_parameter/inline_width = 0.035
+shader_parameter/inline_color = Color(0, 0, 0, 1)
+shader_parameter/atlas_index = Vector2i(0, 4)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jotrs"]
 shader = ExtResource("1_3p23j")
@@ -40,6 +48,13 @@ shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/remap_outline = false
 shader_parameter/remapped_outline_color = Color(1, 1, 1, 1)
 shader_parameter/atlas_index = Vector2i(0, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ok7qc"]
+shader = ExtResource("1_jotrs")
+shader_parameter/has_inline = true
+shader_parameter/inline_width = 0.01
+shader_parameter/inline_color = Color(0, 0, 0, 1)
+shader_parameter/atlas_index = Vector2i(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6jbuy"]
 shader = ExtResource("1_3p23j")
@@ -264,11 +279,17 @@ separation = Vector2i(1, 1)
 10:3/0 = 0
 11:3/0 = 0
 0:4/0 = 0
+0:4/0/material = SubResource("ShaderMaterial_ax4kx")
 1:4/0 = 0
+1:4/0/material = SubResource("ShaderMaterial_ok7qc")
 2:4/0 = 0
+2:4/0/material = SubResource("ShaderMaterial_ok7qc")
 3:4/0 = 0
+3:4/0/material = SubResource("ShaderMaterial_ok7qc")
 4:4/0 = 0
+4:4/0/material = SubResource("ShaderMaterial_ok7qc")
 5:4/0 = 0
+5:4/0/material = SubResource("ShaderMaterial_ok7qc")
 6:4/0 = 0
 7:4/0 = 0
 8:4/0 = 0
@@ -360,5 +381,4 @@ separation = Vector2i(1, 1)
 11:10/0 = 0
 
 [resource]
-tile_size = Vector2i(17, 17)
 sources/0 = SubResource("TileSetAtlasSource_yqjtg")
