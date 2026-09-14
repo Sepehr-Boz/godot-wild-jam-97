@@ -65,9 +65,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			switch_characters(SwitchDirection.FRONT)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and not event.pressed:
 			switch_characters(SwitchDirection.BACK)
-	elif event.is_action_pressed("show_number"):
+	elif event.is_action_pressed("show_tips"):
 		spawn_index_markers()
-	elif event.is_action_released("show_number"):
+	elif event.is_action_released("show_tips"):
 		clear_index_markers()
 
 func move_characters(dir: Vector2i) -> void:
