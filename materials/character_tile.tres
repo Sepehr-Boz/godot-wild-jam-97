@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://drjcxgboxew5j"]
+
+[ext_resource type="Shader" uid="uid://4wp7icq1jn2o" path="res://shaders/character.gdshader" id="1_n3puy"]
+
+[resource]
+shader = ExtResource("1_n3puy")
+shader_parameter/move_active = true
+shader_parameter/position_speed = 1.0
+shader_parameter/min_pos_offset = -0.5
+shader_parameter/max_pos_offset = 0.5
+shader_parameter/rotate_active = true
+shader_parameter/rotation_speed = 1.0
+shader_parameter/min_rot_offset = 0.95
+shader_parameter/max_rot_offset = 1.05
+shader_parameter/shine_active = true
+shader_parameter/shine_speed = 5.0
+shader_parameter/shine_width = 0.049999998735
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/scale_addition = Vector2(0, 0)
+shader_parameter/remap_outline = false
+shader_parameter/remapped_outline_color = Color(1, 1, 1, 1)

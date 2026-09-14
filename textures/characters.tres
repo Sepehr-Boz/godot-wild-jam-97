@@ -1,5 +1,6 @@
 [gd_resource type="TileSet" format=3 uid="uid://dui5l7xdis3kd"]
 
+[ext_resource type="Material" uid="uid://drjcxgboxew5j" path="res://materials/character_tile.tres" id="1_8278l"]
 [ext_resource type="Texture2D" uid="uid://b5u1q54mshcu5" path="res://textures/tiny_dungeon/tile_0084.png" id="1_jpip6"]
 [ext_resource type="Texture2D" uid="uid://c2bporr1t4ank" path="res://textures/tiny_dungeon/tile_0085.png" id="2_8278l"]
 [ext_resource type="Texture2D" uid="uid://dkimm1463x8pw" path="res://textures/tiny_dungeon/tile_0108.png" id="3_as7qf"]
@@ -24,42 +25,52 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jpip6"]
 texture = ExtResource("1_jpip6")
 0:0/0 = 0
+0:0/0/material = ExtResource("1_8278l")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8278l"]
 texture = ExtResource("2_8278l")
 0:0/0 = 0
+0:0/0/material = ExtResource("1_8278l")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_as7qf"]
 texture = ExtResource("13_wsr8p")
 0:0/0 = 0
+0:0/0/material = ExtResource("1_8278l")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78r2y"]
 texture = ExtResource("14_va305")
 0:0/0 = 0
+0:0/0/material = ExtResource("1_8278l")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g6qkb"]
 texture = ExtResource("15_w27if")
 0:0/0 = 0
+0:0/0/material = ExtResource("1_8278l")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7tqi1"]
 texture = ExtResource("16_t0ixn")
 0:0/0 = 0
+0:0/0/material = ExtResource("1_8278l")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qyf3v"]
 texture = ExtResource("17_7fitt")
 0:0/0 = 0
+0:0/0/material = ExtResource("1_8278l")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yi22v"]
 texture = ExtResource("18_pl4tm")
 0:0/0 = 0
+0:0/0/material = ExtResource("1_8278l")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a42lr"]
 texture = ExtResource("19_y0mfx")
 0:0/0 = 0
+0:0/0/material = ExtResource("1_8278l")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_loxw2"]
 texture = ExtResource("20_4l201")
 0:0/0 = 0
+0:0/0/material = ExtResource("1_8278l")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5fsl3"]
 texture = ExtResource("3_as7qf")
@@ -80,6 +91,7 @@ texture = ExtResource("6_7tqi1")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w27if"]
 texture = ExtResource("7_qyf3v")
 0:0/0 = 0
+0:0/0/material = ExtResource("1_8278l")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t0ixn"]
 texture = ExtResource("8_yi22v")

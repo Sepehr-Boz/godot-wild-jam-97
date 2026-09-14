@@ -1,10 +1,10 @@
 extends Node
 
 enum Enemy { BAT, RAT, SPIDER }
-const ENEMY_ATLAS_INDEX: Dictionary[Enemy, Vector2i] = {
-	Enemy.BAT: Vector2i(0, 10),
-	Enemy.RAT: Vector2i(3, 10),
-	Enemy.SPIDER: Vector2i(2, 10)
+const ENEMY_SOURCE_INDEX: Dictionary[Enemy, int] = {
+	Enemy.BAT: 35,
+	Enemy.RAT: 38,
+	Enemy.SPIDER: 37
 }
 
 @onready var _enemies_tilemap = $Enemies
@@ -31,4 +31,4 @@ func increment_time() -> void:
 	_enemies_tilemap.clear()
 	for path: TileMapPath in enemy_paths:
 		path.increment_time()
-		_enemies_tilemap.set_cell(path.get_current_point(), 0, ENEMY_ATLAS_INDEX[enemy_paths[path]])
+		_enemies_tilemap.set_cell(path.get_current_point(), ENEMY_SOURCE_INDEX[enemy_paths[path]], Vector2i.ZERO)

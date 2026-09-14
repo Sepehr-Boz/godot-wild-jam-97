@@ -20,20 +20,8 @@ uniform vec2 scale_addition = vec2(0.0, 0.0);
 uniform bool remap_outline = false;
 uniform vec3 remapped_outline_color: source_color = vec3(1, 1, 1);
 
-uniform ivec2 atlas_index;
-
-const ivec2 TEXTURE_SIZE = ivec2(203, 186);
-const ivec2 TILE_SIZE = ivec2(16, 16);
-const ivec2 TILE_SEPARATION = ivec2(1, 1);
-const ivec2 MARGIN_SIZE = ivec2(0, 0);
-const vec2 NORMALIZED_TILE_SIZE = vec2(TILE_SIZE) / vec2(TEXTURE_SIZE);
-const vec2 NORMALIZED_SEPARATION_SIZE = vec2(TILE_SEPARATION) / vec2(TEXTURE_SIZE);
-const vec2 NORMALIZED_MARGIN_SIZE = vec2(MARGIN_SIZE) / vec2(TEXTURE_SIZE);
 const vec3 OUTLINE_COLOR = vec3(63.0 / 255.0, 38.0 / 255.0, 49.0 / 255.0);
 
-varying vec2 center_of_tile;
-varying vec2 start_of_tile;
-varying vec2 end_of_tile;
 varying float time_offset;
 
 // from https://godotshaders.com/shader/rotate-texture/
@@ -48,16 +36,17 @@ vec2 rotate(vec2 uv, vec2 pivot, float angle)
     return uv;
 }
 
+// from https://godotshaders.com/snippet/random-value/
+float random (vec2 uv) {
+    return fract(sin(dot(uv.xy,
+        vec2(12.9898,78.233))) * 43758.5453123);
+}
+
 void vertex() {
 	// Called for every vertex the material is visible on.
-	start_of_tile = NORMALIZED_MARGIN_SIZE
-		+ (NORMALIZED_TILE_SIZE * vec2(atlas_index))
-		+ (vec2(NORMALIZED_SEPARATION_SIZE) * vec2(atlas_index));
-	center_of_tile = start_of_tile + NORMALIZED_TILE_SIZE / 2.0;
-	end_of_tile = start_of_tile + NORMALIZED_TILE_SIZE;
-	time_offset = float(atlas_index.x * atlas_index.y);
+	time_offset = float(UV.x * UV.y);
 	
-	vec2 diff = (center_of_tile - UV) * scale_addition;
+	vec2 diff = (vec2(0.5, 0.5) - UV) * scale_addition;
 	VERTEX -= diff;
 	
 	// move x over time
@@ -74,7 +63,7 @@ void fragment() {
 	if (rotate_active){
 		float rot_time = sin(TIME * rotation_speed + time_offset) / 2.0 + 0.5;
 		float rotation = mix(min_rot_offset, max_rot_offset, rot_time) * PI / 2.0;
-		vec2 rotated_uv = rotate(UV, center_of_tile, rotation);
+		vec2 rotated_uv = rotate(UV, vec2(0.5, 0.5), rotation);
 		COLOR = texture(TEXTURE, rotated_uv);
 	}
 	else{
@@ -86,8 +75,22 @@ void fragment() {
 	// with the uv so check for if should shine at that time
 	// dont shine over the outline
 	if (shine_active && COLOR.rgb != OUTLINE_COLOR){
-		float shine_time = mod(TIME * shine_speed + float(atlas_index.x) / float(atlas_index.y), 1.0);
-		float distance_to_shine = distance(UV.x, shine_time);
+		float shine_time = mod(TIME, shine_speed);
+		vec2 shine_point_a = vec2(shine_time, 0.0);
+		vec2 shine_point_b = vec2(0.0, shine_time);
+		float distance_to_shine = 
+			abs(
+				UV.x * (shine_point_b.y - shine_point_a.y)
+				- UV.y * (shine_point_b.x - shine_point_a.x)
+				+ shine_point_b.x * shine_point_a.y
+				- shine_point_b.y * shine_point_a.x
+			)
+			/
+			sqrt(
+				pow(shine_point_b.y - shine_point_a.y, 2)
+				+ pow(shine_point_b.x - shine_point_a.x, 2)
+			);
+		
 		if (distance_to_shine <= shine_width){
 			COLOR.rgb = shine_color;
 		}

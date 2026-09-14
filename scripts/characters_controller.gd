@@ -5,17 +5,17 @@ extends Node
 # WHICH FOLLOWS THE KNIGHT
 enum Character { KNIGHT, TANK, MAGE, ARCHER }
 enum SwitchDirection { FRONT, BACK }
-const CHARACTER_ATLAS_INDEX: Dictionary[Character, Vector2i] = {
-	Character.KNIGHT: Vector2i(0, 8),
-	Character.TANK: Vector2i(3, 7),
-	Character.MAGE: Vector2i(0, 7),
-	Character.ARCHER: Vector2i(4, 9)
+const CHARACTER_SOURCE_INDEX: Dictionary[Character, int] = {
+	Character.KNIGHT: 25,
+	Character.TANK:23,
+	Character.MAGE: 20,
+	Character.ARCHER: 34
 }
-const MOVE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(7, 3)
-const ONE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(1, 10)
-const TWO_MARKER_ATLAS_INDEX: Vector2i = Vector2i(2, 10)
-const THREE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(3, 10)
-const FOUR_MARKER_ATLAS_INDEX: Vector2i = Vector2i(4, 10)
+const MOVE_MARKER_SOURCE_INDEX: int = 32
+const ONE_MARKER_SOURCE_INDEX: int = 37
+const TWO_MARKER_SOURCE_INDEX: int = 38
+const THREE_MARKER_SOURCE_INDEX: int = 39
+const FOUR_MARKER_SOURCE_INDEX: int = 40
 
 static var instance: CharacterController
 signal increment_time()
@@ -48,7 +48,7 @@ func _ready() -> void:
 	_character_tilemap.clear()
 	_marker_tilemap.clear()
 	for type in Character.values():
-		_character_tilemap.set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
+		_character_tilemap.set_cell(character_positions[type], CHARACTER_SOURCE_INDEX[type], Vector2i.ZERO)
 	spawn_move_markers()
 	_scale_current_character_animation()
 
@@ -87,7 +87,7 @@ func move_characters(dir: Vector2i) -> void:
 		else:
 			character_positions[type] = prev_char_position
 		prev_char_position = char_position
-		_character_tilemap.set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
+		_character_tilemap.set_cell(character_positions[type], CHARACTER_SOURCE_INDEX[type], Vector2i.ZERO)
 	spawn_move_markers()
 	_scale_current_character_animation()
 	increment_time.emit()
@@ -104,7 +104,7 @@ func switch_characters(direction: SwitchDirection) -> void:
 			var character_position: Vector2i = character_positions[character_queue[i]]
 			character_positions[character_queue[i]] = curr_position
 			curr_position = character_position
-			_character_tilemap.set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
+			_character_tilemap.set_cell(character_positions[character_queue[i]], CHARACTER_SOURCE_INDEX[character_queue[i]], Vector2i.ZERO)
 	else:
 		# push the current character back and the tail to the front
 		var character: Character = character_queue.pop_back()
@@ -114,7 +114,7 @@ func switch_characters(direction: SwitchDirection) -> void:
 			var character_position: Vector2i = character_positions[character_queue[i]]
 			character_positions[character_queue[i]] = curr_position
 			curr_position = character_position
-			_character_tilemap.set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
+			_character_tilemap.set_cell(character_positions[character_queue[i]], CHARACTER_SOURCE_INDEX[character_queue[i]], Vector2i.ZERO)
 	spawn_move_markers()
 	_scale_current_character_animation()
 	increment_time.emit()
@@ -135,27 +135,27 @@ func _scale_current_character_animation() -> void:
 		shader.set_shader_parameter("remap_outline", false)
 	
 	_current_character_tween = get_tree().create_tween()
-	_current_character_tween.tween_method(_current_character_animation, Vector2.ZERO, Vector2(96, 96), 0.1)
-	_current_character_tween.tween_method(_current_character_animation, Vector2(96, 96), Vector2.ZERO, 0.1)
+	_current_character_tween.tween_method(_current_character_animation, Vector2.ZERO, Vector2.ONE * 4, 0.1)
+	_current_character_tween.tween_method(_current_character_animation, Vector2.ONE * 4, Vector2.ZERO, 0.1)
 
 func spawn_move_markers() -> void:
 	for target_position in move_positions:
 		if not intersects_character(target_position):
-			_marker_tilemap.set_cell(target_position, 0, MOVE_MARKER_ATLAS_INDEX)
+			_marker_tilemap.set_cell(target_position, MOVE_MARKER_SOURCE_INDEX, Vector2i.ZERO)
 
 func spawn_index_markers() -> void:
 	for i in len(character_queue):
 		var index: int = i + 1
 		var position: Vector2i = character_positions[character_queue[i]]
 		match index:
-			1: _marker_tilemap.set_cell(position, 0, ONE_MARKER_ATLAS_INDEX)
-			2: _marker_tilemap.set_cell(position, 0, TWO_MARKER_ATLAS_INDEX)
-			3: _marker_tilemap.set_cell(position, 0, THREE_MARKER_ATLAS_INDEX)
-			4: _marker_tilemap.set_cell(position, 0, FOUR_MARKER_ATLAS_INDEX)
+			1: _marker_tilemap.set_cell(position, ONE_MARKER_SOURCE_INDEX, Vector2i.ZERO)
+			2: _marker_tilemap.set_cell(position, TWO_MARKER_SOURCE_INDEX, Vector2i.ZERO)
+			3: _marker_tilemap.set_cell(position, THREE_MARKER_SOURCE_INDEX, Vector2i.ZERO)
+			4: _marker_tilemap.set_cell(position, FOUR_MARKER_SOURCE_INDEX, Vector2i.ZERO)
 
 func clear_move_markers() -> void:
 	for position: Vector2i in _marker_tilemap.get_surrounding_cells(character_positions[current_character]):
-		if _marker_tilemap.get_cell_atlas_coords(position) == MOVE_MARKER_ATLAS_INDEX:
+		if _marker_tilemap.get_cell_source_id(position) == MOVE_MARKER_SOURCE_INDEX:
 			_marker_tilemap.erase_cell(position)
 
 func clear_index_markers() -> void:
