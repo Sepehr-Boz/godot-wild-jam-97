@@ -37,6 +37,8 @@ var character_queue: Array[Character] = [
 @onready var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _current_character_tween: Tween
 var _character_offsets: Dictionary[Character, float] = {}
+var _index_positions: Array[Vector2i] = []
+var _show_index_numbers: bool = false
 
 var current_character: Character:
 	get:
@@ -79,12 +81,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			switch_characters(SwitchDirection.BACK)
 	elif event.is_action_pressed("show_tips"):
 		spawn_index_markers()
+		_show_index_numbers = true
 	elif event.is_action_released("show_tips"):
 		clear_index_markers()
+		_show_index_numbers = false
 
 func move_characters(dir: Vector2i) -> void:
 	_character_tilemap.clear()
 	clear_move_markers()
+	clear_index_markers()
 	var prev_char_position: Vector2i
 	for i in len(character_queue):
 		var type: Character = character_queue[i]
@@ -99,12 +104,13 @@ func move_characters(dir: Vector2i) -> void:
 		shader.set_shader_parameter("offset", _character_offsets[type])
 		_character_tilemap.get_cell_tile_data(character_positions[type]).material = shader
 	spawn_move_markers()
+	if _show_index_numbers:
+		spawn_index_markers()
 	_scale_current_character_animation()
 	increment_time.emit()
 
 func switch_characters(direction: SwitchDirection) -> void:
 	_character_tilemap.clear()
-	clear_move_markers()
 	if direction == SwitchDirection.FRONT:
 		# move the current character to the back and push everything up
 		var character: Character = character_queue.pop_front()
@@ -131,7 +137,6 @@ func switch_characters(direction: SwitchDirection) -> void:
 			var shader: ShaderMaterial = _character_material.duplicate()
 			shader.set_shader_parameter("offset", _character_offsets[character_queue[i]])
 			_character_tilemap.get_cell_tile_data(character_positions[character_queue[i]]).material = shader
-	spawn_move_markers()
 	_scale_current_character_animation()
 	increment_time.emit()
 
@@ -163,6 +168,7 @@ func spawn_index_markers() -> void:
 	for i in len(character_queue):
 		var index: int = i + 1
 		var position: Vector2i = character_positions[character_queue[i]]
+		_index_positions.append(position)
 		match index:
 			1: _marker_tilemap.set_cell(position, ONE_MARKER_SOURCE_INDEX, Vector2i.ZERO)
 			2: _marker_tilemap.set_cell(position, TWO_MARKER_SOURCE_INDEX, Vector2i.ZERO)
@@ -175,8 +181,9 @@ func clear_move_markers() -> void:
 			_marker_tilemap.erase_cell(position)
 
 func clear_index_markers() -> void:
-	for position: Vector2i in character_positions.values():
+	for position: Vector2i in _index_positions:
 		_marker_tilemap.erase_cell(position)
+	_index_positions.clear()
 
 func intersects_character(coord: Vector2i) -> bool:
 	for type in Character.values():
