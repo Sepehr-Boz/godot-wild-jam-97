@@ -44,6 +44,7 @@
 [ext_resource type="Texture2D" uid="uid://bvqnd76kma1l0" path="res://textures/tiny_town/tile_0042.png" id="42_20ouj"]
 [ext_resource type="Texture2D" uid="uid://m8bfn45btvs1" path="res://textures/tiny_town/tile_0043.png" id="43_hiu21"]
 [ext_resource type="Texture2D" uid="uid://es0lwkidt0tm" path="res://textures/tiny_dungeon/tile_0048.png" id="44_78mm6"]
+[ext_resource type="Material" uid="uid://dh7hdog6eyher" path="res://materials/ground_tile.tres" id="44_cbycg"]
 [ext_resource type="Texture2D" uid="uid://f0fwvsufoy0j" path="res://textures/tiny_dungeon/tile_0049.png" id="45_xc4ma"]
 [ext_resource type="Texture2D" uid="uid://cyjsixaqkuaoi" path="res://textures/tiny_dungeon/tile_0050.png" id="46_e2q0p"]
 [ext_resource type="Texture2D" uid="uid://d3fcp4oewhhnm" path="res://textures/tiny_dungeon/tile_0051.png" id="47_yxhct"]
@@ -226,29 +227,37 @@ texture = ExtResource("43_hiu21")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qs7do"]
 texture = ExtResource("44_78mm6")
 0:0/0 = 0
+0:0/0/material = ExtResource("44_cbycg")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v3ylm"]
 texture = ExtResource("45_xc4ma")
 0:0/0 = 0
+0:0/0/material = ExtResource("44_cbycg")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hi5iw"]
 texture = ExtResource("46_e2q0p")
 0:0/0 = 0
+0:0/0/material = ExtResource("44_cbycg")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b1i66"]
 texture = ExtResource("47_yxhct")
 0:0/0 = 0
+0:0/0/material = ExtResource("44_cbycg")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b1bqk"]
 texture = ExtResource("48_gyj06")
 0:0/0 = 0
+0:0/0/material = ExtResource("44_cbycg")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6nwak"]
 texture = ExtResource("49_t0nkp")
+0:0/0 = 0
+0:0/0/material = ExtResource("44_cbycg")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cbycg"]
 texture = ExtResource("50_3b2kc")
 0:0/0 = 0
+0:0/0/material = ExtResource("44_cbycg")
 
 [resource]
 sources/24 = SubResource("TileSetAtlasSource_h0hp8")
