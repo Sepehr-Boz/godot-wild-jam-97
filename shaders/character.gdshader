@@ -20,9 +20,9 @@ uniform vec2 scale_addition = vec2(0.0, 0.0);
 uniform bool remap_outline = false;
 uniform vec3 remapped_outline_color: source_color = vec3(1, 1, 1);
 
-const vec3 OUTLINE_COLOR = vec3(63.0 / 255.0, 38.0 / 255.0, 49.0 / 255.0);
+uniform float offset = 0.0;
 
-varying float time_offset;
+const vec3 OUTLINE_COLOR = vec3(63.0 / 255.0, 38.0 / 255.0, 49.0 / 255.0);
 
 // from https://godotshaders.com/shader/rotate-texture/
 vec2 rotate(vec2 uv, vec2 pivot, float angle)
@@ -44,14 +44,12 @@ float random (vec2 uv) {
 
 void vertex() {
 	// Called for every vertex the material is visible on.
-	time_offset = float(UV.x * UV.y);
-	
 	vec2 diff = (vec2(0.5, 0.5) - UV) * scale_addition;
 	VERTEX -= diff;
 	
 	// move x over time
 	if (move_active){
-		float pos_time = sin(TIME * position_speed + time_offset) / 2.0 + 0.5;
+		float pos_time = sin(TIME * position_speed + offset) / 2.0 + 0.5;
 		VERTEX.x += mix(min_pos_offset, max_pos_offset, pos_time);
 	}
 }
@@ -61,7 +59,7 @@ void fragment() {
 	
 	// rotate over time
 	if (rotate_active){
-		float rot_time = sin(TIME * rotation_speed + time_offset) / 2.0 + 0.5;
+		float rot_time = sin(TIME * rotation_speed + offset) / 2.0 + 0.5;
 		float rotation = mix(min_rot_offset, max_rot_offset, rot_time) * PI / 2.0;
 		vec2 rotated_uv = rotate(UV, vec2(0.5, 0.5), rotation);
 		COLOR = texture(TEXTURE, rotated_uv);
@@ -75,7 +73,7 @@ void fragment() {
 	// with the uv so check for if should shine at that time
 	// dont shine over the outline
 	if (shine_active && COLOR.rgb != OUTLINE_COLOR){
-		float shine_time = mod(TIME, shine_speed);
+		float shine_time = mod(TIME + offset, shine_speed);
 		vec2 shine_point_a = vec2(shine_time, 0.0);
 		vec2 shine_point_b = vec2(0.0, shine_time);
 		float distance_to_shine = 

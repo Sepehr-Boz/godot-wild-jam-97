@@ -23,6 +23,7 @@ signal increment_time()
 @export var current_character_outline_color: Color = Color.WHITE
 @onready var _character_tilemap: TileMapLayer = $Characters
 @onready var _marker_tilemap: TileMapLayer = $Markers
+var _character_material: ShaderMaterial = preload("res://materials/character_tile.tres")
 var character_positions: Dictionary[Character, Vector2i] = {
 	Character.KNIGHT: Vector2i(8, 4),
 	Character.TANK: Vector2i(7, 4),
@@ -33,7 +34,9 @@ var character_positions: Dictionary[Character, Vector2i] = {
 var character_queue: Array[Character] = [
 	Character.KNIGHT, Character.TANK, Character.MAGE, Character.ARCHER
 ]
+@onready var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _current_character_tween: Tween
+var _character_offsets: Dictionary[Character, float] = {}
 
 var current_character: Character:
 	get:
@@ -48,7 +51,11 @@ func _ready() -> void:
 	_character_tilemap.clear()
 	_marker_tilemap.clear()
 	for type in Character.values():
+		_character_offsets[type] = _rng.randf()
 		_character_tilemap.set_cell(character_positions[type], CHARACTER_SOURCE_INDEX[type], Vector2i.ZERO)
+		var shader: ShaderMaterial = _character_material.duplicate()
+		shader.set_shader_parameter("offset", _character_offsets[type])
+		_character_tilemap.get_cell_tile_data(character_positions[type]).material = shader
 	spawn_move_markers()
 	_scale_current_character_animation()
 
@@ -88,6 +95,9 @@ func move_characters(dir: Vector2i) -> void:
 			character_positions[type] = prev_char_position
 		prev_char_position = char_position
 		_character_tilemap.set_cell(character_positions[type], CHARACTER_SOURCE_INDEX[type], Vector2i.ZERO)
+		var shader: ShaderMaterial = _character_material.duplicate()
+		shader.set_shader_parameter("offset", _character_offsets[type])
+		_character_tilemap.get_cell_tile_data(character_positions[type]).material = shader
 	spawn_move_markers()
 	_scale_current_character_animation()
 	increment_time.emit()
@@ -105,6 +115,9 @@ func switch_characters(direction: SwitchDirection) -> void:
 			character_positions[character_queue[i]] = curr_position
 			curr_position = character_position
 			_character_tilemap.set_cell(character_positions[character_queue[i]], CHARACTER_SOURCE_INDEX[character_queue[i]], Vector2i.ZERO)
+			var shader: ShaderMaterial = _character_material.duplicate()
+			shader.set_shader_parameter("offset", _character_offsets[character_queue[i]])
+			_character_tilemap.get_cell_tile_data(character_positions[character_queue[i]]).material = shader
 	else:
 		# push the current character back and the tail to the front
 		var character: Character = character_queue.pop_back()
@@ -115,6 +128,9 @@ func switch_characters(direction: SwitchDirection) -> void:
 			character_positions[character_queue[i]] = curr_position
 			curr_position = character_position
 			_character_tilemap.set_cell(character_positions[character_queue[i]], CHARACTER_SOURCE_INDEX[character_queue[i]], Vector2i.ZERO)
+			var shader: ShaderMaterial = _character_material.duplicate()
+			shader.set_shader_parameter("offset", _character_offsets[character_queue[i]])
+			_character_tilemap.get_cell_tile_data(character_positions[character_queue[i]]).material = shader
 	spawn_move_markers()
 	_scale_current_character_animation()
 	increment_time.emit()
