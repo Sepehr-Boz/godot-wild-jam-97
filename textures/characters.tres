@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cv6qkho6fmmxg" path="res://textures/tiny_dungeon/tile_0088.png" id="15_w27if"]
 [ext_resource type="Texture2D" uid="uid://dmqf4hkns5kdq" path="res://textures/tiny_dungeon/tile_0096.png" id="16_t0ixn"]
 [ext_resource type="Texture2D" uid="uid://mnsjncnffiac" path="res://textures/tiny_dungeon/tile_0097.png" id="17_7fitt"]
+[ext_resource type="Material" uid="uid://botc2hoor2js6" path="res://materials/enemy_tile.tres" id="17_as7qf"]
 [ext_resource type="Texture2D" uid="uid://no4cfcvmurr0" path="res://textures/tiny_dungeon/tile_0098.png" id="18_pl4tm"]
 [ext_resource type="Texture2D" uid="uid://djcejdchsgcdp" path="res://textures/tiny_dungeon/tile_0099.png" id="19_y0mfx"]
 [ext_resource type="Texture2D" uid="uid://ctkgpkkd88toh" path="res://textures/tiny_dungeon/tile_0100.png" id="20_4l201"]
@@ -96,6 +97,7 @@ texture = ExtResource("7_qyf3v")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t0ixn"]
 texture = ExtResource("8_yi22v")
 0:0/0 = 0
+0:0/0/material = ExtResource("17_as7qf")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7fitt"]
 texture = ExtResource("9_a42lr")
@@ -104,10 +106,12 @@ texture = ExtResource("9_a42lr")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pl4tm"]
 texture = ExtResource("10_loxw2")
 0:0/0 = 0
+0:0/0/material = ExtResource("17_as7qf")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y0mfx"]
 texture = ExtResource("11_5fsl3")
 0:0/0 = 0
+0:0/0/material = ExtResource("17_as7qf")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4l201"]
 texture = ExtResource("12_wpbfx")

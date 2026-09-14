@@ -1,6 +1,7 @@
 shader_type canvas_item;
 
 uniform bool move_active = true;
+uniform vec2 move_direction = vec2(1, 0);
 uniform float position_speed = 1.0;
 uniform float min_pos_offset = -0.5;
 uniform float max_pos_offset = 0.5;
@@ -50,7 +51,7 @@ void vertex() {
 	// move x over time
 	if (move_active){
 		float pos_time = sin(TIME * position_speed + offset) / 2.0 + 0.5;
-		VERTEX.x += mix(min_pos_offset, max_pos_offset, pos_time);
+		VERTEX.xy += mix(min_pos_offset * normalize(move_direction), max_pos_offset * normalize(move_direction), pos_time);
 	}
 }
 

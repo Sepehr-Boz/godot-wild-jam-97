@@ -5,6 +5,7 @@
 [resource]
 shader = ExtResource("1_n3puy")
 shader_parameter/move_active = true
+shader_parameter/move_direction = Vector2(1, 0)
 shader_parameter/position_speed = 1.0
 shader_parameter/min_pos_offset = -0.5
 shader_parameter/max_pos_offset = 0.5
@@ -19,3 +20,4 @@ shader_parameter/shine_color = Color(1, 1, 1, 1)
 shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/remap_outline = false
 shader_parameter/remapped_outline_color = Color(1, 1, 1, 1)
+shader_parameter/offset = 0.0
