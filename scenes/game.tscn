@@ -26,6 +26,7 @@ tile_map_data = PackedByteArray("AAAGAAQAFAAAAAAAAAAHAAQAFwAAAAAAAAAIAAQAGQAAAAA
 tile_set = ExtResource("3_u5sy4")
 
 [node name="Markers" type="TileMapLayer" parent="Character Manager" unique_id=1685389557]
+z_index = 2
 tile_map_data = PackedByteArray("AAAIAAQAJQAAAAAAAAAHAAQAJgAAAAAAAAAGAAQAJwAAAAAAAAAFAAQAKAAAAAAAAAAIAAMAIAAAAAAAAAAJAAQAIAAAAAAAAAAIAAUAIAAAAAAAAAA=")
 tile_set = ExtResource("4_u5sy4")
 
