@@ -12,6 +12,7 @@ const CHARACTER_SOURCE_INDEX: Dictionary[Character, int] = {
 	Character.ARCHER: 34
 }
 const MOVE_MARKER_SOURCE_INDEX: int = 32
+const ATTACK_MARKER_SOURCE_INDEX: int = 48
 const ONE_MARKER_SOURCE_INDEX: int = 37
 const TWO_MARKER_SOURCE_INDEX: int = 38
 const THREE_MARKER_SOURCE_INDEX: int = 39
@@ -19,6 +20,8 @@ const FOUR_MARKER_SOURCE_INDEX: int = 40
 
 static var instance: CharacterController
 signal increment_time()
+signal characters_moved(positions: Array[Vector2i])
+signal characters_killed()
 
 @export var current_character_outline_color: Color = Color.WHITE
 @onready var _character_tilemap: TileMapLayer = $Characters
@@ -39,6 +42,7 @@ var _current_character_tween: Tween
 var _character_offsets: Dictionary[Character, float] = {}
 var _index_positions: Array[Vector2i] = []
 var _show_index_numbers: bool = false
+var _enemy_positions: Array[Vector2i] = []
 
 var current_character: Character:
 	get:
@@ -52,7 +56,7 @@ func _ready() -> void:
 	instance = self
 	_character_tilemap.clear()
 	_marker_tilemap.clear()
-	for type in Character.values():
+	for type in character_queue:
 		_character_offsets[type] = _rng.randf()
 		_character_tilemap.set_cell(character_positions[type], CHARACTER_SOURCE_INDEX[type], Vector2i.ZERO)
 		var shader: ShaderMaterial = _character_material.duplicate()
@@ -69,7 +73,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			# and if so then move it and all the companions to that position also
 			var clicked_cell: Vector2i = _character_tilemap.local_to_map(_character_tilemap.get_local_mouse_position())
 			# DONT ALLOW moving back onto other companions
-			for type in Character.values():
+			for type in character_queue:
 				if clicked_cell == character_positions[type]:
 					return
 			var current_character_position: Vector2i = character_positions[current_character]
@@ -103,11 +107,15 @@ func move_characters(dir: Vector2i) -> void:
 		var shader: ShaderMaterial = _character_material.duplicate()
 		shader.set_shader_parameter("offset", _character_offsets[type])
 		_character_tilemap.get_cell_tile_data(character_positions[type]).material = shader
-	spawn_move_markers()
+	for enemy_pos: Vector2i in _enemy_positions:
+		if character_positions[current_character] == enemy_pos:
+			EnemyController.instance.kill_enemy_at(enemy_pos)
 	if _show_index_numbers:
 		spawn_index_markers()
 	_scale_current_character_animation()
 	increment_time.emit()
+	characters_moved.emit(character_positions.values())
+	spawn_move_markers()
 
 func switch_characters(direction: SwitchDirection) -> void:
 	_character_tilemap.clear()
@@ -137,8 +145,34 @@ func switch_characters(direction: SwitchDirection) -> void:
 			var shader: ShaderMaterial = _character_material.duplicate()
 			shader.set_shader_parameter("offset", _character_offsets[character_queue[i]])
 			_character_tilemap.get_cell_tile_data(character_positions[character_queue[i]]).material = shader
+	clear_move_markers()
+	for enemy_pos: Vector2i in _enemy_positions:
+		if character_positions[current_character] == enemy_pos:
+			EnemyController.instance.kill_enemy_at(enemy_pos)
 	_scale_current_character_animation()
 	increment_time.emit()
+	spawn_move_markers()
+
+func kill_character_at(coord: Vector2i) -> void:
+	var tile_source: int = _character_tilemap.get_cell_source_id(coord)
+	_character_tilemap.erase_cell(coord)
+	match tile_source:
+		-1:
+			return
+		CHARACTER_SOURCE_INDEX[Character.KNIGHT]:
+			character_queue.erase(Character.KNIGHT)
+			character_positions.erase(Character.KNIGHT)
+		CHARACTER_SOURCE_INDEX[Character.TANK]:
+			character_queue.erase(Character.TANK)
+			character_positions.erase(Character.TANK)
+		CHARACTER_SOURCE_INDEX[Character.MAGE]:
+			character_queue.erase(Character.MAGE)
+			character_positions.erase(Character.MAGE)
+		CHARACTER_SOURCE_INDEX[Character.ARCHER]:
+			character_queue.erase(Character.ARCHER)
+			character_positions.erase(Character.ARCHER)
+	if len(character_queue) == 0:
+		characters_killed.emit()
 
 func _scale_current_character_animation() -> void:
 	var _current_character_animation = func (value: Vector2):
@@ -150,7 +184,7 @@ func _scale_current_character_animation() -> void:
 	# if another tween is already running then stop it and reset the scale of ALL the characters
 	if _current_character_tween != null and _current_character_tween.is_running():
 		_current_character_tween.kill()
-	for character in Character.values():
+	for character in character_queue:
 		var shader: ShaderMaterial = _character_tilemap.get_cell_tile_data(character_positions[character]).material as ShaderMaterial
 		shader.set_shader_parameter("scale_addition", Vector2.ZERO)
 		shader.set_shader_parameter("remap_outline", false)
@@ -161,7 +195,11 @@ func _scale_current_character_animation() -> void:
 
 func spawn_move_markers() -> void:
 	for target_position in move_positions:
-		if not intersects_character(target_position):
+		if intersects_character(target_position):
+			continue
+		elif target_position in _enemy_positions:
+			_marker_tilemap.set_cell(target_position, ATTACK_MARKER_SOURCE_INDEX, Vector2i.ZERO)
+		else:
 			_marker_tilemap.set_cell(target_position, MOVE_MARKER_SOURCE_INDEX, Vector2i.ZERO)
 
 func spawn_index_markers() -> void:
@@ -177,7 +215,8 @@ func spawn_index_markers() -> void:
 
 func clear_move_markers() -> void:
 	for position: Vector2i in _marker_tilemap.get_surrounding_cells(character_positions[current_character]):
-		if _marker_tilemap.get_cell_source_id(position) == MOVE_MARKER_SOURCE_INDEX:
+		var tile_source_id: int = _marker_tilemap.get_cell_source_id(position)
+		if tile_source_id == MOVE_MARKER_SOURCE_INDEX or tile_source_id == ATTACK_MARKER_SOURCE_INDEX:
 			_marker_tilemap.erase_cell(position)
 
 func clear_index_markers() -> void:
@@ -186,7 +225,11 @@ func clear_index_markers() -> void:
 	_index_positions.clear()
 
 func intersects_character(coord: Vector2i) -> bool:
-	for type in Character.values():
+	for type in character_queue:
 		if coord == character_positions[type]:
 			return true
 	return false
+
+
+func _on_enemy_manager_enemies_moved(positions: Array[Vector2i]) -> void:
+	_enemy_positions = positions
