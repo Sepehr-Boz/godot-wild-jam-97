@@ -87,5 +87,6 @@ loop_type = 2
 tile_map_data = PackedByteArray("AAALAAAAJQAAAAAAAAAEAAAAJQAAAAAAAAAAAAcAIwAAAAAAAAAPAAYAIwAAAAAAAAADAAIAJgAAAAAAAAAMAAQAJgAAAAAAAAA=")
 tile_set = ExtResource("3_u5sy4")
 
+[connection signal="characters_moved" from="Character Manager" to="Enemy Manager" method="_on_character_manager_characters_moved"]
 [connection signal="increment_time" from="Character Manager" to="Enemy Manager" method="_on_character_manager_increment_time"]
 [connection signal="enemies_moved" from="Enemy Manager" to="Character Manager" method="_on_enemy_manager_enemies_moved"]

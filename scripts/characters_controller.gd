@@ -20,6 +20,7 @@ const FOUR_MARKER_SOURCE_INDEX: int = 40
 
 static var instance: CharacterController
 signal increment_time()
+signal characters_moved(positions: Array[Vector2i])
 
 @export var current_character_outline_color: Color = Color.WHITE
 @onready var _character_tilemap: TileMapLayer = $Characters
@@ -54,7 +55,7 @@ func _ready() -> void:
 	instance = self
 	_character_tilemap.clear()
 	_marker_tilemap.clear()
-	for type in Character.values():
+	for type in character_queue:
 		_character_offsets[type] = _rng.randf()
 		_character_tilemap.set_cell(character_positions[type], CHARACTER_SOURCE_INDEX[type], Vector2i.ZERO)
 		var shader: ShaderMaterial = _character_material.duplicate()
@@ -71,7 +72,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			# and if so then move it and all the companions to that position also
 			var clicked_cell: Vector2i = _character_tilemap.local_to_map(_character_tilemap.get_local_mouse_position())
 			# DONT ALLOW moving back onto other companions
-			for type in Character.values():
+			for type in character_queue:
 				if clicked_cell == character_positions[type]:
 					return
 			var current_character_position: Vector2i = character_positions[current_character]
@@ -112,6 +113,7 @@ func move_characters(dir: Vector2i) -> void:
 		spawn_index_markers()
 	_scale_current_character_animation()
 	increment_time.emit()
+	characters_moved.emit(character_positions.values())
 	spawn_move_markers()
 
 func switch_characters(direction: SwitchDirection) -> void:
@@ -150,6 +152,25 @@ func switch_characters(direction: SwitchDirection) -> void:
 	increment_time.emit()
 	spawn_move_markers()
 
+func kill_character_at(coord: Vector2i) -> void:
+	var tile_source: int = _character_tilemap.get_cell_source_id(coord)
+	_character_tilemap.erase_cell(coord)
+	match tile_source:
+		-1:
+			return
+		CHARACTER_SOURCE_INDEX[Character.KNIGHT]:
+			character_queue.erase(Character.KNIGHT)
+			character_positions.erase(Character.KNIGHT)
+		CHARACTER_SOURCE_INDEX[Character.TANK]:
+			character_queue.erase(Character.TANK)
+			character_positions.erase(Character.TANK)
+		CHARACTER_SOURCE_INDEX[Character.MAGE]:
+			character_queue.erase(Character.MAGE)
+			character_positions.erase(Character.MAGE)
+		CHARACTER_SOURCE_INDEX[Character.ARCHER]:
+			character_queue.erase(Character.ARCHER)
+			character_positions.erase(Character.ARCHER)
+
 func _scale_current_character_animation() -> void:
 	var _current_character_animation = func (value: Vector2):
 		var shader: ShaderMaterial = _character_tilemap.get_cell_tile_data(character_positions[current_character]).material as ShaderMaterial
@@ -160,7 +181,7 @@ func _scale_current_character_animation() -> void:
 	# if another tween is already running then stop it and reset the scale of ALL the characters
 	if _current_character_tween != null and _current_character_tween.is_running():
 		_current_character_tween.kill()
-	for character in Character.values():
+	for character in character_queue:
 		var shader: ShaderMaterial = _character_tilemap.get_cell_tile_data(character_positions[character]).material as ShaderMaterial
 		shader.set_shader_parameter("scale_addition", Vector2.ZERO)
 		shader.set_shader_parameter("remap_outline", false)
@@ -201,7 +222,7 @@ func clear_index_markers() -> void:
 	_index_positions.clear()
 
 func intersects_character(coord: Vector2i) -> bool:
-	for type in Character.values():
+	for type in character_queue:
 		if coord == character_positions[type]:
 			return true
 	return false

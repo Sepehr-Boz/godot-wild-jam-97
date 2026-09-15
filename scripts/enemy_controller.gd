@@ -17,6 +17,7 @@ signal enemies_moved(positions: Array[Vector2i])
 var _enemy_material: ShaderMaterial = preload("res://materials/enemy_tile.tres")
 @onready var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _enemy_offsets: Dictionary[TileMapPath, float] = {}
+var _character_positions: Array[Vector2i] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,11 +38,14 @@ func increment_time() -> void:
 	_enemies_tilemap.clear()
 	for path: TileMapPath in enemy_paths:
 		path.increment_time()
-		_enemies_tilemap.set_cell(path.get_current_point(), ENEMY_SOURCE_INDEX[enemy_paths[path]], Vector2i.ZERO)
+		var new_position: Vector2i = path.get_current_point()
+		_enemies_tilemap.set_cell(new_position, ENEMY_SOURCE_INDEX[enemy_paths[path]], Vector2i.ZERO)
 		var shader: ShaderMaterial = _enemy_material.duplicate()
 		shader.set_shader_parameter("offset", _enemy_offsets[path])
-		_enemies_tilemap.get_cell_tile_data(path.get_current_point()).material = shader
-		_scale_enemy_animation(_enemies_tilemap.get_cell_tile_data(path.get_current_point()))
+		_enemies_tilemap.get_cell_tile_data(new_position).material = shader
+		_scale_enemy_animation(_enemies_tilemap.get_cell_tile_data(new_position))
+		if new_position in _character_positions:
+			CharacterController.instance.kill_character_at(new_position)
 
 func kill_enemy_at(coord: Vector2i) -> void:
 	for path: TileMapPath in enemy_paths.keys():
@@ -66,3 +70,7 @@ func _on_character_manager_increment_time() -> void:
 	for path: TileMapPath in enemy_paths.keys():
 		positions.append(path.get_current_point())
 	enemies_moved.emit(positions)
+
+
+func _on_character_manager_characters_moved(positions: Array[Vector2i]) -> void:
+	_character_positions = positions
