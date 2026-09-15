@@ -45,8 +45,6 @@ func increment_time() -> void:
 		shader.set_shader_parameter("offset", _enemy_offsets[path])
 		_enemies_tilemap.get_cell_tile_data(new_position).material = shader
 		_scale_enemy_animation(_enemies_tilemap.get_cell_tile_data(new_position))
-		if new_position in _character_positions:
-			CharacterController.instance.kill_character_at(new_position)
 
 func kill_enemy_at(coord: Vector2i) -> void:
 	for path: TileMapPath in enemy_paths.keys():

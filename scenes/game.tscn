@@ -1,12 +1,15 @@
 [gd_scene format=4 uid="uid://djro2qll2rjyc"]
 
 [ext_resource type="TileSet" uid="uid://uoygroojndl3" path="res://textures/ground.tres" id="1_p57ef"]
-[ext_resource type="Script" uid="uid://b8rutvltj8dok" path="res://scripts/characters_controller.gd" id="2_yqjtg"]
 [ext_resource type="TileSet" uid="uid://dui5l7xdis3kd" path="res://textures/characters.tres" id="3_u5sy4"]
 [ext_resource type="Script" uid="uid://c3s47vnxua5mj" path="res://scripts/enemy_controller.gd" id="4_lbhrr"]
 [ext_resource type="TileSet" uid="uid://dm6c4ho4yurov" path="res://textures/markers.tres" id="4_u5sy4"]
 [ext_resource type="Script" uid="uid://da5wkweelbsvl" path="res://scripts/tilemap_path.gd" id="5_iywne"]
 [ext_resource type="Script" uid="uid://ba81hliobouyo" path="res://scripts/game_manager.gd" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://bcth45kacap3e" path="res://scenes/knight.tscn" id="9_dinhu"]
+[ext_resource type="PackedScene" uid="uid://bemlf7fd4twmn" path="res://scenes/tank.tscn" id="9_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://c8j4lyk548oow" path="res://scenes/mage.tscn" id="10_dinhu"]
+[ext_resource type="PackedScene" uid="uid://82wg2pfneox0" path="res://scenes/archer.tscn" id="11_kvuet"]
 
 [node name="Node2D" type="Node2D" unique_id=1351537289]
 
@@ -17,19 +20,6 @@ zoom = Vector2(5, 5)
 [node name="Background" type="TileMapLayer" parent="." unique_id=1296268083]
 tile_map_data = PackedByteArray("AAAAAAAARAAAAAAAAAAAAAEARAAAAAAAAAAAAAIARAAAAAAAAAAAAAMARAAAAAAAAAAAAAQARAAAAAAAAAAAAAUARAAAAAAAAAABAAAARAAAAAAAAAABAAEARQAAAAAAAAABAAIARAAAAAAAAAABAAMARAAAAAAAAAABAAQARQAAAAAAAAABAAUATQAAAAAAAAACAAAARAAAAAAAAAACAAEARAAAAAAAAAACAAIARAAAAAAAAAACAAMARAAAAAAAAAACAAQARAAAAAAAAAACAAUARAAAAAAAAAADAAAARAAAAAAAAAADAAEARAAAAAAAAAADAAIATQAAAAAAAAADAAMARAAAAAAAAAADAAQARQAAAAAAAAADAAUARAAAAAAAAAAEAAAARAAAAAAAAAAEAAEARAAAAAAAAAAEAAIARAAAAAAAAAAEAAMARAAAAAAAAAAEAAQARAAAAAAAAAAEAAUARAAAAAAAAAAFAAAARAAAAAAAAAAFAAEARAAAAAAAAAAFAAIARQAAAAAAAAAFAAMARAAAAAAAAAAFAAQARQAAAAAAAAAFAAUARAAAAAAAAAAGAAAARAAAAAAAAAAGAAEARAAAAAAAAAAGAAIARAAAAAAAAAAGAAMARAAAAAAAAAAGAAQARAAAAAAAAAAGAAUARAAAAAAAAAAHAAAARAAAAAAAAAAHAAEARAAAAAAAAAAHAAIARAAAAAAAAAAHAAMARAAAAAAAAAAHAAQARAAAAAAAAAAHAAUARAAAAAAAAAAIAAAARAAAAAAAAAAIAAEARQAAAAAAAAAIAAIARAAAAAAAAAAIAAMARAAAAAAAAAAIAAQATQAAAAAAAAAIAAUARAAAAAAAAAAAAAYARAAAAAAAAAAAAAcARAAAAAAAAAAAAAgARAAAAAAAAAABAAYARAAAAAAAAAABAAcARAAAAAAAAAABAAgARAAAAAAAAAACAAYARAAAAAAAAAACAAcARAAAAAAAAAACAAgARAAAAAAAAAADAAYARAAAAAAAAAADAAcATQAAAAAAAAADAAgARAAAAAAAAAAEAAYARAAAAAAAAAAEAAcARAAAAAAAAAAEAAgARAAAAAAAAAAFAAYARAAAAAAAAAAFAAcARAAAAAAAAAAFAAgARAAAAAAAAAAGAAYARQAAAAAAAAAGAAcARQAAAAAAAAAGAAgARAAAAAAAAAAHAAYARAAAAAAAAAAHAAcATQAAAAAAAAAHAAgARAAAAAAAAAAIAAYARAAAAAAAAAAIAAcARAAAAAAAAAAIAAgARAAAAAAAAAAJAAAARAAAAAAAAAAJAAEARAAAAAAAAAAJAAIARAAAAAAAAAAJAAMARAAAAAAAAAAJAAQARAAAAAAAAAAJAAUARAAAAAAAAAAJAAYARAAAAAAAAAAJAAcARAAAAAAAAAAJAAgARAAAAAAAAAAKAAAARAAAAAAAAAAKAAEARAAAAAAAAAAKAAIARAAAAAAAAAAKAAMARAAAAAAAAAAKAAQARAAAAAAAAAAKAAUARQAAAAAAAAAKAAYARAAAAAAAAAAKAAcARQAAAAAAAAAKAAgARQAAAAAAAAALAAAARAAAAAAAAAALAAEARAAAAAAAAAALAAIATQAAAAAAAAALAAMARAAAAAAAAAALAAQARAAAAAAAAAALAAUARAAAAAAAAAALAAYARAAAAAAAAAALAAcARAAAAAAAAAALAAgARAAAAAAAAAAMAAAARAAAAAAAAAAMAAEARAAAAAAAAAAMAAIARAAAAAAAAAAMAAMARAAAAAAAAAAMAAQARAAAAAAAAAAMAAUARAAAAAAAAAAMAAYARAAAAAAAAAAMAAcATQAAAAAAAAAMAAgARAAAAAAAAAANAAAARAAAAAAAAAANAAEARAAAAAAAAAANAAIARAAAAAAAAAANAAMARAAAAAAAAAANAAQARAAAAAAAAAANAAUARAAAAAAAAAANAAYARAAAAAAAAAANAAcARAAAAAAAAAANAAgARAAAAAAAAAAOAAAARAAAAAAAAAAOAAEARAAAAAAAAAAOAAIARQAAAAAAAAAOAAMARAAAAAAAAAAOAAQARAAAAAAAAAAOAAUARQAAAAAAAAAOAAYARAAAAAAAAAAOAAcARAAAAAAAAAAOAAgARAAAAAAAAAAPAAAARAAAAAAAAAAPAAEARAAAAAAAAAAPAAIARAAAAAAAAAAPAAMARQAAAAAAAAAPAAQARAAAAAAAAAAPAAUARAAAAAAAAAAPAAYARAAAAAAAAAAPAAcARAAAAAAAAAAPAAgARAAAAAAAAAA=")
 tile_set = ExtResource("1_p57ef")
-
-[node name="Character Manager" type="Node" parent="." unique_id=858665341]
-script = ExtResource("2_yqjtg")
-current_character_outline_color = Color(0.57254905, 0.92941177, 0.9607843, 1)
-
-[node name="Characters" type="TileMapLayer" parent="Character Manager" unique_id=662563618]
-tile_map_data = PackedByteArray("AAAGAAQAFAAAAAAAAAAHAAQAFwAAAAAAAAAIAAQAGQAAAAAAAAAFAAQAIgAAAAAAAAA=")
-tile_set = ExtResource("3_u5sy4")
-
-[node name="Markers" type="TileMapLayer" parent="Character Manager" unique_id=1685389557]
-z_index = 2
-tile_map_data = PackedByteArray("AAAIAAQAJQAAAAAAAAAHAAQAJgAAAAAAAAAGAAQAJwAAAAAAAAAFAAQAKAAAAAAAAAAIAAMAIAAAAAAAAAAJAAQAIAAAAAAAAAAIAAUAIAAAAAAAAAA=")
-tile_set = ExtResource("4_u5sy4")
 
 [node name="Enemy Manager" type="Node" parent="." unique_id=1018820385 node_paths=PackedStringArray("enemy_paths")]
 script = ExtResource("4_lbhrr")
@@ -91,6 +81,21 @@ tile_set = ExtResource("3_u5sy4")
 [node name="Game Manager" type="Node" parent="." unique_id=1094982514]
 script = ExtResource("7_u5sy4")
 
-[connection signal="characters_moved" from="Character Manager" to="Enemy Manager" method="_on_character_manager_characters_moved"]
-[connection signal="increment_time" from="Character Manager" to="Enemy Manager" method="_on_character_manager_increment_time"]
-[connection signal="enemies_moved" from="Enemy Manager" to="Character Manager" method="_on_enemy_manager_enemies_moved"]
+[node name="CharacterManager" type="Node" parent="." unique_id=1048820254]
+
+[node name="Character Controller" parent="CharacterManager" unique_id=1721062491 instance=ExtResource("9_dinhu")]
+initial_position = Vector2i(8, 4)
+
+[node name="Character Controller2" parent="CharacterManager" unique_id=1136494659 instance=ExtResource("9_kvpfn")]
+initial_position = Vector2i(7, 4)
+
+[node name="Character Controller3" parent="CharacterManager" unique_id=1032895860 instance=ExtResource("10_dinhu")]
+initial_position = Vector2i(6, 4)
+
+[node name="Character Controller4" parent="CharacterManager" unique_id=1952554487 instance=ExtResource("11_kvuet")]
+initial_position = Vector2i(5, 4)
+
+[connection signal="increment_time" from="Game Manager" to="CharacterManager/Character Controller" method="_on_time_incremented"]
+[connection signal="increment_time" from="Game Manager" to="CharacterManager/Character Controller2" method="_on_time_incremented"]
+[connection signal="increment_time" from="Game Manager" to="CharacterManager/Character Controller3" method="_on_time_incremented"]
+[connection signal="increment_time" from="Game Manager" to="CharacterManager/Character Controller4" method="_on_time_incremented"]

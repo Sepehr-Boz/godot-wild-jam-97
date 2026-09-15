@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c8j4lyk548oow"]
+
+[ext_resource type="PackedScene" uid="uid://dyi1sj7ufsu1a" path="res://scenes/character_controller.tscn" id="1_j2dsb"]
+
+[node name="Character Controller" unique_id=1721062491 instance=ExtResource("1_j2dsb")]
+character_tile_source_id = 20
+character_number_source_id = 39
+attack_marker_source_id = 48
+
+[node name="Character" parent="." index="0" unique_id=60370671]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="Markers" parent="." index="1" unique_id=266964505]
+tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 0, 0, 0)
