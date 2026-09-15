@@ -34,6 +34,10 @@ func _ready() -> void:
 	target_position = initial_position
 	clear()
 	update()
+	
+	while not GameManager.instance:
+		await get_tree().create_timer(0.1).timeout
+	GameManager.instance.increment_time.connect(_on_time_incremented)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

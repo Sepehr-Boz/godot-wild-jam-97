@@ -129,14 +129,3 @@ initial_position = Vector2i(0, 4)
 
 [node name="Character Controller4" parent="CharacterManager" unique_id=1952554487 instance=ExtResource("11_kvuet")]
 initial_position = Vector2i(0, 6)
-
-[connection signal="increment_time" from="Game Manager" to="CharacterManager/Character Controller" method="_on_time_incremented"]
-[connection signal="increment_time" from="Game Manager" to="CharacterManager/Character Controller2" method="_on_time_incremented"]
-[connection signal="increment_time" from="Game Manager" to="CharacterManager/Character Controller3" method="_on_time_incremented"]
-[connection signal="increment_time" from="Game Manager" to="CharacterManager/Character Controller4" method="_on_time_incremented"]
-[connection signal="increment_time" from="Game Manager" to="EnemyManager/EnemyController" method="_on_time_incremented"]
-[connection signal="increment_time" from="Game Manager" to="EnemyManager/EnemyController2" method="_on_time_incremented"]
-[connection signal="increment_time" from="Game Manager" to="EnemyManager/EnemyController3" method="_on_time_incremented"]
-[connection signal="increment_time" from="Game Manager" to="EnemyManager/EnemyController4" method="_on_time_incremented"]
-[connection signal="increment_time" from="Game Manager" to="EnemyManager/EnemyController5" method="_on_time_incremented"]
-[connection signal="increment_time" from="Game Manager" to="EnemyManager/EnemyController6" method="_on_time_incremented"]

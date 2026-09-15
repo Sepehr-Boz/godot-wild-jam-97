@@ -34,6 +34,10 @@ func _ready() -> void:
 	_path_tilemap.modulate.a = 0.25
 	clear()
 	update()
+	
+	while not GameManager.instance:
+		await get_tree().create_timer(0.1).timeout
+	GameManager.instance.increment_time.connect(_on_time_incremented)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("show_tips"):
