@@ -10,6 +10,7 @@ const ENEMY_SOURCE_INDEX: Dictionary[Enemy, int] = {
 
 static var instance: EnemyController
 signal enemies_moved(positions: Array[Vector2i])
+signal enemies_killed()
 
 @onready var _enemies_tilemap = $Enemies
 @export var enemy_paths: Dictionary[TileMapPath, Enemy] = {}
@@ -54,6 +55,8 @@ func kill_enemy_at(coord: Vector2i) -> void:
 			_enemies_tilemap.erase_cell(coord)
 			enemy_paths.erase(path)
 			break
+	if len(enemy_paths) == 0:
+		enemies_killed.emit()
 
 func _scale_enemy_animation(tile: TileData) -> void:
 	var _animation = func (value: Vector2):

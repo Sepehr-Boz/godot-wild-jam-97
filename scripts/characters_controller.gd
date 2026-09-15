@@ -21,6 +21,7 @@ const FOUR_MARKER_SOURCE_INDEX: int = 40
 static var instance: CharacterController
 signal increment_time()
 signal characters_moved(positions: Array[Vector2i])
+signal characters_killed()
 
 @export var current_character_outline_color: Color = Color.WHITE
 @onready var _character_tilemap: TileMapLayer = $Characters
@@ -170,6 +171,8 @@ func kill_character_at(coord: Vector2i) -> void:
 		CHARACTER_SOURCE_INDEX[Character.ARCHER]:
 			character_queue.erase(Character.ARCHER)
 			character_positions.erase(Character.ARCHER)
+	if len(character_queue) == 0:
+		characters_killed.emit()
 
 func _scale_current_character_animation() -> void:
 	var _current_character_animation = func (value: Vector2):

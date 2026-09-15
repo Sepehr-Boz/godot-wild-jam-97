@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c3s47vnxua5mj" path="res://scripts/enemy_controller.gd" id="4_lbhrr"]
 [ext_resource type="TileSet" uid="uid://dm6c4ho4yurov" path="res://textures/markers.tres" id="4_u5sy4"]
 [ext_resource type="Script" uid="uid://da5wkweelbsvl" path="res://scripts/tilemap_path.gd" id="5_iywne"]
+[ext_resource type="Script" uid="uid://ba81hliobouyo" path="res://scripts/game_manager.gd" id="7_u5sy4"]
 
 [node name="Node2D" type="Node2D" unique_id=1351537289]
 
@@ -86,6 +87,9 @@ loop_type = 2
 [node name="Enemies" type="TileMapLayer" parent="Enemy Manager" unique_id=1088505745]
 tile_map_data = PackedByteArray("AAALAAAAJQAAAAAAAAAEAAAAJQAAAAAAAAAAAAcAIwAAAAAAAAAPAAYAIwAAAAAAAAADAAIAJgAAAAAAAAAMAAQAJgAAAAAAAAA=")
 tile_set = ExtResource("3_u5sy4")
+
+[node name="Game Manager" type="Node" parent="." unique_id=1094982514]
+script = ExtResource("7_u5sy4")
 
 [connection signal="characters_moved" from="Character Manager" to="Enemy Manager" method="_on_character_manager_characters_moved"]
 [connection signal="increment_time" from="Character Manager" to="Enemy Manager" method="_on_character_manager_increment_time"]
