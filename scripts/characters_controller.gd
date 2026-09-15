@@ -5,17 +5,17 @@ extends Node
 # WHICH FOLLOWS THE KNIGHT
 enum Character { KNIGHT, TANK, MAGE, ARCHER }
 enum SwitchDirection { FRONT, BACK }
-const CHARACTER_ATLAS_INDEX: Dictionary[Character, Vector2i] = {
-	Character.KNIGHT: Vector2i(0, 8),
-	Character.TANK: Vector2i(3, 7),
-	Character.MAGE: Vector2i(0, 7),
-	Character.ARCHER: Vector2i(4, 9)
+const CHARACTER_SOURCE_INDEX: Dictionary[Character, int] = {
+	Character.KNIGHT: 25,
+	Character.TANK:23,
+	Character.MAGE: 20,
+	Character.ARCHER: 34
 }
-const MOVE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(7, 3)
-const ONE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(1, 10)
-const TWO_MARKER_ATLAS_INDEX: Vector2i = Vector2i(2, 10)
-const THREE_MARKER_ATLAS_INDEX: Vector2i = Vector2i(3, 10)
-const FOUR_MARKER_ATLAS_INDEX: Vector2i = Vector2i(4, 10)
+const MOVE_MARKER_SOURCE_INDEX: int = 32
+const ONE_MARKER_SOURCE_INDEX: int = 37
+const TWO_MARKER_SOURCE_INDEX: int = 38
+const THREE_MARKER_SOURCE_INDEX: int = 39
+const FOUR_MARKER_SOURCE_INDEX: int = 40
 
 static var instance: CharacterController
 signal increment_time()
@@ -23,6 +23,7 @@ signal increment_time()
 @export var current_character_outline_color: Color = Color.WHITE
 @onready var _character_tilemap: TileMapLayer = $Characters
 @onready var _marker_tilemap: TileMapLayer = $Markers
+var _character_material: ShaderMaterial = preload("res://materials/character_tile.tres")
 var character_positions: Dictionary[Character, Vector2i] = {
 	Character.KNIGHT: Vector2i(8, 4),
 	Character.TANK: Vector2i(7, 4),
@@ -33,7 +34,11 @@ var character_positions: Dictionary[Character, Vector2i] = {
 var character_queue: Array[Character] = [
 	Character.KNIGHT, Character.TANK, Character.MAGE, Character.ARCHER
 ]
+@onready var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _current_character_tween: Tween
+var _character_offsets: Dictionary[Character, float] = {}
+var _index_positions: Array[Vector2i] = []
+var _show_index_numbers: bool = false
 
 var current_character: Character:
 	get:
@@ -48,7 +53,11 @@ func _ready() -> void:
 	_character_tilemap.clear()
 	_marker_tilemap.clear()
 	for type in Character.values():
-		_character_tilemap.set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
+		_character_offsets[type] = _rng.randf()
+		_character_tilemap.set_cell(character_positions[type], CHARACTER_SOURCE_INDEX[type], Vector2i.ZERO)
+		var shader: ShaderMaterial = _character_material.duplicate()
+		shader.set_shader_parameter("offset", _character_offsets[type])
+		_character_tilemap.get_cell_tile_data(character_positions[type]).material = shader
 	spawn_move_markers()
 	_scale_current_character_animation()
 
@@ -72,12 +81,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			switch_characters(SwitchDirection.BACK)
 	elif event.is_action_pressed("show_tips"):
 		spawn_index_markers()
+		_show_index_numbers = true
 	elif event.is_action_released("show_tips"):
 		clear_index_markers()
+		_show_index_numbers = false
 
 func move_characters(dir: Vector2i) -> void:
 	_character_tilemap.clear()
 	clear_move_markers()
+	clear_index_markers()
 	var prev_char_position: Vector2i
 	for i in len(character_queue):
 		var type: Character = character_queue[i]
@@ -87,14 +99,18 @@ func move_characters(dir: Vector2i) -> void:
 		else:
 			character_positions[type] = prev_char_position
 		prev_char_position = char_position
-		_character_tilemap.set_cell(character_positions[type], 0, CHARACTER_ATLAS_INDEX[type])
+		_character_tilemap.set_cell(character_positions[type], CHARACTER_SOURCE_INDEX[type], Vector2i.ZERO)
+		var shader: ShaderMaterial = _character_material.duplicate()
+		shader.set_shader_parameter("offset", _character_offsets[type])
+		_character_tilemap.get_cell_tile_data(character_positions[type]).material = shader
 	spawn_move_markers()
+	if _show_index_numbers:
+		spawn_index_markers()
 	_scale_current_character_animation()
 	increment_time.emit()
 
 func switch_characters(direction: SwitchDirection) -> void:
 	_character_tilemap.clear()
-	clear_move_markers()
 	if direction == SwitchDirection.FRONT:
 		# move the current character to the back and push everything up
 		var character: Character = character_queue.pop_front()
@@ -104,7 +120,10 @@ func switch_characters(direction: SwitchDirection) -> void:
 			var character_position: Vector2i = character_positions[character_queue[i]]
 			character_positions[character_queue[i]] = curr_position
 			curr_position = character_position
-			_character_tilemap.set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
+			_character_tilemap.set_cell(character_positions[character_queue[i]], CHARACTER_SOURCE_INDEX[character_queue[i]], Vector2i.ZERO)
+			var shader: ShaderMaterial = _character_material.duplicate()
+			shader.set_shader_parameter("offset", _character_offsets[character_queue[i]])
+			_character_tilemap.get_cell_tile_data(character_positions[character_queue[i]]).material = shader
 	else:
 		# push the current character back and the tail to the front
 		var character: Character = character_queue.pop_back()
@@ -114,8 +133,10 @@ func switch_characters(direction: SwitchDirection) -> void:
 			var character_position: Vector2i = character_positions[character_queue[i]]
 			character_positions[character_queue[i]] = curr_position
 			curr_position = character_position
-			_character_tilemap.set_cell(character_positions[character_queue[i]], 0, CHARACTER_ATLAS_INDEX[character_queue[i]])
-	spawn_move_markers()
+			_character_tilemap.set_cell(character_positions[character_queue[i]], CHARACTER_SOURCE_INDEX[character_queue[i]], Vector2i.ZERO)
+			var shader: ShaderMaterial = _character_material.duplicate()
+			shader.set_shader_parameter("offset", _character_offsets[character_queue[i]])
+			_character_tilemap.get_cell_tile_data(character_positions[character_queue[i]]).material = shader
 	_scale_current_character_animation()
 	increment_time.emit()
 
@@ -135,32 +156,34 @@ func _scale_current_character_animation() -> void:
 		shader.set_shader_parameter("remap_outline", false)
 	
 	_current_character_tween = get_tree().create_tween()
-	_current_character_tween.tween_method(_current_character_animation, Vector2.ZERO, Vector2(96, 96), 0.1)
-	_current_character_tween.tween_method(_current_character_animation, Vector2(96, 96), Vector2.ZERO, 0.1)
+	_current_character_tween.tween_method(_current_character_animation, Vector2.ZERO, Vector2.ONE * 4, 0.1)
+	_current_character_tween.tween_method(_current_character_animation, Vector2.ONE * 4, Vector2.ZERO, 0.1)
 
 func spawn_move_markers() -> void:
 	for target_position in move_positions:
 		if not intersects_character(target_position):
-			_marker_tilemap.set_cell(target_position, 0, MOVE_MARKER_ATLAS_INDEX)
+			_marker_tilemap.set_cell(target_position, MOVE_MARKER_SOURCE_INDEX, Vector2i.ZERO)
 
 func spawn_index_markers() -> void:
 	for i in len(character_queue):
 		var index: int = i + 1
 		var position: Vector2i = character_positions[character_queue[i]]
+		_index_positions.append(position)
 		match index:
-			1: _marker_tilemap.set_cell(position, 0, ONE_MARKER_ATLAS_INDEX)
-			2: _marker_tilemap.set_cell(position, 0, TWO_MARKER_ATLAS_INDEX)
-			3: _marker_tilemap.set_cell(position, 0, THREE_MARKER_ATLAS_INDEX)
-			4: _marker_tilemap.set_cell(position, 0, FOUR_MARKER_ATLAS_INDEX)
+			1: _marker_tilemap.set_cell(position, ONE_MARKER_SOURCE_INDEX, Vector2i.ZERO)
+			2: _marker_tilemap.set_cell(position, TWO_MARKER_SOURCE_INDEX, Vector2i.ZERO)
+			3: _marker_tilemap.set_cell(position, THREE_MARKER_SOURCE_INDEX, Vector2i.ZERO)
+			4: _marker_tilemap.set_cell(position, FOUR_MARKER_SOURCE_INDEX, Vector2i.ZERO)
 
 func clear_move_markers() -> void:
 	for position: Vector2i in _marker_tilemap.get_surrounding_cells(character_positions[current_character]):
-		if _marker_tilemap.get_cell_atlas_coords(position) == MOVE_MARKER_ATLAS_INDEX:
+		if _marker_tilemap.get_cell_source_id(position) == MOVE_MARKER_SOURCE_INDEX:
 			_marker_tilemap.erase_cell(position)
 
 func clear_index_markers() -> void:
-	for position: Vector2i in character_positions.values():
+	for position: Vector2i in _index_positions:
 		_marker_tilemap.erase_cell(position)
+	_index_positions.clear()
 
 func intersects_character(coord: Vector2i) -> bool:
 	for type in Character.values():

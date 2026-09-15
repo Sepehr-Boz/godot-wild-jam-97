@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dh7hdog6eyher"]
+
+[ext_resource type="Shader" uid="uid://bqygprak6n8w3" path="res://shaders/ground.gdshader" id="1_mnmdr"]
+
+[resource]
+shader = ExtResource("1_mnmdr")
+shader_parameter/has_inline = true
+shader_parameter/inline_width_pixels = 1.5
+shader_parameter/inline_color = Color(0, 0, 0, 0)

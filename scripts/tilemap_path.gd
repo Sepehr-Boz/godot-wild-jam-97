@@ -46,7 +46,7 @@ func get_current_point() -> Vector2i:
 	return points[current_time]
 
 func hide_path() -> void:
-	visible = false
+	self_modulate.a = 0.25
 
 func show_path() -> void:
-	visible = true
+	self_modulate.a = 1.0
