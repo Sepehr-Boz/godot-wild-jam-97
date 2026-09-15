@@ -26,18 +26,21 @@ var _move_tween: Tween
 var _show_tips: bool = false
 var character_position: Vector2i
 var target_position: Vector2i
+var past_movements: Array[Vector2i] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_character_material.set_shader_parameter("offset", GameManager.RNG.randf())
 	character_position = initial_position
 	target_position = initial_position
+	past_movements.append(initial_position)
 	clear()
 	update()
 	
 	while not GameManager.instance:
 		await get_tree().create_timer(0.1).timeout
 	GameManager.instance.increment_time.connect(_on_time_incremented)
+	GameManager.instance.decrement_time.connect(_on_time_decremented)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -72,10 +75,33 @@ func _input(event: InputEvent) -> void:
 		_show_tips = false
 		_marker_tilemap.erase_cell(character_position)
 
-func _on_time_incremented() -> void:
+func _on_time_incremented(time: int) -> void:
+	var should_play_animation: bool
+	if time >= len(past_movements):
+		# only play the animation if the character moved
+		should_play_animation = target_position != character_position
+		character_position = target_position
+		past_movements.append(character_position)
+	elif target_position != past_movements[time]:
+		past_movements = past_movements.slice(0, time)
+		_on_time_incremented(time)
+		return
+	else:
+		var target: Vector2i = past_movements[time]
+		should_play_animation = target != character_position
+		character_position = target
+		target_position = character_position if time >= len(past_movements) - 1 else past_movements[time + 1]
+	clear()
+	update()
+	if should_play_animation:
+		play_move_animation()
+
+func _on_time_decremented(time: int) -> void:
 	# only play the animation if the character moved
-	var should_play_animation = target_position != character_position
-	character_position = target_position
+	var target = past_movements[time]
+	var should_play_animation = target != character_position
+	character_position = target
+	target_position = past_movements[time + 1]
 	clear()
 	update()
 	if should_play_animation:

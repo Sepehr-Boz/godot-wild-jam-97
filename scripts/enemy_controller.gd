@@ -24,13 +24,13 @@ enum LoopType { NONE, TURN_AROUND, LOOP }
 var _move_tween: Tween
 var _show_tips: bool = false
 var enemy_position: Vector2i
-var path_time: int # in range of 0 <= i < len(path points)
+var path_offset: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_enemy_material.set_shader_parameter("offset", GameManager.RNG.randf())
-	path_time = 0 if not start_at_random_point else GameManager.RNG.randi_range(0, len(path_points) - 1)
-	enemy_position = path_points[path_time]
+	path_offset = 0 if not start_at_random_point else GameManager.RNG.randi_range(0, len(path_points) - 1)
+	enemy_position = path_points[path_offset]
 	_path_tilemap.modulate.a = 0.25
 	clear()
 	update()
@@ -38,6 +38,7 @@ func _ready() -> void:
 	while not GameManager.instance:
 		await get_tree().create_timer(0.1).timeout
 	GameManager.instance.increment_time.connect(_on_time_incremented)
+	GameManager.instance.decrement_time.connect(_on_time_decremented)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("show_tips"):
@@ -47,9 +48,14 @@ func _input(event: InputEvent) -> void:
 		_show_tips = false
 		_path_tilemap.modulate.a = 0.25
 
-func _on_time_incremented() -> void:
-	path_time += path_jump
-	enemy_position = sample_path(path_time)
+func _on_time_incremented(time: int) -> void:
+	enemy_position = sample_path(path_offset + time * path_jump)
+	clear()
+	update()
+	play_move_animation()
+
+func _on_time_decremented(time: int) -> void:
+	enemy_position = sample_path(path_offset + time * path_jump)
 	clear()
 	update()
 	play_move_animation()

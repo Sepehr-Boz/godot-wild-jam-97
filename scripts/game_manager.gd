@@ -1,11 +1,14 @@
 class_name GameManager
 extends Node
 
-signal increment_time()
-signal decrement_time()
+signal increment_time(time: int)
+signal decrement_time(time: int)
 
 static var instance: GameManager
 static var RNG: RandomNumberGenerator = RandomNumberGenerator.new()
+
+@export var max_actions_allowed: int = 100
+var time: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,10 +16,12 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_released():
-			increment_time.emit()
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.is_released():
-			decrement_time.emit()
+		if time < max_actions_allowed and event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_released():
+			time += 1
+			increment_time.emit(time)
+		elif time > 0 and event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.is_released():
+			time -= 1
+			decrement_time.emit(time)
 
 func _on_characters_killed() -> void:
 	print("all characters killed")
