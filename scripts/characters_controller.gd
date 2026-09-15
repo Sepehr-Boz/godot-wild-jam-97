@@ -12,6 +12,7 @@ const CHARACTER_SOURCE_INDEX: Dictionary[Character, int] = {
 	Character.ARCHER: 34
 }
 const MOVE_MARKER_SOURCE_INDEX: int = 32
+const ATTACK_MARKER_SOURCE_INDEX: int = 48
 const ONE_MARKER_SOURCE_INDEX: int = 37
 const TWO_MARKER_SOURCE_INDEX: int = 38
 const THREE_MARKER_SOURCE_INDEX: int = 39
@@ -39,6 +40,7 @@ var _current_character_tween: Tween
 var _character_offsets: Dictionary[Character, float] = {}
 var _index_positions: Array[Vector2i] = []
 var _show_index_numbers: bool = false
+var _enemy_positions: Array[Vector2i] = []
 
 var current_character: Character:
 	get:
@@ -103,11 +105,14 @@ func move_characters(dir: Vector2i) -> void:
 		var shader: ShaderMaterial = _character_material.duplicate()
 		shader.set_shader_parameter("offset", _character_offsets[type])
 		_character_tilemap.get_cell_tile_data(character_positions[type]).material = shader
-	spawn_move_markers()
+	for enemy_pos: Vector2i in _enemy_positions:
+		if character_positions[current_character] == enemy_pos:
+			EnemyController.instance.kill_enemy_at(enemy_pos)
 	if _show_index_numbers:
 		spawn_index_markers()
 	_scale_current_character_animation()
 	increment_time.emit()
+	spawn_move_markers()
 
 func switch_characters(direction: SwitchDirection) -> void:
 	_character_tilemap.clear()
@@ -137,8 +142,13 @@ func switch_characters(direction: SwitchDirection) -> void:
 			var shader: ShaderMaterial = _character_material.duplicate()
 			shader.set_shader_parameter("offset", _character_offsets[character_queue[i]])
 			_character_tilemap.get_cell_tile_data(character_positions[character_queue[i]]).material = shader
+	clear_move_markers()
+	for enemy_pos: Vector2i in _enemy_positions:
+		if character_positions[current_character] == enemy_pos:
+			EnemyController.instance.kill_enemy_at(enemy_pos)
 	_scale_current_character_animation()
 	increment_time.emit()
+	spawn_move_markers()
 
 func _scale_current_character_animation() -> void:
 	var _current_character_animation = func (value: Vector2):
@@ -161,7 +171,11 @@ func _scale_current_character_animation() -> void:
 
 func spawn_move_markers() -> void:
 	for target_position in move_positions:
-		if not intersects_character(target_position):
+		if intersects_character(target_position):
+			continue
+		elif target_position in _enemy_positions:
+			_marker_tilemap.set_cell(target_position, ATTACK_MARKER_SOURCE_INDEX, Vector2i.ZERO)
+		else:
 			_marker_tilemap.set_cell(target_position, MOVE_MARKER_SOURCE_INDEX, Vector2i.ZERO)
 
 func spawn_index_markers() -> void:
@@ -177,7 +191,8 @@ func spawn_index_markers() -> void:
 
 func clear_move_markers() -> void:
 	for position: Vector2i in _marker_tilemap.get_surrounding_cells(character_positions[current_character]):
-		if _marker_tilemap.get_cell_source_id(position) == MOVE_MARKER_SOURCE_INDEX:
+		var tile_source_id: int = _marker_tilemap.get_cell_source_id(position)
+		if tile_source_id == MOVE_MARKER_SOURCE_INDEX or tile_source_id == ATTACK_MARKER_SOURCE_INDEX:
 			_marker_tilemap.erase_cell(position)
 
 func clear_index_markers() -> void:
@@ -190,3 +205,7 @@ func intersects_character(coord: Vector2i) -> bool:
 		if coord == character_positions[type]:
 			return true
 	return false
+
+
+func _on_enemy_manager_enemies_moved(positions: Array[Vector2i]) -> void:
+	_enemy_positions = positions
