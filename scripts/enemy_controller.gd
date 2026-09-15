@@ -1,77 +1,81 @@
 class_name EnemyController
-extends Node
+extends Node2D
 
-enum Enemy { BAT, RAT, SPIDER }
-const ENEMY_SOURCE_INDEX: Dictionary[Enemy, int] = {
-	Enemy.BAT: 35,
-	Enemy.RAT: 38,
-	Enemy.SPIDER: 37
-}
+# - this class contains 2 tilemaps: one for the enemy it controls
+# and the other for the path that it follows
+# - this class moves the enemy along the path and then can either move to
+# the end and stop (NONE), turn around and move back to the start
+# repeatedly (TURN_AROUND), or keep looping for when the paths are
+# closed (LOOP)
+# - the path jump defines how quickly the enemy moves through the path,
+# 1 means it will move from point to next, 2 = it will skip 1, 3 will skip 2 etc.
 
-static var instance: EnemyController
-signal enemies_moved(positions: Array[Vector2i])
-signal enemies_killed()
+enum LoopType { NONE, TURN_AROUND, LOOP }
 
-@onready var _enemies_tilemap = $Enemies
-@export var enemy_paths: Dictionary[TileMapPath, Enemy] = {}
-@export var enemy_move_outline_color: Color = Color.BLACK
-var _enemy_material: ShaderMaterial = preload("res://materials/enemy_tile.tres")
-@onready var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
-var _enemy_offsets: Dictionary[TileMapPath, float] = {}
-var _character_positions: Array[Vector2i] = []
+@export var enemy_tile_source_id: int
+@export var path_points: Array[Vector2i] = []
+@export var path_jump: int = 1
+@export var path_loop: LoopType = LoopType.TURN_AROUND
+@export var start_at_random_point: bool = false
+
+@onready var _enemy_tilemap: TileMapLayer = $Enemy
+@onready var _path_tilemap: TileMapLayer = $Path
+@onready var _enemy_material: ShaderMaterial = preload("res://materials/enemy_tile.tres").duplicate()
+var _move_tween: Tween
+var _show_tips: bool = false
+var enemy_position: Vector2i
+var path_time: int # in range of 0 <= i < len(path points)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	instance = self
-	for path: TileMapPath in enemy_paths.keys():
-		path.hide_path()
-		_enemy_offsets[path] = _rng.randf()
+	_enemy_material.set_shader_parameter("offset", GameManager.RNG.randf())
+	path_time = 0 if not start_at_random_point else GameManager.RNG.randi_range(0, len(path_points) - 1)
+	enemy_position = path_points[path_time]
+	_path_tilemap.modulate.a = 0.25
+	clear()
+	update()
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("show_tips"):
-		for path: TileMapPath in enemy_paths.keys():
-			path.show_path()
+		_show_tips = true
+		_path_tilemap.modulate.a = 1.0
 	elif event.is_action_released("show_tips"):
-		for path: TileMapPath in enemy_paths.keys():
-			path.hide_path()
+		_show_tips = false
+		_path_tilemap.modulate.a = 0.25
 
-func increment_time() -> void:
-	_enemies_tilemap.clear()
-	for path: TileMapPath in enemy_paths:
-		path.increment_time()
-		var new_position: Vector2i = path.get_current_point()
-		_enemies_tilemap.set_cell(new_position, ENEMY_SOURCE_INDEX[enemy_paths[path]], Vector2i.ZERO)
-		var shader: ShaderMaterial = _enemy_material.duplicate()
-		shader.set_shader_parameter("offset", _enemy_offsets[path])
-		_enemies_tilemap.get_cell_tile_data(new_position).material = shader
-		_scale_enemy_animation(_enemies_tilemap.get_cell_tile_data(new_position))
+func _on_time_incremented() -> void:
+	path_time += path_jump
+	enemy_position = sample_path(path_time)
+	clear()
+	update()
+	play_move_animation()
 
-func kill_enemy_at(coord: Vector2i) -> void:
-	for path: TileMapPath in enemy_paths.keys():
-		if coord == path.get_current_point():
-			path.visible = false
-			_enemies_tilemap.erase_cell(coord)
-			enemy_paths.erase(path)
-			break
-	if len(enemy_paths) == 0:
-		enemies_killed.emit()
+func sample_path(index: int) -> Vector2i:
+	if path_loop == LoopType.NONE:
+		return path_points[clampi(index, 0, len(path_points) - 1)]
+	elif path_loop == LoopType.TURN_AROUND:
+		var num_loops_completed: int = index / len(path_points)
+		if num_loops_completed % 2 == 0:
+			return path_points[index % len(path_points)]
+		else:
+			return path_points[len(path_points) - 1 - index % len(path_points)]
+	else:
+		return path_points[index % len(path_points)]
 
-func _scale_enemy_animation(tile: TileData) -> void:
-	var _animation = func (value: Vector2):
-		var shader: ShaderMaterial = tile.material
-		shader.set_shader_parameter("scale_addition", value)
+func clear() -> void:
+	_enemy_tilemap.clear()
+
+func update() -> void:
+	_enemy_tilemap.set_cell(enemy_position, enemy_tile_source_id, Vector2i.ZERO)
+	_enemy_tilemap.get_cell_tile_data(enemy_position).material = _enemy_material
+
+func play_move_animation() -> void:
+	var _move_animation = func (value) -> void:
+		_enemy_material.set_shader_parameter("scale_addition", value)
 	
-	var tween: Tween = get_tree().create_tween()
-	tween.tween_method(_animation, Vector2.ZERO, Vector2.ONE * 2, 0.1)
-	tween.tween_method(_animation, Vector2.ONE * 2, Vector2.ZERO, 0.1)
-
-func _on_character_manager_increment_time() -> void:
-	increment_time()
-	var positions: Array[Vector2i] = []
-	for path: TileMapPath in enemy_paths.keys():
-		positions.append(path.get_current_point())
-	enemies_moved.emit(positions)
-
-
-func _on_character_manager_characters_moved(positions: Array[Vector2i]) -> void:
-	_character_positions = positions
+	if _move_tween != null and _move_tween.is_running():
+		await _move_tween.finished
+	
+	_move_tween = get_tree().create_tween()
+	_move_tween.tween_method(_move_animation, Vector2.ZERO, Vector2(2, 2), 0.1)
+	_move_tween.tween_method(_move_animation, Vector2(2, 2), Vector2.ZERO, 0.1)
