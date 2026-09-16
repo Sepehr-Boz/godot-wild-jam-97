@@ -23,6 +23,7 @@ enum LoopType { NONE, TURN_AROUND, LOOP }
 @onready var _enemy_material: ShaderMaterial = preload("res://materials/enemy_tile.tres").duplicate()
 var _move_tween: Tween
 var _show_tips: bool = false
+var _killed_at_time: int = INT64_MAX
 var enemy_position: Vector2i
 var path_offset: int
 
@@ -39,27 +40,47 @@ func _ready() -> void:
 		await get_tree().create_timer(0.1).timeout
 	GameManager.instance.increment_time.connect(_on_time_incremented)
 	GameManager.instance.decrement_time.connect(_on_time_decremented)
+	GameManager.instance.enemy_killed_at.connect(_on_enemy_killed_at)
 	GameManager.enemies.append(self)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("show_tips"):
-		_show_tips = true
-		_path_tilemap.modulate.a = 1.0
-	elif event.is_action_released("show_tips"):
-		_show_tips = false
-		_path_tilemap.modulate.a = 0.25
+	if event is InputEventMouse:
+		event = event as InputEventMouse
+		var hover_coord: Vector2i = _enemy_tilemap.local_to_map(get_local_mouse_position())
+		var used_cells: Array[Vector2i] = _enemy_tilemap.get_used_cells()
+		used_cells.append_array(_path_tilemap.get_used_cells())
+		if hover_coord in used_cells and _path_tilemap.modulate.a == 0.25:
+			_show_tips = true
+			_path_tilemap.modulate.a = 1.0
+		elif hover_coord not in used_cells and _path_tilemap.modulate.a == 1.0:
+			_show_tips = false
+			_path_tilemap.modulate.a = 0.25
 
 func _on_time_incremented(time: int) -> void:
 	enemy_position = sample_path(path_offset + time * path_jump)
 	clear()
+	if time >= _killed_at_time:
+		return
+	else:
+		_killed_at_time = INT64_MAX
 	update()
 	play_move_animation()
 
 func _on_time_decremented(time: int) -> void:
 	enemy_position = sample_path(path_offset + time * path_jump)
 	clear()
+	if time >= _killed_at_time:
+		return
+	else:
+		_killed_at_time = INT64_MAX
 	update()
 	play_move_animation()
+
+func _on_enemy_killed_at(coord: Vector2i, time: int) -> void:
+	if enemy_position == coord:
+		_killed_at_time = time
+		_enemy_tilemap.clear()
+		_path_tilemap.modulate.a = 0.0
 
 func sample_path(index: int) -> Vector2i:
 	if path_loop == LoopType.NONE:
@@ -79,6 +100,7 @@ func clear() -> void:
 func update() -> void:
 	_enemy_tilemap.set_cell(enemy_position, enemy_tile_source_id, Vector2i.ZERO)
 	_enemy_tilemap.get_cell_tile_data(enemy_position).material = _enemy_material
+	_path_tilemap.modulate.a = 1.0 if _show_tips else 0.25
 
 func play_move_animation() -> void:
 	var _move_animation = func (value) -> void:

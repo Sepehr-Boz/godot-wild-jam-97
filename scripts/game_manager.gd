@@ -3,6 +3,7 @@ extends Node
 
 signal increment_time(time: int)
 signal decrement_time(time: int)
+signal enemy_killed_at(coord: Vector2i, time: int)
 
 static var instance: GameManager
 static var RNG: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -21,9 +22,17 @@ func _input(event: InputEvent) -> void:
 		if time < max_actions_allowed and event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_released():
 			time += 1
 			increment_time.emit(time)
+			_has_character_overlapped_enemy()
 		elif time > 0 and event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.is_released():
 			time -= 1
 			decrement_time.emit(time)
+			_has_character_overlapped_enemy()
+
+func _has_character_overlapped_enemy() -> void:
+	for character: CharacterController in characters:
+		for enemy: EnemyController in enemies:
+			if character.character_position == enemy.enemy_position:
+				enemy_killed_at.emit(enemy.enemy_position, time)
 
 func _on_characters_killed() -> void:
 	print("all characters killed")
