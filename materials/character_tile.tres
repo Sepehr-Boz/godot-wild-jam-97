@@ -19,5 +19,5 @@ shader_parameter/shine_width = 0.049999998735
 shader_parameter/shine_color = Color(1, 1, 1, 1)
 shader_parameter/scale_addition = Vector2(0, 0)
 shader_parameter/remap_outline = false
-shader_parameter/remapped_outline_color = Color(1, 1, 1, 1)
+shader_parameter/remapped_outline_color = Color(0.57254905, 0.92941177, 0.9607843, 1)
 shader_parameter/offset = 0.0

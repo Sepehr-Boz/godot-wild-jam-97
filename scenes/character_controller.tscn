@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dyi1sj7ufsu1a"]
+
+[ext_resource type="Script" uid="uid://cyra713upr25m" path="res://scripts/character_controller.gd" id="1_q780c"]
+[ext_resource type="TileSet" uid="uid://dui5l7xdis3kd" path="res://textures/characters.tres" id="2_2rfdc"]
+[ext_resource type="TileSet" uid="uid://dm6c4ho4yurov" path="res://textures/markers.tres" id="3_1rga4"]
+
+[node name="Character Controller" type="Node2D" unique_id=112210087]
+script = ExtResource("1_q780c")
+selected_move_marker_source_id = 32
+attack_marker_source_id = 48
+selected_attack_marker_source_id = 1
+
+[node name="Character" type="TileMapLayer" parent="." unique_id=60370671]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0)
+tile_set = ExtResource("2_2rfdc")
+
+[node name="Markers" type="TileMapLayer" parent="." unique_id=266964505]
+tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = ExtResource("3_1rga4")

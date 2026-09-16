@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bbsmwe4feb77t"]
+
+[ext_resource type="Shader" uid="uid://qkl8dguenupm" path="res://shaders/marker.gdshader" id="1_xp6er"]
+
+[resource]
+shader = ExtResource("1_xp6er")
+shader_parameter/remap_color = true
+shader_parameter/inner_color_remap = Color(0.8718602, 0.8718602, 0.8718602, 1)
+shader_parameter/outline_color_remap = Color(0.57254905, 0.92941177, 0.9607843, 1)
