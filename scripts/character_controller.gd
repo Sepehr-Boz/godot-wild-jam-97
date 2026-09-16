@@ -60,6 +60,10 @@ func _input(event: InputEvent) -> void:
 			var destinations: Array = move_directions.map(
 				func (x: Vector2i): return character_position + x
 			)
+			if clicked_cell == character_position:
+				target_position = character_position
+				for target: Vector2i in target_positions:
+					_marker_tilemap.set_cell(target, move_marker_source_id, Vector2.ZERO)
 			if clicked_cell in destinations:
 				for target: Vector2i in target_positions:
 					if clicked_cell == target:
