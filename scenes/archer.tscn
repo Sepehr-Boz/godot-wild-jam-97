@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dyi1sj7ufsu1a" path="res://scenes/character_controller.tscn" id="1_jggnj"]
 
 [node name="Character Controller" unique_id=1721062491 instance=ExtResource("1_jggnj")]
+move_directions = Array[Vector2i]([Vector2i(-2, 0), Vector2i(2, 0), Vector2i(0, -2), Vector2i(0, 2)])
 character_tile_source_id = 34
 character_number_source_id = 40
 
@@ -10,4 +11,4 @@ character_number_source_id = 40
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="Markers" parent="." index="1" unique_id=266964505]
-tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
