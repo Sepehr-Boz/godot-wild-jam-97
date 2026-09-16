@@ -24,9 +24,14 @@ extends Node2D
 @onready var _character_material: ShaderMaterial = preload("res://materials/character_tile.tres").duplicate()
 var _move_tween: Tween
 var _show_tips: bool = false
+var _character_selected: bool = false
 var character_position: Vector2i
 var target_position: Vector2i
 var past_movements: Array[Vector2i] = []
+
+var target_positions: Array[Vector2i]:
+	get:
+		return move_directions.map(func (x: Vector2i): return x + character_position).filter(_target_position_free)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,23 +46,29 @@ func _ready() -> void:
 		await get_tree().create_timer(0.1).timeout
 	GameManager.instance.increment_time.connect(_on_time_incremented)
 	GameManager.instance.decrement_time.connect(_on_time_decremented)
+	GameManager.characters.append(self)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		event = event as InputEventMouseButton
-		if event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
-			var clicked_cell: Vector2i = _character_tilemap.local_to_map(get_local_mouse_position())
+		var clicked_cell: Vector2i = _character_tilemap.local_to_map(get_local_mouse_position())
+		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed() and clicked_cell == character_position:
+			_character_selected = true
+			_character_material.set_shader_parameter("remap_outline", true)
+		elif event.button_index == MOUSE_BUTTON_LEFT and event.is_released() and _character_selected:
 			# if click is outside the movements then ignore
 			var destinations: Array = move_directions.map(
 				func (x: Vector2i): return character_position + x
 			)
 			if clicked_cell in destinations:
-				for target: Vector2i in destinations:
+				for target: Vector2i in target_positions:
 					if clicked_cell == target:
 						target_position = clicked_cell
 						_marker_tilemap.set_cell(target, selected_move_marker_source_id, Vector2.ZERO)
 					else:
 						_marker_tilemap.set_cell(target, move_marker_source_id, Vector2.ZERO)
+			_character_selected = false
+			_character_material.set_shader_parameter("remap_outline", false)
 	elif event is InputEventMouse:
 		event = event as InputEventMouse
 		var hover_coord: Vector2i = _character_tilemap.local_to_map(get_local_mouse_position())
@@ -74,6 +85,16 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_released("show_tips"):
 		_show_tips = false
 		_marker_tilemap.erase_cell(character_position)
+
+func _target_position_free(coord: Vector2i) -> bool:
+	for character: CharacterController in GameManager.characters:
+		if character == self:
+			continue
+		elif character.character_position == coord:
+			return false
+		elif character.target_position == coord:
+			return false
+	return true
 
 func _on_time_incremented(time: int) -> void:
 	var should_play_animation: bool
@@ -116,8 +137,11 @@ func update() -> void:
 	_character_tilemap.get_cell_tile_data(character_position).material = _character_material
 	if _show_tips:
 		show_number()
-	for move: Vector2i in move_directions:
-		_marker_tilemap.set_cell(character_position + move, move_marker_source_id, Vector2i.ZERO)
+	for target: Vector2i in target_positions:
+		if target == target_position:
+			_marker_tilemap.set_cell(target, selected_move_marker_source_id, Vector2i.ZERO)
+		else:
+			_marker_tilemap.set_cell(target, move_marker_source_id, Vector2i.ZERO)
 
 func show_number() -> void:
 	_marker_tilemap.set_cell(character_position, character_number_source_id, Vector2i.ZERO)
@@ -126,14 +150,10 @@ func play_move_animation() -> void:
 	# inner function
 	var _move_animation = func (value) -> void:
 		_character_material.set_shader_parameter("scale_addition", value)
-		_character_material.set_shader_parameter("remap_outline", true)
 	
 	if _move_tween != null and _move_tween.is_running():
 		await _move_tween.finished
-		_character_material.set_shader_parameter("remap_outline", false)
 	
 	_move_tween = get_tree().create_tween()
 	_move_tween.tween_method(_move_animation, Vector2.ZERO, Vector2(4, 4), 0.1)
 	_move_tween.tween_method(_move_animation, Vector2(4, 4), Vector2.ZERO, 0.1)
-	await _move_tween.finished
-	_character_material.set_shader_parameter("remap_outline", false)

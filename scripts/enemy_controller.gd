@@ -39,6 +39,7 @@ func _ready() -> void:
 		await get_tree().create_timer(0.1).timeout
 	GameManager.instance.increment_time.connect(_on_time_incremented)
 	GameManager.instance.decrement_time.connect(_on_time_decremented)
+	GameManager.enemies.append(self)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("show_tips"):

@@ -6,6 +6,8 @@ signal decrement_time(time: int)
 
 static var instance: GameManager
 static var RNG: RandomNumberGenerator = RandomNumberGenerator.new()
+static var enemies: Array[EnemyController] = []
+static var characters: Array[CharacterController] = []
 
 @export var max_actions_allowed: int = 100
 var time: int = 0
