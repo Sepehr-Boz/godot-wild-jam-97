@@ -1,6 +1,7 @@
 [gd_resource type="TileSet" format=3 uid="uid://dm6c4ho4yurov"]
 
 [ext_resource type="Texture2D" uid="uid://c3ge274xcs2tv" path="res://textures/tiny_battle/tile_0040.png" id="1_f76iw"]
+[ext_resource type="Material" uid="uid://cq0t70qgwpic5" path="res://materials/attack_marker_tile.tres" id="2_05mw8"]
 [ext_resource type="Texture2D" uid="uid://chffpcpvpgta6" path="res://textures/tiny_battle/tile_0041.png" id="2_aj2yw"]
 [ext_resource type="Texture2D" uid="uid://b4xqn70f0gfv7" path="res://textures/tiny_battle/tile_0078.png" id="3_05mw8"]
 [ext_resource type="Texture2D" uid="uid://cubh4qaxuhxn5" path="res://textures/tiny_battle/tile_0180.png" id="4_wv47e"]
@@ -30,6 +31,11 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nhqns"]
 texture = ExtResource("23_en6ib")
 0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q54iq"]
+texture = ExtResource("17_jqhsy")
+0:0/0 = 0
+0:0/0/material = ExtResource("2_05mw8")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f76iw"]
 texture = ExtResource("1_f76iw")
@@ -159,3 +165,4 @@ sources/47 = SubResource("TileSetAtlasSource_en6ib")
 sources/48 = SubResource("TileSetAtlasSource_kl2ti")
 sources/49 = SubResource("TileSetAtlasSource_hgp7j")
 sources/0 = SubResource("TileSetAtlasSource_nhqns")
+sources/1 = SubResource("TileSetAtlasSource_q54iq")

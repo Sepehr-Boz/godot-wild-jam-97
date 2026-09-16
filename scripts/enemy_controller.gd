@@ -25,6 +25,7 @@ var _move_tween: Tween
 var _show_tips: bool = false
 var _killed_at_time: int = INT64_MAX
 var enemy_position: Vector2i
+var next_postition: Vector2i
 var path_offset: int
 
 func is_dead_at(time: int) -> bool:
@@ -34,7 +35,8 @@ func is_dead_at(time: int) -> bool:
 func _ready() -> void:
 	_enemy_material.set_shader_parameter("offset", GameManager.RNG.randf())
 	path_offset = 0 if not start_at_random_point else GameManager.RNG.randi_range(0, len(path_points) - 1)
-	enemy_position = path_points[path_offset]
+	enemy_position = sample_path(path_offset)
+	next_postition = sample_path(path_offset + path_jump)
 	_path_tilemap.modulate.a = 0.25
 	clear()
 	update()
@@ -61,6 +63,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_time_incremented(time: int) -> void:
 	enemy_position = sample_path(path_offset + time * path_jump)
+	next_postition = sample_path(path_offset + (time + 1) * path_jump)
 	clear()
 	if time >= _killed_at_time:
 		return
@@ -71,6 +74,7 @@ func _on_time_incremented(time: int) -> void:
 
 func _on_time_decremented(time: int) -> void:
 	enemy_position = sample_path(path_offset + time * path_jump)
+	next_postition = sample_path(path_offset + (time + 1) * path_jump)
 	clear()
 	if time >= _killed_at_time:
 		return

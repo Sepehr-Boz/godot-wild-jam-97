@@ -7,6 +7,8 @@
 [node name="Character Controller" type="Node2D" unique_id=112210087]
 script = ExtResource("1_q780c")
 selected_move_marker_source_id = 32
+attack_marker_source_id = 48
+selected_attack_marker_source_id = 1
 
 [node name="Character" type="TileMapLayer" parent="." unique_id=60370671]
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0)

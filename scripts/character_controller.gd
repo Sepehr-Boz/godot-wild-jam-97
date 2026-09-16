@@ -18,6 +18,7 @@ extends Node2D
 @export var move_marker_source_id: int
 @export var selected_move_marker_source_id: int
 @export var attack_marker_source_id: int
+@export var selected_attack_marker_source_id: int
 
 @onready var _character_tilemap: TileMapLayer = $Character
 @onready var _marker_tilemap: TileMapLayer = $Markers
@@ -63,14 +64,23 @@ func _input(event: InputEvent) -> void:
 			if clicked_cell == character_position:
 				target_position = character_position
 				for target: Vector2i in target_positions:
-					_marker_tilemap.set_cell(target, move_marker_source_id, Vector2.ZERO)
+					if _target_position_will_kill_enemy(target):
+						_marker_tilemap.set_cell(target, attack_marker_source_id, Vector2.ZERO)
+					else:
+						_marker_tilemap.set_cell(target, move_marker_source_id, Vector2.ZERO)
 			if clicked_cell in destinations:
 				for target: Vector2i in target_positions:
 					if clicked_cell == target:
 						target_position = clicked_cell
-						_marker_tilemap.set_cell(target, selected_move_marker_source_id, Vector2.ZERO)
+						if _target_position_will_kill_enemy(target):
+							_marker_tilemap.set_cell(target, selected_attack_marker_source_id, Vector2.ZERO)
+						else:
+							_marker_tilemap.set_cell(target, selected_move_marker_source_id, Vector2.ZERO)
 					else:
-						_marker_tilemap.set_cell(target, move_marker_source_id, Vector2.ZERO)
+						if _target_position_will_kill_enemy(target):
+							_marker_tilemap.set_cell(target, attack_marker_source_id, Vector2.ZERO)
+						else:
+							_marker_tilemap.set_cell(target, move_marker_source_id, Vector2.ZERO)
 			_character_selected = false
 			_character_material.set_shader_parameter("remap_outline", false)
 	elif event is InputEventMouse:
@@ -100,6 +110,17 @@ func _target_position_free(coord: Vector2i) -> bool:
 			return false
 	return true
 
+func _target_position_will_kill_enemy(coord: Vector2i) -> bool:
+	for enemy: EnemyController in GameManager.enemies:
+		if not enemy.is_dead_at(GameManager.time) and coord == enemy.next_postition:
+			return true
+	return false
+
+func _check_if_killed_enemy(coord: Vector2i, time: int) -> void:
+	for enemy: EnemyController in GameManager.enemies:
+		if character_position == enemy.enemy_position:
+			GameManager.instance.enemy_killed_at.emit(enemy.enemy_position, GameManager.time)
+
 func _on_time_incremented(time: int) -> void:
 	var should_play_animation: bool
 	if time >= len(past_movements):
@@ -116,6 +137,7 @@ func _on_time_incremented(time: int) -> void:
 		should_play_animation = target != character_position
 		character_position = target
 		target_position = character_position if time >= len(past_movements) - 1 else past_movements[time + 1]
+	_check_if_killed_enemy(character_position, time)
 	clear()
 	update()
 	if should_play_animation:
@@ -127,6 +149,7 @@ func _on_time_decremented(time: int) -> void:
 	var should_play_animation = target != character_position
 	character_position = target
 	target_position = past_movements[time + 1]
+	_check_if_killed_enemy(character_position, time)
 	clear()
 	update()
 	if should_play_animation:
@@ -143,9 +166,15 @@ func update() -> void:
 		show_number()
 	for target: Vector2i in target_positions:
 		if target == target_position:
-			_marker_tilemap.set_cell(target, selected_move_marker_source_id, Vector2i.ZERO)
+			if _target_position_will_kill_enemy(target):
+				_marker_tilemap.set_cell(target, selected_attack_marker_source_id, Vector2.ZERO)
+			else:
+				_marker_tilemap.set_cell(target, selected_move_marker_source_id, Vector2.ZERO)
 		else:
-			_marker_tilemap.set_cell(target, move_marker_source_id, Vector2i.ZERO)
+			if _target_position_will_kill_enemy(target):
+				_marker_tilemap.set_cell(target, attack_marker_source_id, Vector2.ZERO)
+			else:
+				_marker_tilemap.set_cell(target, move_marker_source_id, Vector2.ZERO)
 
 func show_number() -> void:
 	_marker_tilemap.set_cell(character_position, character_number_source_id, Vector2i.ZERO)
