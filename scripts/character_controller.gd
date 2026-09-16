@@ -14,7 +14,6 @@ extends Node2D
 
 @export_group("Source IDs")
 @export var character_tile_source_id: int
-@export var character_number_source_id: int
 @export var move_marker_source_id: int
 @export var selected_move_marker_source_id: int
 @export var attack_marker_source_id: int
@@ -24,7 +23,6 @@ extends Node2D
 @onready var _marker_tilemap: TileMapLayer = $Markers
 @onready var _character_material: ShaderMaterial = preload("res://materials/character_tile.tres").duplicate()
 var _move_tween: Tween
-var _show_tips: bool = false
 var _character_selected: bool = false
 var character_position: Vector2i
 var target_position: Vector2i
@@ -93,12 +91,6 @@ func _input(event: InputEvent) -> void:
 				modulate.a = 1.0
 				return
 		modulate.a = 0.25
-	elif event.is_action_pressed("show_tips"):
-		_show_tips = true
-		show_number()
-	elif event.is_action_released("show_tips"):
-		_show_tips = false
-		_marker_tilemap.erase_cell(character_position)
 
 func _target_position_free(coord: Vector2i) -> bool:
 	for character: CharacterController in GameManager.characters:
@@ -162,8 +154,6 @@ func clear() -> void:
 func update() -> void:
 	_character_tilemap.set_cell(character_position, character_tile_source_id, Vector2i.ZERO)
 	_character_tilemap.get_cell_tile_data(character_position).material = _character_material
-	if _show_tips:
-		show_number()
 	for target: Vector2i in target_positions:
 		if target == target_position:
 			if _target_position_will_kill_enemy(target):
@@ -175,9 +165,6 @@ func update() -> void:
 				_marker_tilemap.set_cell(target, attack_marker_source_id, Vector2.ZERO)
 			else:
 				_marker_tilemap.set_cell(target, move_marker_source_id, Vector2.ZERO)
-
-func show_number() -> void:
-	_marker_tilemap.set_cell(character_position, character_number_source_id, Vector2i.ZERO)
 
 func play_move_animation() -> void:
 	# inner function

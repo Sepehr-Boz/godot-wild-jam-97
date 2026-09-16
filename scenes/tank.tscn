@@ -4,10 +4,6 @@
 
 [node name="Character Controller" unique_id=1721062491 instance=ExtResource("1_qrxud")]
 character_tile_source_id = 23
-character_number_source_id = 38
 
 [node name="Character" parent="." index="0" unique_id=60370671]
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0)
-
-[node name="Markers" parent="." index="1" unique_id=266964505]
-tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 0, 0, 0)

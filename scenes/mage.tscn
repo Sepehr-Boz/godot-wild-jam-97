@@ -5,10 +5,9 @@
 [node name="Character Controller" unique_id=1721062491 instance=ExtResource("1_j2dsb")]
 move_directions = Array[Vector2i]([Vector2i(-1, -1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(1, 1)])
 character_tile_source_id = 20
-character_number_source_id = 39
 
 [node name="Character" parent="." index="0" unique_id=60370671]
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="Markers" parent="." index="1" unique_id=266964505]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 0, 0, 0, 255, 255, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 255, 255, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0)
