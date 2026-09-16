@@ -27,6 +27,9 @@ var _killed_at_time: int = INT64_MAX
 var enemy_position: Vector2i
 var path_offset: int
 
+func is_dead_at(time: int) -> bool:
+	return time >= _killed_at_time
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_enemy_material.set_shader_parameter("offset", GameManager.RNG.randf())

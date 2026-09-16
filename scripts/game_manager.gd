@@ -23,6 +23,8 @@ func _input(event: InputEvent) -> void:
 			time += 1
 			increment_time.emit(time)
 			_has_character_overlapped_enemy()
+			if _all_enemies_dead():
+				get_tree().quit()
 		elif time > 0 and event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.is_released():
 			time -= 1
 			decrement_time.emit(time)
@@ -34,10 +36,8 @@ func _has_character_overlapped_enemy() -> void:
 			if character.character_position == enemy.enemy_position:
 				enemy_killed_at.emit(enemy.enemy_position, time)
 
-func _on_characters_killed() -> void:
-	print("all characters killed")
-	get_tree().quit()
-
-func _on_enemies_killed() -> void:
-	print("all enemies killed")
-	get_tree().quit()
+func _all_enemies_dead() -> bool:
+	for enemy: EnemyController in enemies:
+		if not enemy.is_dead_at(time):
+			return false
+	return true
