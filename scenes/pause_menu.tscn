@@ -37,61 +37,30 @@ content_margin_top = 16.0
 content_margin_right = 48.0
 content_margin_bottom = 16.0
 bg_color = Color(0, 0, 0, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 border_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
-corner_radius_top_left = 64
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trtic"]
 bg_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
-border_width_left = 16
-border_width_top = 16
-border_width_right = 16
-border_width_bottom = 16
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 border_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
-corner_radius_top_left = 64
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir15t"]
 bg_color = Color(0.28729492, 0.28729492, 0.2872949, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 border_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
-corner_radius_top_left = 64
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ca42v"]
-content_margin_left = 48.0
-content_margin_top = 16.0
-content_margin_right = 48.0
-content_margin_bottom = 16.0
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
-corner_radius_bottom_right = 64
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rysoc"]
-bg_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
-border_width_left = 16
-border_width_top = 16
-border_width_right = 16
-border_width_bottom = 16
-border_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
-corner_radius_bottom_right = 64
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ssvqc"]
-bg_color = Color(0.28729492, 0.28729492, 0.2872949, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
-corner_radius_bottom_right = 64
 
 [node name="Pause Menu" type="CanvasLayer" unique_id=1920645430]
 script = ExtResource("1_myx47")
@@ -140,16 +109,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -320.0
+offset_top = -120.0
+offset_right = 320.0
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 12
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_constants/separation = 24
 
 [node name="Continue Button" type="Button" parent="VBoxContainer" unique_id=982453019]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_kvuet")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_trtic")
@@ -158,8 +129,9 @@ text = "Continue"
 
 [node name="Quit Button" type="Button" parent="VBoxContainer" unique_id=2092414843]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_font_sizes/font_size = 48
-theme_override_styles/normal = SubResource("StyleBoxFlat_ca42v")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_rysoc")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ssvqc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_kvuet")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_trtic")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ir15t")
 text = "Quit"
