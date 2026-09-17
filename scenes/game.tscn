@@ -8,11 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://bcth45kacap3e" path="res://scenes/knight.tscn" id="9_dinhu"]
 [ext_resource type="PackedScene" uid="uid://bemlf7fd4twmn" path="res://scenes/tank.tscn" id="9_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://c8j4lyk548oow" path="res://scenes/mage.tscn" id="10_dinhu"]
+[ext_resource type="PackedScene" uid="uid://brrn8mv8dglf8" path="res://scenes/pause_menu.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://82wg2pfneox0" path="res://scenes/archer.tscn" id="11_kvuet"]
 
 [node name="Node2D" type="Node2D" unique_id=1351537289]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=63711488]
+offset = Vector2(-16, -16)
 anchor_mode = 0
 zoom = Vector2(5, 5)
 
@@ -129,3 +131,5 @@ initial_position = Vector2i(0, 4)
 
 [node name="Character Controller4" parent="CharacterManager" unique_id=1952554487 instance=ExtResource("11_kvuet")]
 initial_position = Vector2i(0, 6)
+
+[node name="Pause Menu" parent="." unique_id=1920645430 instance=ExtResource("10_vtaks")]

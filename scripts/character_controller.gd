@@ -48,6 +48,8 @@ func _ready() -> void:
 	GameManager.characters.append(self)
 
 func _input(event: InputEvent) -> void:
+	if Engine.time_scale == 0:
+		return
 	if event is InputEventMouseButton:
 		event = event as InputEventMouseButton
 		var clicked_cell: Vector2i = _character_tilemap.local_to_map(get_local_mouse_position())

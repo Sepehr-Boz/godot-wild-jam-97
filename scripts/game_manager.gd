@@ -18,6 +18,8 @@ func _ready() -> void:
 	instance = self
 
 func _input(event: InputEvent) -> void:
+	if Engine.time_scale == 0:
+		return
 	if event is InputEventMouseButton:
 		if time < max_actions_allowed and event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_released():
 			time += 1

@@ -49,6 +49,8 @@ func _ready() -> void:
 	GameManager.enemies.append(self)
 
 func _input(event: InputEvent) -> void:
+	if Engine.time_scale == 0:
+		return
 	if event is InputEventMouse:
 		event = event as InputEventMouse
 		var hover_coord: Vector2i = _enemy_tilemap.local_to_map(get_local_mouse_position())
