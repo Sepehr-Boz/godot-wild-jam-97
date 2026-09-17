@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var _buttons_container: Control = $VBoxContainer
 @onready var _continue_button: Button = $"VBoxContainer/Continue Button"
 @onready var _quit_button: Button = $"VBoxContainer/Quit Button"
+var _level_select_scene: PackedScene = load("res://scenes/level_selection.tscn")
 var is_open: bool = false
 
 # Called when the node enters the scene tree for the first time.
@@ -19,8 +20,7 @@ func _ready() -> void:
 	_continue_button.pressed.connect(close_menu)
 	_quit_button.pressed.connect(
 		func ():
-			# TODO: navigate to the start scene on press
-			pass
+			get_tree().change_scene_to_packed(_level_select_scene)
 	)
 	close_menu()
 

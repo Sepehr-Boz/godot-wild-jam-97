@@ -1,0 +1,743 @@
+[gd_scene format=3 uid="uid://c331762syc77m"]
+
+[ext_resource type="Script" uid="uid://die23w68k2nxi" path="res://scripts/level_selection.gd" id="1_3rh63"]
+[ext_resource type="Texture2D" uid="uid://2lp25u2x0ngf" path="res://textures/game_icons/backward.png" id="2_tuscg"]
+[ext_resource type="Texture2D" uid="uid://ci6evadhbbl1f" path="res://textures/game_icons/forward.png" id="3_42rqe"]
+[ext_resource type="Script" uid="uid://d141yr4v5oya5" path="res://scripts/level_select_button.gd" id="4_tuscg"]
+[ext_resource type="PackedScene" uid="uid://djro2qll2rjyc" path="res://scenes/game.tscn" id="5_42rqe"]
+[ext_resource type="Texture2D" uid="uid://dmqf4hkns5kdq" path="res://textures/tiny_dungeon/tile_0096.png" id="6_2wv3l"]
+[ext_resource type="Texture2D" uid="uid://dj3vmnkl3v4s3" path="res://textures/tiny_dungeon/tile_0087.png" id="7_ujbu7"]
+[ext_resource type="Texture2D" uid="uid://b5u1q54mshcu5" path="res://textures/tiny_dungeon/tile_0084.png" id="8_e545p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wlwq"]
+bg_color = Color(0.29803923, 0.29803923, 0.29803923, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0wlwq"]
+font_size = 42
+font_color = Color(0.72156864, 0.6117647, 1, 1)
+outline_size = 2
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myx47"]
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.7206415, 0.6114786, 1, 1)
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 4
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42rqe"]
+bg_color = Color(0.72156864, 0.6117647, 1, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.72156864, 0.6117647, 1, 1)
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 4
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcujv"]
+bg_color = Color(0.68307734, 0.6830774, 0.68307734, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.7206415, 0.6114786, 1, 1)
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 4
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e5wnf"]
+font_size = 64
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0rqca"]
+load_path = "res://.godot/imported/tile_0112.png-acbb9730e106fb1f72a48608a6cb531b.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_0rqca"]
+font_size = 42
+font_color = Color(0.5254902, 0.8392157, 1, 1)
+outline_size = 2
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wv3l"]
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.5254902, 0.8392157, 1, 1)
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 4
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujbu7"]
+bg_color = Color(0.5254902, 0.8392157, 1, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.5254902, 0.8392157, 1, 1)
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 4
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e545p"]
+bg_color = Color(0.68307734, 0.6830774, 0.68307734, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.5254902, 0.8392157, 1, 1)
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 4
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2wv3l"]
+font_size = 42
+font_color = Color(0.96862745, 0.6627451, 0.20784314, 1)
+outline_size = 2
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0rqca"]
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.96862745, 0.6627451, 0.20784314, 1)
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 4
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qy6r0"]
+bg_color = Color(0.96862745, 0.6627451, 0.20784314, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.96862745, 0.6627451, 0.20784314, 1)
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 4
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w3k4e"]
+bg_color = Color(0.68307734, 0.6830774, 0.68307734, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.96862745, 0.6627451, 0.20784314, 1)
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 4
+shadow_offset = Vector2(0, 8)
+
+[node name="Control" type="Control" unique_id=1407330930 node_paths=PackedStringArray("_slides")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3rh63")
+_slides = [NodePath("Homepage"), NodePath("Tutorial Levels"), NodePath("Easy Levels"), NodePath("Normal Levels")]
+
+[node name="Left Button" type="Button" parent="." unique_id=248206475]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 96.0
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0wlwq")
+icon = ExtResource("2_tuscg")
+icon_alignment = 1
+
+[node name="Right Button" type="Button" parent="." unique_id=1517883615]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -96.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0wlwq")
+icon = ExtResource("3_42rqe")
+icon_alignment = 1
+
+[node name="Homepage" type="CanvasLayer" parent="." unique_id=1334016218]
+
+[node name="Tutorial Levels" type="CanvasLayer" parent="." unique_id=555441519]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels" unique_id=296037344]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_right = -96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer" unique_id=234269992]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Tutorial Levels"
+label_settings = SubResource("LabelSettings_0wlwq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer" unique_id=961296795]
+layout_mode = 2
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 96
+theme_override_constants/margin_bottom = 96
+
+[node name="GridContainer" type="GridContainer" parent="Tutorial Levels/MarginContainer/MarginContainer" unique_id=2035627188]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="Button" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1245348674]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_myx47")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
+script = ExtResource("4_tuscg")
+level_scene = ExtResource("5_42rqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button" unique_id=1743952352]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer" unique_id=543573649]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer/HBoxContainer" unique_id=828607821]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_rotation = -0.17453292
+texture = ExtResource("6_2wv3l")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer/HBoxContainer" unique_id=1216366419]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Knight"
+label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1165268521]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_myx47")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
+script = ExtResource("4_tuscg")
+level_scene = ExtResource("5_42rqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button2" unique_id=306708919]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer" unique_id=479123533]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer/HBoxContainer" unique_id=1365100238]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_rotation = -0.17453292
+texture = ExtResource("7_ujbu7")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer/HBoxContainer" unique_id=1714792306]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Tank"
+label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button3" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1621565426]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_myx47")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
+script = ExtResource("4_tuscg")
+level_scene = ExtResource("5_42rqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button3" unique_id=2002359139]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer" unique_id=1637029303]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer/HBoxContainer" unique_id=289526561]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_rotation = -0.17453292
+texture = ExtResource("8_e545p")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer/HBoxContainer" unique_id=1169482633]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Mage"
+label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button4" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=714179744]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_myx47")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
+script = ExtResource("4_tuscg")
+level_scene = ExtResource("5_42rqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button4" unique_id=1787379118]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer" unique_id=1894635628]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer/HBoxContainer" unique_id=1618503085]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_rotation = -0.17453292
+texture = SubResource("CompressedTexture2D_0rqca")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer/HBoxContainer" unique_id=1881869224]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Rogue"
+label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Easy Levels" type="CanvasLayer" parent="." unique_id=2140302375]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Easy Levels" unique_id=214181590]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_right = -96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="Easy Levels/MarginContainer" unique_id=228037169]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Easy Levels"
+label_settings = SubResource("LabelSettings_0rqca")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Easy Levels/MarginContainer" unique_id=1480775756]
+layout_mode = 2
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 96
+theme_override_constants/margin_bottom = 96
+
+[node name="GridContainer" type="GridContainer" parent="Easy Levels/MarginContainer/MarginContainer" unique_id=2018816700]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="Button" type="Button" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer" unique_id=531068391]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wv3l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
+script = ExtResource("4_tuscg")
+level_scene = ExtResource("5_42rqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button" unique_id=1862678127]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer" unique_id=1598282118]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer/HBoxContainer" unique_id=744805509]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Level 1"
+label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1807143752]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wv3l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
+script = ExtResource("4_tuscg")
+level_scene = ExtResource("5_42rqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button2" unique_id=1397892133]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer" unique_id=497414696]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer/HBoxContainer" unique_id=1007725427]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Level 2"
+label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button3" type="Button" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1634262066]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wv3l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
+script = ExtResource("4_tuscg")
+level_scene = ExtResource("5_42rqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button3" unique_id=1601103230]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer" unique_id=1569519875]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer/HBoxContainer" unique_id=2074277721]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Level 3"
+label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button4" type="Button" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer" unique_id=2083706246]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wv3l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
+script = ExtResource("4_tuscg")
+level_scene = ExtResource("5_42rqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button4" unique_id=2118807259]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer" unique_id=93724159]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer/HBoxContainer" unique_id=127464389]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Level 4"
+label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Normal Levels" type="CanvasLayer" parent="." unique_id=1328373412]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Normal Levels" unique_id=285858289]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_right = -96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="Normal Levels/MarginContainer" unique_id=649944947]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Normal Levels"
+label_settings = SubResource("LabelSettings_2wv3l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Normal Levels/MarginContainer" unique_id=298774784]
+layout_mode = 2
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 96
+theme_override_constants/margin_bottom = 96
+
+[node name="GridContainer" type="GridContainer" parent="Normal Levels/MarginContainer/MarginContainer" unique_id=1374811724]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="Button" type="Button" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer" unique_id=222807760]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_0rqca")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qy6r0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w3k4e")
+script = ExtResource("4_tuscg")
+level_scene = ExtResource("5_42rqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button" unique_id=273801069]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer" unique_id=321497235]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer/HBoxContainer" unique_id=1392630926]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Level 5"
+label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1510935691]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_0rqca")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qy6r0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w3k4e")
+script = ExtResource("4_tuscg")
+level_scene = ExtResource("5_42rqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button2" unique_id=291360225]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer" unique_id=48944335]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer/HBoxContainer" unique_id=31237565]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Level 6"
+label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button3" type="Button" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer" unique_id=628419942]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_0rqca")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qy6r0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w3k4e")
+script = ExtResource("4_tuscg")
+level_scene = ExtResource("5_42rqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button3" unique_id=1069029257]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer" unique_id=172579740]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer/HBoxContainer" unique_id=1480456199]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Level 7"
+label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button4" type="Button" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer" unique_id=169180666]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_0rqca")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qy6r0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w3k4e")
+script = ExtResource("4_tuscg")
+level_scene = ExtResource("5_42rqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button4" unique_id=2111894068]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer" unique_id=437286990]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer/HBoxContainer" unique_id=1648697283]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Level 8"
+label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -16,6 +16,10 @@ static var time: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	instance = self
+	RNG = RandomNumberGenerator.new()
+	enemies = []
+	characters = []
+	time = 0
 
 func _input(event: InputEvent) -> void:
 	if Engine.time_scale == 0:
