@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://brrn8mv8dglf8"]
+
+[ext_resource type="Script" uid="uid://b3lax2ixh6nj2" path="res://scripts/pause_menu.gd" id="1_myx47"]
+[ext_resource type="Texture2D" uid="uid://dshsltrqp6pcu" path="res://textures/game_icons/barsHorizontal.png" id="2_kukqi"]
+[ext_resource type="FontFile" uid="uid://msxl68d1s27q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="3_kukqi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5wnf"]
+content_margin_left = 48.0
+content_margin_top = 16.0
+content_margin_right = 48.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvpfn"]
+bg_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dinhu"]
+bg_color = Color(0.28729492, 0.28729492, 0.2872949, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvuet"]
+content_margin_left = 48.0
+content_margin_top = 16.0
+content_margin_right = 48.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trtic"]
+bg_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir15t"]
+bg_color = Color(0.28729492, 0.28729492, 0.2872949, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.93333334, 0.21568628, 0.20784314, 1)
+
+[node name="Pause Menu" type="CanvasLayer" unique_id=1920645430]
+script = ExtResource("1_myx47")
+
+[node name="Background" type="ColorRect" parent="." unique_id=263807629]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.24705882)
+
+[node name="Pause Button" type="Button" parent="." unique_id=313569771]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_top = -58.0
+offset_right = 84.0
+offset_bottom = 70.0
+grow_horizontal = 0
+rotation = 0.7853982
+theme_override_styles/normal = SubResource("StyleBoxFlat_e5wnf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kvpfn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dinhu")
+
+[node name="TextureRect" type="TextureRect" parent="Pause Button" unique_id=465472381]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.5
+offset_top = 1.0
+offset_right = 13.500023
+offset_bottom = 51.000023
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.7853982
+texture = ExtResource("2_kukqi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=623893299]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -120.0
+offset_right = 320.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_constants/separation = 24
+
+[node name="Continue Button" type="Button" parent="VBoxContainer" unique_id=982453019]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_kukqi")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_kvuet")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_trtic")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ir15t")
+text = "Continue"
+
+[node name="Quit Button" type="Button" parent="VBoxContainer" unique_id=2092414843]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_kukqi")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_kvuet")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_trtic")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ir15t")
+text = "Quit"

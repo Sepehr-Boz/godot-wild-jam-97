@@ -8,11 +8,64 @@
 [ext_resource type="PackedScene" uid="uid://bcth45kacap3e" path="res://scenes/knight.tscn" id="9_dinhu"]
 [ext_resource type="PackedScene" uid="uid://bemlf7fd4twmn" path="res://scenes/tank.tscn" id="9_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://c8j4lyk548oow" path="res://scenes/mage.tscn" id="10_dinhu"]
+[ext_resource type="PackedScene" uid="uid://brrn8mv8dglf8" path="res://scenes/pause_menu.tscn" id="10_vtaks"]
+[ext_resource type="Script" uid="uid://dv70vbuwrvf6f" path="res://scripts/time_slider.gd" id="11_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://82wg2pfneox0" path="res://scenes/archer.tscn" id="11_kvuet"]
+[ext_resource type="Script" uid="uid://dpcfn5pahm5an" path="res://scripts/game_win_container.gd" id="12_dinhu"]
+[ext_resource type="FontFile" uid="uid://msxl68d1s27q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="12_kvuet"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5d2l8"]
+font = ExtResource("12_kvuet")
+
+[sub_resource type="LabelSettings" id="LabelSettings_7l7mv"]
+font = ExtResource("12_kvuet")
+
+[sub_resource type="LabelSettings" id="LabelSettings_0wlwq"]
+font = ExtResource("12_kvuet")
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvpfn"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3529412, 0.8392157, 0.13725491, 1)
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 4
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dinhu"]
+bg_color = Color(0.3529412, 0.8392157, 0.13725491, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3529412, 0.8392157, 0.13725491, 1)
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 4
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvuet"]
+bg_color = Color(0.68307734, 0.6830774, 0.68307734, 1)
+skew = Vector2(0.165, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3529412, 0.8392157, 0.13725491, 1)
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 4
+shadow_offset = Vector2(0, 8)
 
 [node name="Node2D" type="Node2D" unique_id=1351537289]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=63711488]
+offset = Vector2(-16, -16)
 anchor_mode = 0
 zoom = Vector2(5, 5)
 
@@ -22,6 +75,7 @@ tile_set = ExtResource("1_p57ef")
 
 [node name="Game Manager" type="Node" parent="." unique_id=1094982514]
 script = ExtResource("7_u5sy4")
+max_actions_allowed = 50
 
 [node name="EnemyManager" type="Node" parent="." unique_id=1497168704]
 
@@ -129,3 +183,84 @@ initial_position = Vector2i(0, 4)
 
 [node name="Character Controller4" parent="CharacterManager" unique_id=1952554487 instance=ExtResource("11_kvuet")]
 initial_position = Vector2i(0, 6)
+
+[node name="Pause Menu" parent="." unique_id=1920645430 instance=ExtResource("10_vtaks")]
+visible = false
+
+[node name="Game UI" type="CanvasLayer" parent="." unique_id=299966338]
+
+[node name="MarginContainer" type="MarginContainer" parent="Game UI" unique_id=398288675]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 816
+
+[node name="HSlider" type="HSlider" parent="Game UI/MarginContainer" unique_id=1551148795]
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 50.0
+rounded = true
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+script = ExtResource("11_kvpfn")
+
+[node name="Label" type="Label" parent="Game UI/MarginContainer" unique_id=2097099090]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position = Vector2(2, 8)
+text = "0"
+label_settings = SubResource("LabelSettings_5d2l8")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="Game UI/MarginContainer" unique_id=2087187367]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position = Vector2(3.5, 8)
+text = "50"
+label_settings = SubResource("LabelSettings_7l7mv")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Game UI" unique_id=1879275963]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 816
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 16
+script = ExtResource("12_dinhu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Game UI/MarginContainer2" unique_id=1746226457]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="Label" type="Label" parent="Game UI/MarginContainer2/HBoxContainer" unique_id=1702197085]
+layout_mode = 2
+text = "You Killed All Enemies!"
+label_settings = SubResource("LabelSettings_0wlwq")
+
+[node name="Button" type="Button" parent="Game UI/MarginContainer2/HBoxContainer" unique_id=876360141]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_kvuet")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_kvpfn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dinhu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kvuet")
+text = "Confirm Path?"
