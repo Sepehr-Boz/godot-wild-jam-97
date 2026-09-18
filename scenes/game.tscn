@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bemlf7fd4twmn" path="res://scenes/tank.tscn" id="9_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://c8j4lyk548oow" path="res://scenes/mage.tscn" id="10_dinhu"]
 [ext_resource type="PackedScene" uid="uid://brrn8mv8dglf8" path="res://scenes/pause_menu.tscn" id="10_vtaks"]
+[ext_resource type="Script" uid="uid://dv70vbuwrvf6f" path="res://scripts/time_slider.gd" id="11_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://82wg2pfneox0" path="res://scenes/archer.tscn" id="11_kvuet"]
 
 [node name="Node2D" type="Node2D" unique_id=1351537289]
@@ -133,3 +134,47 @@ initial_position = Vector2i(0, 4)
 initial_position = Vector2i(0, 6)
 
 [node name="Pause Menu" parent="." unique_id=1920645430 instance=ExtResource("10_vtaks")]
+visible = false
+
+[node name="Game UI" type="CanvasLayer" parent="." unique_id=299966338]
+
+[node name="MarginContainer" type="MarginContainer" parent="Game UI" unique_id=398288675]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 816
+
+[node name="HSlider" type="HSlider" parent="Game UI/MarginContainer" unique_id=1551148795]
+layout_mode = 2
+size_flags_vertical = 1
+rounded = true
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+script = ExtResource("11_kvpfn")
+
+[node name="Label" type="Label" parent="Game UI/MarginContainer" unique_id=2097099090]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position = Vector2(4, 8)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="Game UI/MarginContainer" unique_id=2087187367]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position = Vector2(6, 8)
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2

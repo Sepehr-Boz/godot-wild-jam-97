@@ -20,6 +20,11 @@ func _ready() -> void:
 	enemies = []
 	characters = []
 	time = 0
+	increment_time.connect(
+		func (x: int):
+			if _all_enemies_dead():
+				get_tree().quit()
+	)
 
 func _input(event: InputEvent) -> void:
 	if Engine.time_scale == 0:
@@ -28,8 +33,6 @@ func _input(event: InputEvent) -> void:
 		if time < max_actions_allowed and event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_released():
 			time += 1
 			increment_time.emit(time)
-			if _all_enemies_dead():
-				get_tree().quit()
 		elif time > 0 and event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.is_released():
 			time -= 1
 			decrement_time.emit(time)
