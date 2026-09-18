@@ -1,8 +1,8 @@
 extends Control
 
 @export var _slides: Array[CanvasLayer] = []
-@onready var _left_button: Button = $"Left Button"
-@onready var _right_button: Button = $"Right Button"
+@onready var _left_button: Button = $"Navigation Buttons/Left Button"
+@onready var _right_button: Button = $"Navigation Buttons/Right Button"
 
 var current_slide: int = 0
 
