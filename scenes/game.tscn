@@ -12,8 +12,16 @@
 [ext_resource type="Script" uid="uid://dv70vbuwrvf6f" path="res://scripts/time_slider.gd" id="11_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://82wg2pfneox0" path="res://scenes/archer.tscn" id="11_kvuet"]
 [ext_resource type="Script" uid="uid://dpcfn5pahm5an" path="res://scripts/game_win_container.gd" id="12_dinhu"]
+[ext_resource type="FontFile" uid="uid://msxl68d1s27q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="12_kvuet"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5d2l8"]
+font = ExtResource("12_kvuet")
+
+[sub_resource type="LabelSettings" id="LabelSettings_7l7mv"]
+font = ExtResource("12_kvuet")
 
 [sub_resource type="LabelSettings" id="LabelSettings_0wlwq"]
+font = ExtResource("12_kvuet")
 font_size = 32
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvpfn"]
@@ -208,8 +216,9 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 offset_transform_enabled = true
-offset_transform_position = Vector2(4, 8)
+offset_transform_position = Vector2(2, 8)
 text = "0"
+label_settings = SubResource("LabelSettings_5d2l8")
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -218,8 +227,9 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 offset_transform_enabled = true
-offset_transform_position = Vector2(2, 8)
+offset_transform_position = Vector2(3.5, 8)
 text = "50"
+label_settings = SubResource("LabelSettings_7l7mv")
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -248,6 +258,7 @@ label_settings = SubResource("LabelSettings_0wlwq")
 
 [node name="Button" type="Button" parent="Game UI/MarginContainer2/HBoxContainer" unique_id=876360141]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("12_kvuet")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_kvpfn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_dinhu")

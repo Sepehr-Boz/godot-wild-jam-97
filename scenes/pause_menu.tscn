@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b3lax2ixh6nj2" path="res://scripts/pause_menu.gd" id="1_myx47"]
 [ext_resource type="Texture2D" uid="uid://dshsltrqp6pcu" path="res://textures/game_icons/barsHorizontal.png" id="2_kukqi"]
+[ext_resource type="FontFile" uid="uid://msxl68d1s27q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="3_kukqi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5wnf"]
 content_margin_left = 48.0
@@ -121,6 +122,7 @@ theme_override_constants/separation = 24
 [node name="Continue Button" type="Button" parent="VBoxContainer" unique_id=982453019]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_kukqi")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_kvuet")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_trtic")
@@ -130,6 +132,7 @@ text = "Continue"
 [node name="Quit Button" type="Button" parent="VBoxContainer" unique_id=2092414843]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_kukqi")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_kvuet")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_trtic")

@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://djro2qll2rjyc" path="res://scenes/game.tscn" id="5_42rqe"]
 [ext_resource type="TileSet" uid="uid://dui5l7xdis3kd" path="res://textures/characters.tres" id="5_e545p"]
 [ext_resource type="Texture2D" uid="uid://dmqf4hkns5kdq" path="res://textures/tiny_dungeon/tile_0096.png" id="6_2wv3l"]
+[ext_resource type="FontFile" uid="uid://msxl68d1s27q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="6_qy6r0"]
 [ext_resource type="Texture2D" uid="uid://dj3vmnkl3v4s3" path="res://textures/tiny_dungeon/tile_0087.png" id="7_ujbu7"]
 [ext_resource type="Texture2D" uid="uid://b5u1q54mshcu5" path="res://textures/tiny_dungeon/tile_0084.png" id="8_e545p"]
 
@@ -16,7 +17,8 @@
 bg_color = Color(0.29803923, 0.29803923, 0.29803923, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_e545p"]
-font_size = 50
+font = ExtResource("6_qy6r0")
+font_size = 40
 font_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
 outline_size = 4
 shadow_size = 4
@@ -24,7 +26,8 @@ shadow_color = Color(0, 0, 0, 0.24705882)
 shadow_offset = Vector2(0, 10)
 
 [sub_resource type="LabelSettings" id="LabelSettings_qy6r0"]
-font_size = 110
+font = ExtResource("6_qy6r0")
+font_size = 100
 font_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
 outline_size = 8
 shadow_size = 8
@@ -76,6 +79,7 @@ shadow_size = 4
 shadow_offset = Vector2(0, 8)
 
 [sub_resource type="LabelSettings" id="LabelSettings_e5wnf"]
+font = ExtResource("6_qy6r0")
 font_size = 64
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0rqca"]
