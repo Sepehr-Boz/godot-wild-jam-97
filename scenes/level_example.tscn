@@ -1,0 +1,118 @@
+[gd_scene format=4 uid="uid://cq2umkhj00tu1"]
+
+[ext_resource type="PackedScene" uid="uid://dh0skun3we2op" path="res://scenes/level_template.tscn" id="1_xn183"]
+[ext_resource type="Script" uid="uid://c3s47vnxua5mj" path="res://scripts/enemy_controller.gd" id="2_4w0cn"]
+[ext_resource type="TileSet" uid="uid://dm6c4ho4yurov" path="res://textures/markers.tres" id="3_v5e0p"]
+[ext_resource type="TileSet" uid="uid://dui5l7xdis3kd" path="res://textures/characters.tres" id="4_nh3i6"]
+[ext_resource type="PackedScene" uid="uid://bcth45kacap3e" path="res://scenes/knight.tscn" id="5_rgt5t"]
+[ext_resource type="PackedScene" uid="uid://bemlf7fd4twmn" path="res://scenes/tank.tscn" id="6_ab0e5"]
+[ext_resource type="PackedScene" uid="uid://c8j4lyk548oow" path="res://scenes/mage.tscn" id="7_xqtrc"]
+[ext_resource type="PackedScene" uid="uid://82wg2pfneox0" path="res://scenes/archer.tscn" id="8_q4olt"]
+
+[node name="Node2D" unique_id=1000675191 instance=ExtResource("1_xn183")]
+
+[node name="EnemyController" type="Node2D" parent="Enemies" parent_id_path=PackedInt32Array(543137243) index="0" unique_id=1864815902]
+script = ExtResource("2_4w0cn")
+enemy_tile_source_id = 37
+path_points = Array[Vector2i]([Vector2i(4, 0), Vector2i(4, 1), Vector2i(4, 2), Vector2i(4, 3), Vector2i(4, 4), Vector2i(4, 5)])
+start_at_random_point = true
+metadata/_custom_type_script = "uid://c3s47vnxua5mj"
+
+[node name="Path" type="TileMapLayer" parent="Enemies/EnemyController" index="0" unique_id=1790367046]
+tile_map_data = PackedByteArray("AAAEAAAAGQAAAAAAAAAEAAEAHQAAAAAAAAAEAAIAHQAAAAAAAAAEAAMAHQAAAAAAAAAEAAQAHQAAAAAAAAAEAAUAIQAAAAAAAAA=")
+tile_set = ExtResource("3_v5e0p")
+
+[node name="Enemy" type="TileMapLayer" parent="Enemies/EnemyController" index="1" unique_id=1708286514]
+tile_map_data = PackedByteArray("AAAEAAAAJQAAAAAAAAA=")
+tile_set = ExtResource("4_nh3i6")
+
+[node name="EnemyController2" type="Node2D" parent="Enemies" parent_id_path=PackedInt32Array(543137243) index="1" unique_id=557433776]
+script = ExtResource("2_4w0cn")
+enemy_tile_source_id = 37
+path_points = Array[Vector2i]([Vector2i(11, 0), Vector2i(11, 1), Vector2i(11, 2), Vector2i(11, 3), Vector2i(11, 4), Vector2i(11, 5)])
+start_at_random_point = true
+metadata/_custom_type_script = "uid://c3s47vnxua5mj"
+
+[node name="Path" type="TileMapLayer" parent="Enemies/EnemyController2" index="0" unique_id=1855597312]
+tile_map_data = PackedByteArray("AAALAAAAGQAAAAAAAAALAAEAHQAAAAAAAAALAAIAHQAAAAAAAAALAAMAHQAAAAAAAAALAAQAHQAAAAAAAAALAAUAIQAAAAAAAAA=")
+tile_set = ExtResource("3_v5e0p")
+
+[node name="Enemy" type="TileMapLayer" parent="Enemies/EnemyController2" index="1" unique_id=2013167664]
+tile_map_data = PackedByteArray("AAALAAAAJQAAAAAAAAA=")
+tile_set = ExtResource("4_nh3i6")
+
+[node name="EnemyController3" type="Node2D" parent="Enemies" parent_id_path=PackedInt32Array(543137243) index="2" unique_id=1642497673]
+script = ExtResource("2_4w0cn")
+enemy_tile_source_id = 38
+path_points = Array[Vector2i]([Vector2i(5, 6), Vector2i(5, 5), Vector2i(5, 4), Vector2i(5, 3), Vector2i(5, 2), Vector2i(6, 2), Vector2i(7, 2), Vector2i(8, 2), Vector2i(9, 2), Vector2i(9, 3), Vector2i(9, 4), Vector2i(9, 5), Vector2i(9, 6), Vector2i(8, 6), Vector2i(7, 6), Vector2i(6, 6)])
+path_loop = 2
+start_at_random_point = true
+metadata/_custom_type_script = "uid://c3s47vnxua5mj"
+
+[node name="Path" type="TileMapLayer" parent="Enemies/EnemyController3" index="0" unique_id=1780063867]
+tile_map_data = PackedByteArray("AAAFAAMAHQAAAAAAAAAFAAQAHQAAAAAAAAAFAAUAHQAAAAAAAAAFAAYAIgAAAAAAAAAGAAYAGgAAAAAAAAAHAAYAGwAAAAAAAAAJAAYAIwAAAAAAAAAJAAIAHwAAAAAAAAAFAAIAHgAAAAAAAAAJAAMAHQAAAAAAAAAJAAQAHQAAAAAAAAAJAAUAHQAAAAAAAAAIAAYAGwAAAAAAAAAGAAIAGwAAAAAAAAAHAAIAGwAAAAAAAAAIAAIAGwAAAAAAAAA=")
+tile_set = ExtResource("3_v5e0p")
+
+[node name="Enemy" type="TileMapLayer" parent="Enemies/EnemyController3" index="1" unique_id=1237797614]
+tile_map_data = PackedByteArray("AAAFAAYAJgAAAAAAAAA=")
+tile_set = ExtResource("4_nh3i6")
+
+[node name="EnemyController4" type="Node2D" parent="Enemies" parent_id_path=PackedInt32Array(543137243) index="3" unique_id=1164310972]
+script = ExtResource("2_4w0cn")
+enemy_tile_source_id = 38
+path_points = Array[Vector2i]([Vector2i(6, 4), Vector2i(6, 3), Vector2i(6, 2), Vector2i(6, 1), Vector2i(6, 0), Vector2i(7, 0), Vector2i(8, 0), Vector2i(9, 0), Vector2i(10, 0), Vector2i(10, 1), Vector2i(10, 2), Vector2i(10, 3), Vector2i(10, 4), Vector2i(9, 4), Vector2i(8, 4), Vector2i(7, 4)])
+path_loop = 2
+start_at_random_point = true
+metadata/_custom_type_script = "uid://c3s47vnxua5mj"
+
+[node name="Path" type="TileMapLayer" parent="Enemies/EnemyController4" index="0" unique_id=2018917445]
+tile_map_data = PackedByteArray("AAAGAAIAHQAAAAAAAAAJAAQAGwAAAAAAAAAGAAAAHgAAAAAAAAAGAAEAHQAAAAAAAAAGAAMAHQAAAAAAAAAGAAQAIgAAAAAAAAAHAAAAGwAAAAAAAAAHAAQAGgAAAAAAAAAIAAAAGwAAAAAAAAAIAAQAGwAAAAAAAAAJAAAAGwAAAAAAAAAKAAAAHwAAAAAAAAAKAAEAHQAAAAAAAAAKAAIAHQAAAAAAAAAKAAMAHQAAAAAAAAAKAAQAIwAAAAAAAAA=")
+tile_set = ExtResource("3_v5e0p")
+
+[node name="Enemy" type="TileMapLayer" parent="Enemies/EnemyController4" index="1" unique_id=115562873]
+tile_map_data = PackedByteArray("AAAGAAQAJgAAAAAAAAA=")
+tile_set = ExtResource("4_nh3i6")
+
+[node name="EnemyController5" type="Node2D" parent="Enemies" parent_id_path=PackedInt32Array(543137243) index="4" unique_id=1274140985]
+script = ExtResource("2_4w0cn")
+enemy_tile_source_id = 35
+path_points = Array[Vector2i]([Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7), Vector2i(6, 7), Vector2i(7, 7), Vector2i(8, 7), Vector2i(9, 7), Vector2i(10, 7), Vector2i(11, 7), Vector2i(12, 7), Vector2i(13, 7), Vector2i(14, 7), Vector2i(15, 7)])
+start_at_random_point = true
+metadata/_custom_type_script = "uid://c3s47vnxua5mj"
+
+[node name="Path" type="TileMapLayer" parent="Enemies/EnemyController5" index="0" unique_id=1000941768]
+tile_map_data = PackedByteArray("AAAPAAcAHAAAAAAAAAAOAAcAGwAAAAAAAAANAAcAGwAAAAAAAAAMAAcAGwAAAAAAAAALAAcAGwAAAAAAAAAKAAcAGwAAAAAAAAAJAAcAGwAAAAAAAAAIAAcAGwAAAAAAAAACAAcAGwAAAAAAAAABAAcAGwAAAAAAAAADAAcAGwAAAAAAAAAEAAcAGwAAAAAAAAAFAAcAGwAAAAAAAAAGAAcAGwAAAAAAAAAHAAcAGwAAAAAAAAAAAAcAGgAAAAAAAAA=")
+tile_set = ExtResource("3_v5e0p")
+
+[node name="Enemy" type="TileMapLayer" parent="Enemies/EnemyController5" index="1" unique_id=1726405080]
+tile_map_data = PackedByteArray("AAAAAAcAIwAAAAAAAAA=")
+tile_set = ExtResource("4_nh3i6")
+
+[node name="EnemyController6" type="Node2D" parent="Enemies" parent_id_path=PackedInt32Array(543137243) index="5" unique_id=656754214]
+script = ExtResource("2_4w0cn")
+enemy_tile_source_id = 35
+path_points = Array[Vector2i]([Vector2i(15, 8), Vector2i(14, 8), Vector2i(13, 8), Vector2i(12, 8), Vector2i(11, 8), Vector2i(10, 8), Vector2i(9, 8), Vector2i(8, 8), Vector2i(7, 8), Vector2i(6, 8), Vector2i(5, 8), Vector2i(4, 8), Vector2i(3, 8), Vector2i(2, 8), Vector2i(1, 8), Vector2i(0, 8)])
+start_at_random_point = true
+metadata/_custom_type_script = "uid://c3s47vnxua5mj"
+
+[node name="Path" type="TileMapLayer" parent="Enemies/EnemyController6" index="0" unique_id=965148769]
+tile_map_data = PackedByteArray("AAAAAAgAGgAAAAAAAAABAAgAGwAAAAAAAAACAAgAGwAAAAAAAAADAAgAGwAAAAAAAAAEAAgAGwAAAAAAAAAFAAgAGwAAAAAAAAAGAAgAGwAAAAAAAAAHAAgAGwAAAAAAAAAIAAgAGwAAAAAAAAAJAAgAGwAAAAAAAAAKAAgAGwAAAAAAAAALAAgAGwAAAAAAAAAMAAgAGwAAAAAAAAANAAgAGwAAAAAAAAAOAAgAGwAAAAAAAAAPAAgAHAAAAAAAAAA=")
+tile_set = ExtResource("3_v5e0p")
+
+[node name="Enemy" type="TileMapLayer" parent="Enemies/EnemyController6" index="1" unique_id=665111101]
+tile_map_data = PackedByteArray("AAAPAAgAIwAAAAAAAAA=")
+tile_set = ExtResource("4_nh3i6")
+
+[node name="Character Controller" parent="Characters" parent_id_path=PackedInt32Array(1611630907) index="0" unique_id=1721062491 instance=ExtResource("5_rgt5t")]
+
+[node name="Character Controller2" parent="Characters" parent_id_path=PackedInt32Array(1611630907) index="1" unique_id=568348499 instance=ExtResource("6_ab0e5")]
+initial_position = Vector2i(0, 2)
+
+[node name="Character Controller3" parent="Characters" parent_id_path=PackedInt32Array(1611630907) index="2" unique_id=1161971925 instance=ExtResource("7_xqtrc")]
+initial_position = Vector2i(0, 4)
+
+[node name="Character Controller4" parent="Characters" parent_id_path=PackedInt32Array(1611630907) index="3" unique_id=512298994 instance=ExtResource("8_q4olt")]
+initial_position = Vector2i(0, 6)
+
+[node name="Foreground" parent="." index="5" unique_id=832319535]
+tile_map_data = PackedByteArray("AAABAAIANQAAAAAAAAACAAEANQAAAAAAAAANAAEANQAAAAAAAAAOAAIANQAAAAAAAAAOAAYANQAAAAAAAAANAAcANQAAAAAAAAACAAcANQAAAAAAAAABAAYANQAAAAAAAAACAAIANwAAAAAAAAANAAIANwAAAAAAAAACAAYANwAAAAAAAAANAAYANwAAAAAAAAA=")

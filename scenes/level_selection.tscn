@@ -6,12 +6,12 @@
 [ext_resource type="Script" uid="uid://dnixamm7ly2cc" path="res://scripts/homepage.gd" id="4_e545p"]
 [ext_resource type="Script" uid="uid://d141yr4v5oya5" path="res://scripts/level_select_button.gd" id="4_tuscg"]
 [ext_resource type="TileSet" uid="uid://uoygroojndl3" path="res://textures/ground.tres" id="4_ujbu7"]
-[ext_resource type="PackedScene" uid="uid://djro2qll2rjyc" path="res://scenes/game.tscn" id="5_42rqe"]
 [ext_resource type="TileSet" uid="uid://dui5l7xdis3kd" path="res://textures/characters.tres" id="5_e545p"]
 [ext_resource type="Texture2D" uid="uid://dmqf4hkns5kdq" path="res://textures/tiny_dungeon/tile_0096.png" id="6_2wv3l"]
 [ext_resource type="FontFile" uid="uid://msxl68d1s27q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="6_qy6r0"]
 [ext_resource type="Texture2D" uid="uid://dj3vmnkl3v4s3" path="res://textures/tiny_dungeon/tile_0087.png" id="7_ujbu7"]
 [ext_resource type="Texture2D" uid="uid://b5u1q54mshcu5" path="res://textures/tiny_dungeon/tile_0084.png" id="8_e545p"]
+[ext_resource type="PackedScene" uid="uid://cq2umkhj00tu1" path="res://scenes/level_example.tscn" id="13_w3k4e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wlwq"]
 bg_color = Color(0.29803923, 0.29803923, 0.29803923, 1)
@@ -297,7 +297,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_myx47")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("5_42rqe")
+level_scene = ExtResource("13_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button" unique_id=1743952352]
 layout_mode = 1
@@ -340,7 +340,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_myx47")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("5_42rqe")
+level_scene = ExtResource("13_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button2" unique_id=306708919]
 layout_mode = 1
@@ -383,7 +383,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_myx47")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("5_42rqe")
+level_scene = ExtResource("13_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button3" unique_id=2002359139]
 layout_mode = 1
@@ -426,7 +426,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_myx47")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("5_42rqe")
+level_scene = ExtResource("13_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button4" unique_id=1787379118]
 layout_mode = 1
@@ -504,7 +504,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2wv3l")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("5_42rqe")
+level_scene = ExtResource("13_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button" unique_id=1862678127]
 layout_mode = 1
@@ -539,7 +539,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2wv3l")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("5_42rqe")
+level_scene = ExtResource("13_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button2" unique_id=1397892133]
 layout_mode = 1
@@ -574,7 +574,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2wv3l")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("5_42rqe")
+level_scene = ExtResource("13_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button3" unique_id=1601103230]
 layout_mode = 1
@@ -609,7 +609,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2wv3l")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("5_42rqe")
+level_scene = ExtResource("13_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Easy Levels/MarginContainer/MarginContainer/GridContainer/Button4" unique_id=2118807259]
 layout_mode = 1
@@ -679,7 +679,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_0rqca")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qy6r0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_w3k4e")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("5_42rqe")
+level_scene = ExtResource("13_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button" unique_id=273801069]
 layout_mode = 1
@@ -714,7 +714,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_0rqca")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qy6r0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_w3k4e")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("5_42rqe")
+level_scene = ExtResource("13_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button2" unique_id=291360225]
 layout_mode = 1
@@ -749,7 +749,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_0rqca")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qy6r0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_w3k4e")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("5_42rqe")
+level_scene = ExtResource("13_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button3" unique_id=1069029257]
 layout_mode = 1
@@ -784,7 +784,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_0rqca")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qy6r0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_w3k4e")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("5_42rqe")
+level_scene = ExtResource("13_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Normal Levels/MarginContainer/MarginContainer/GridContainer/Button4" unique_id=2111894068]
 layout_mode = 1
