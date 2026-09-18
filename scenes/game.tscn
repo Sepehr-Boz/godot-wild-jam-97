@@ -67,6 +67,7 @@ tile_set = ExtResource("1_p57ef")
 
 [node name="Game Manager" type="Node" parent="." unique_id=1094982514]
 script = ExtResource("7_u5sy4")
+max_actions_allowed = 50
 
 [node name="EnemyManager" type="Node" parent="." unique_id=1497168704]
 
@@ -195,6 +196,7 @@ theme_override_constants/margin_bottom = 816
 [node name="HSlider" type="HSlider" parent="Game UI/MarginContainer" unique_id=1551148795]
 layout_mode = 2
 size_flags_vertical = 1
+max_value = 50.0
 rounded = true
 scrollable = false
 tick_count = 10
@@ -216,8 +218,8 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 offset_transform_enabled = true
-offset_transform_position = Vector2(6, 8)
-text = "100"
+offset_transform_position = Vector2(2, 8)
+text = "50"
 horizontal_alignment = 1
 vertical_alignment = 2
 
