@@ -20,11 +20,6 @@ func _ready() -> void:
 	enemies = []
 	characters = []
 	time = 0
-	increment_time.connect(
-		func (x: int):
-			if _all_enemies_dead():
-				get_tree().quit()
-	)
 
 func _input(event: InputEvent) -> void:
 	if Engine.time_scale == 0:
@@ -37,7 +32,7 @@ func _input(event: InputEvent) -> void:
 			time -= 1
 			decrement_time.emit(time)
 
-func _all_enemies_dead() -> bool:
+func all_enemies_dead() -> bool:
 	for enemy: EnemyController in enemies:
 		if not enemy.is_dead_at(time):
 			return false
