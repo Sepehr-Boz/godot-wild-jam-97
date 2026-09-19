@@ -11,7 +11,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseButton:
 		event = event as InputEventMouseButton
-		if event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
+		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 			Engine.time_scale = 1
 			visible = false
 			_click_audio.play()
