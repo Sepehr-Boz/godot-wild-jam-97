@@ -8,6 +8,9 @@
 
 [node name="Node2D" unique_id=1000675191 instance=ExtResource("1_446hj")]
 
+[node name="Game Manager" parent="." index="2" unique_id=2098701123]
+occupied_positions = Array[Vector2i]([Vector2i(2, 1), Vector2i(1, 2), Vector2i(1, 6), Vector2i(2, 7), Vector2i(13, 1), Vector2i(14, 2), Vector2i(14, 6), Vector2i(13, 7)])
+
 [node name="EnemyController3" type="Node2D" parent="Enemies" parent_id_path=PackedInt32Array(543137243) index="0" unique_id=462278309]
 script = ExtResource("2_48y0u")
 enemy_tile_source_id = 38

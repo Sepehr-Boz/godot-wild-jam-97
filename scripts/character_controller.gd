@@ -100,6 +100,8 @@ func _input(event: InputEvent) -> void:
 		modulate.a = 0.25
 
 func _target_position_free(coord: Vector2i) -> bool:
+	if coord in GameManager.instance.occupied_positions:
+		return false
 	for character: CharacterController in GameManager.characters:
 		if character == self:
 			continue

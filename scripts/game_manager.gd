@@ -12,6 +12,9 @@ static var characters: Array[CharacterController] = []
 static var time: int = 0
 
 @export var max_actions_allowed: int = 100
+# stores 'collidable' objects so prevent characters moving onto these
+# positions
+@export var occupied_positions: Array[Vector2i] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

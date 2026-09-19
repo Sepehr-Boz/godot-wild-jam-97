@@ -11,6 +11,7 @@
 
 [node name="Game Manager" parent="." index="2" unique_id=2098701123]
 max_actions_allowed = 100
+occupied_positions = Array[Vector2i]([Vector2i(2, 1), Vector2i(1, 2), Vector2i(1, 6), Vector2i(2, 7), Vector2i(13, 1), Vector2i(14, 2), Vector2i(14, 6), Vector2i(13, 7)])
 
 [node name="EnemyController" type="Node2D" parent="Enemies" parent_id_path=PackedInt32Array(543137243) index="0" unique_id=250985193]
 script = ExtResource("2_fcfvj")
