@@ -6,6 +6,9 @@ extends Node2D
 # - this class keeps track of the defined movement the player wants to make
 # and then when time is incremented then it moves to that spot
 
+const LEVEL_BOUND_START: Vector2i = Vector2i.ZERO
+const LEVEL_BOUND_END: Vector2i = Vector2i(15, 8)
+
 @export var initial_position: Vector2i
 # to customise how some characters can move
 @export var move_directions: Array[Vector2i] = [
@@ -30,7 +33,9 @@ var past_movements: Array[Vector2i] = []
 
 var target_positions: Array[Vector2i]:
 	get:
-		return move_directions.map(func (x: Vector2i): return x + character_position).filter(_target_position_free)
+		return move_directions.map(
+			func (x: Vector2i): return x + character_position
+		).filter(_target_position_free).filter(_is_within_level_bounds)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -95,6 +100,8 @@ func _input(event: InputEvent) -> void:
 		modulate.a = 0.25
 
 func _target_position_free(coord: Vector2i) -> bool:
+	if coord in GameManager.instance.occupied_positions:
+		return false
 	for character: CharacterController in GameManager.characters:
 		if character == self:
 			continue
@@ -103,6 +110,18 @@ func _target_position_free(coord: Vector2i) -> bool:
 		elif character.target_position == coord:
 			return false
 	return true
+
+func _is_within_level_bounds(coord: Vector2i) -> bool:
+	if coord.x < LEVEL_BOUND_START.x:
+		return false
+	elif coord.x > LEVEL_BOUND_END.x:
+		return false
+	elif coord.y < LEVEL_BOUND_START.y:
+		return false
+	elif coord.y > LEVEL_BOUND_END.y:
+		return false
+	else:
+		return true
 
 func _target_position_will_kill_enemy(coord: Vector2i) -> bool:
 	for enemy: EnemyController in GameManager.enemies:

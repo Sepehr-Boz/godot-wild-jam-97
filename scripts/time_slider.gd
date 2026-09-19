@@ -1,13 +1,27 @@
 class_name TimeSlider
 extends HSlider
 
+@onready var _max_label: Label = $"../Label2"
+@onready var _value_label: Label = $"../Current Value"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not GameManager.instance:
 		await get_tree().create_timer(0.1).timeout
-	GameManager.instance.increment_time.connect(func (x): value = x)
-	GameManager.instance.decrement_time.connect(func (x): value = x)
+	max_value = GameManager.instance.max_actions_allowed
+	tick_count = max_value / 10
+	_max_label.text = str(GameManager.instance.max_actions_allowed)
+	_value_label.text = "Time Step 0"
+	GameManager.instance.increment_time.connect(
+		func (x):
+			set_value_no_signal(x)
+			_value_label.text = "Time Step %d" % x
+	)
+	GameManager.instance.decrement_time.connect(
+		func (x):
+			set_value_no_signal(x)
+			_value_label.text = "Time Step %d" % x
+	)
 	value_changed.connect(_on_manual_change)
 
 func _on_manual_change(value: float) -> void:

@@ -1,0 +1,61 @@
+[gd_scene format=4 uid="uid://cntsabmmxu1a5"]
+
+[ext_resource type="PackedScene" uid="uid://dh0skun3we2op" path="res://scenes/level_template.tscn" id="1_favs3"]
+[ext_resource type="Script" uid="uid://c3s47vnxua5mj" path="res://scripts/enemy_controller.gd" id="2_flhbt"]
+[ext_resource type="TileSet" uid="uid://dm6c4ho4yurov" path="res://textures/markers.tres" id="3_lfmll"]
+[ext_resource type="TileSet" uid="uid://dui5l7xdis3kd" path="res://textures/characters.tres" id="4_6hjpd"]
+[ext_resource type="PackedScene" uid="uid://82wg2pfneox0" path="res://scenes/archer.tscn" id="5_e5rvv"]
+
+[node name="Node2D" unique_id=1000675191 instance=ExtResource("1_favs3")]
+
+[node name="Game Manager" parent="." index="2" unique_id=2098701123]
+occupied_positions = Array[Vector2i]([Vector2i(2, 1), Vector2i(1, 2), Vector2i(1, 6), Vector2i(2, 7), Vector2i(13, 1), Vector2i(14, 2), Vector2i(14, 6), Vector2i(13, 7)])
+rng_seed = 4
+
+[node name="EnemyController5" type="Node2D" parent="Enemies" parent_id_path=PackedInt32Array(543137243) index="0" unique_id=897628565]
+script = ExtResource("2_flhbt")
+enemy_tile_source_id = 35
+path_points = Array[Vector2i]([Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0), Vector2i(8, 0), Vector2i(9, 0), Vector2i(10, 0), Vector2i(11, 0), Vector2i(12, 0), Vector2i(13, 0), Vector2i(14, 0)])
+start_at_random_point = true
+metadata/_custom_type_script = "uid://c3s47vnxua5mj"
+
+[node name="Path" type="TileMapLayer" parent="Enemies/EnemyController5" index="0" unique_id=2034111397]
+tile_map_data = PackedByteArray("AAABAAAAGgAAAAAAAAACAAAAGwAAAAAAAAADAAAAGwAAAAAAAAAEAAAAGwAAAAAAAAAFAAAAGwAAAAAAAAAGAAAAGwAAAAAAAAAHAAAAGwAAAAAAAAAIAAAAGwAAAAAAAAAJAAAAGwAAAAAAAAAKAAAAGwAAAAAAAAALAAAAGwAAAAAAAAAMAAAAGwAAAAAAAAANAAAAGwAAAAAAAAAOAAAAHAAAAAAAAAA=")
+tile_set = ExtResource("3_lfmll")
+
+[node name="Enemy" type="TileMapLayer" parent="Enemies/EnemyController5" index="1" unique_id=772339827]
+tile_map_data = PackedByteArray("AAABAAAAIwAAAAAAAAA=")
+tile_set = ExtResource("4_6hjpd")
+
+[node name="EnemyController6" type="Node2D" parent="Enemies" parent_id_path=PackedInt32Array(543137243) index="1" unique_id=259261182]
+script = ExtResource("2_flhbt")
+enemy_tile_source_id = 35
+path_points = Array[Vector2i]([Vector2i(14, 8), Vector2i(13, 8), Vector2i(12, 8), Vector2i(11, 8), Vector2i(10, 8), Vector2i(9, 8), Vector2i(8, 8), Vector2i(7, 8), Vector2i(6, 8), Vector2i(5, 8), Vector2i(4, 8), Vector2i(3, 8), Vector2i(2, 8), Vector2i(1, 8)])
+start_at_random_point = true
+metadata/_custom_type_script = "uid://c3s47vnxua5mj"
+
+[node name="Path" type="TileMapLayer" parent="Enemies/EnemyController6" index="0" unique_id=1301161697]
+tile_map_data = PackedByteArray("AAABAAgAGgAAAAAAAAACAAgAGwAAAAAAAAADAAgAGwAAAAAAAAAEAAgAGwAAAAAAAAAFAAgAGwAAAAAAAAAGAAgAGwAAAAAAAAAHAAgAGwAAAAAAAAAIAAgAGwAAAAAAAAAJAAgAGwAAAAAAAAAKAAgAGwAAAAAAAAALAAgAGwAAAAAAAAAMAAgAGwAAAAAAAAANAAgAGwAAAAAAAAAOAAgAHAAAAAAAAAA=")
+tile_set = ExtResource("3_lfmll")
+
+[node name="Enemy" type="TileMapLayer" parent="Enemies/EnemyController6" index="1" unique_id=636560542]
+tile_map_data = PackedByteArray("AAAOAAgAIwAAAAAAAAA=")
+tile_set = ExtResource("4_6hjpd")
+
+[node name="EnemyController8" type="Node2D" parent="Enemies" parent_id_path=PackedInt32Array(543137243) index="2" unique_id=247922519]
+script = ExtResource("2_flhbt")
+enemy_tile_source_id = 35
+path_points = Array[Vector2i]([Vector2i(15, 1), Vector2i(15, 2), Vector2i(15, 3), Vector2i(15, 4), Vector2i(15, 5), Vector2i(15, 6), Vector2i(15, 7)])
+start_at_random_point = true
+metadata/_custom_type_script = "uid://c3s47vnxua5mj"
+
+[node name="Path" type="TileMapLayer" parent="Enemies/EnemyController8" index="0" unique_id=1455241965]
+tile_map_data = PackedByteArray("AAAPAAEAGQAAAAAAAAAPAAIAHQAAAAAAAAAPAAMAHQAAAAAAAAAPAAQAHQAAAAAAAAAPAAUAHQAAAAAAAAAPAAYAHQAAAAAAAAAPAAcAIQAAAAAAAAA=")
+tile_set = ExtResource("3_lfmll")
+
+[node name="Enemy" type="TileMapLayer" parent="Enemies/EnemyController8" index="1" unique_id=696067246]
+tile_map_data = PackedByteArray("AAAPAAEAIwAAAAAAAAA=")
+tile_set = ExtResource("4_6hjpd")
+
+[node name="Character Controller4" parent="Characters" parent_id_path=PackedInt32Array(1611630907) index="0" unique_id=1721062491 instance=ExtResource("5_e5rvv")]
+initial_position = Vector2i(3, 4)
