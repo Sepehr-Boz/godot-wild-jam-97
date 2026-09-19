@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cq2umkhj00tu1" path="res://scenes/level_example.tscn" id="13_w3k4e"]
 [ext_resource type="PackedScene" uid="uid://cntsabmmxu1a5" path="res://scenes/rogue_tutorial.tscn" id="15_0oihc"]
 [ext_resource type="PackedScene" uid="uid://42w3er0sfi0" path="res://scenes/level_1.tscn" id="16_74jid"]
+[ext_resource type="PackedScene" uid="uid://bqh4axa4krcif" path="res://scenes/level_2.tscn" id="17_f5b06"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wlwq"]
 bg_color = Color(0.29803923, 0.29803923, 0.29803923, 1)
@@ -502,7 +503,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2wv3l")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("13_w3k4e")
+level_scene = ExtResource("17_f5b06")
 
 [node name="MarginContainer" type="MarginContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button2" unique_id=1397892133]
 layout_mode = 1
