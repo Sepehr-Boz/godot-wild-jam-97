@@ -10,6 +10,7 @@ static var RNG: RandomNumberGenerator = RandomNumberGenerator.new()
 static var enemies: Array[EnemyController] = []
 static var characters: Array[CharacterController] = []
 static var time: int = 0
+var level_clear_time: int
 
 @export var max_actions_allowed: int = 100
 # stores 'collidable' objects so prevent characters moving onto these
@@ -26,6 +27,11 @@ func _ready() -> void:
 	enemies = []
 	characters = []
 	time = 0
+	level_clear_time = 0
+	enemy_killed_at.connect(
+		func (x, y):
+			level_clear_time = y
+	)
 
 func _input(event: InputEvent) -> void:
 	if Engine.time_scale == 0:
