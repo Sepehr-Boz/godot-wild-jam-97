@@ -18,11 +18,6 @@ func _ready() -> void:
 	_left_button.visible = false
 	_right_button.visible = len(_slides) > 1
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func _on_left_button_press() -> void:
 	if current_slide == 0:
 		return

@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://42w3er0sfi0" path="res://scenes/level_1.tscn" id="16_74jid"]
 [ext_resource type="PackedScene" uid="uid://bqh4axa4krcif" path="res://scenes/level_2.tscn" id="17_f5b06"]
 [ext_resource type="PackedScene" uid="uid://dq26uko1u0p2s" path="res://scenes/level_3.tscn" id="18_4it42"]
+[ext_resource type="Script" uid="uid://dumma4nsm3mpa" path="res://scripts/save_manager.gd" id="20_lwmgr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wlwq"]
 bg_color = Color(0.29803923, 0.29803923, 0.29803923, 1)
@@ -90,6 +91,10 @@ shadow_offset = Vector2(0, 8)
 font = ExtResource("6_qy6r0")
 font_size = 64
 
+[sub_resource type="LabelSettings" id="LabelSettings_nc37p"]
+font = ExtResource("6_qy6r0")
+font_size = 24
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0rqca"]
 load_path = "res://.godot/imported/tile_0112.png-acbb9730e106fb1f72a48608a6cb531b.ctex"
 
@@ -152,6 +157,9 @@ _slides = [NodePath("Homepage"), NodePath("Tutorial Levels"), NodePath("Levels")
 offset = Vector2(-16, -16)
 anchor_mode = 0
 zoom = Vector2(5, 5)
+
+[node name="Save Manager" type="Node" parent="." unique_id=695324521]
+script = ExtResource("20_lwmgr")
 
 [node name="Navigation Buttons" type="CanvasLayer" parent="." unique_id=175906703]
 
@@ -255,7 +263,7 @@ theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
 columns = 2
 
-[node name="Button" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1245348674]
+[node name="Button" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1245348674 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -265,6 +273,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
 script = ExtResource("4_tuscg")
 level_scene = ExtResource("9_w3k4e")
+level_save_name = "tutorial_1"
+high_score_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Label2")
 
 [node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button" unique_id=1743952352]
 layout_mode = 1
@@ -289,7 +299,11 @@ texture = ExtResource("6_2wv3l")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer/HBoxContainer" unique_id=1216366419]
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer/HBoxContainer" unique_id=1219619084]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1216366419]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -298,7 +312,16 @@ label_settings = SubResource("LabelSettings_e5wnf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button2" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1165268521]
+[node name="Label2" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer/HBoxContainer/VBoxContainer" unique_id=130316628]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "High-Score 0"
+label_settings = SubResource("LabelSettings_nc37p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1165268521 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -308,6 +331,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
 script = ExtResource("4_tuscg")
 level_scene = ExtResource("11_ljdws")
+level_save_name = "tutorial_2"
+high_score_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Label2")
 
 [node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button2" unique_id=306708919]
 layout_mode = 1
@@ -332,7 +357,11 @@ texture = ExtResource("7_ujbu7")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer/HBoxContainer" unique_id=1714792306]
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer/HBoxContainer" unique_id=443017769]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1237233071]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -341,7 +370,16 @@ label_settings = SubResource("LabelSettings_e5wnf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button3" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1621565426]
+[node name="Label2" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1142234248]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "High-Score 0"
+label_settings = SubResource("LabelSettings_nc37p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button3" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1621565426 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -351,6 +389,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
 script = ExtResource("4_tuscg")
 level_scene = ExtResource("13_crhqw")
+level_save_name = "tutorial_3"
+high_score_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Label2")
 
 [node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button3" unique_id=2002359139]
 layout_mode = 1
@@ -375,7 +415,11 @@ texture = ExtResource("8_e545p")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer/HBoxContainer" unique_id=1169482633]
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer/HBoxContainer" unique_id=2106888206]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1264483756]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -384,7 +428,16 @@ label_settings = SubResource("LabelSettings_e5wnf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button4" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=714179744]
+[node name="Label2" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer/HBoxContainer/VBoxContainer" unique_id=175252314]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "High-Score 0"
+label_settings = SubResource("LabelSettings_nc37p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button4" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=714179744 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -394,6 +447,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
 script = ExtResource("4_tuscg")
 level_scene = ExtResource("15_0oihc")
+level_save_name = "tutorial_4"
+high_score_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Label2")
 
 [node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button4" unique_id=1787379118]
 layout_mode = 1
@@ -418,12 +473,25 @@ texture = SubResource("CompressedTexture2D_0rqca")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer/HBoxContainer" unique_id=1881869224]
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer/HBoxContainer" unique_id=1034581428]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer/HBoxContainer/VBoxContainer" unique_id=382654115]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Rogue"
 label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2065717745]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "High-Score 0"
+label_settings = SubResource("LabelSettings_nc37p")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -462,7 +530,7 @@ theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
 columns = 2
 
-[node name="Button" type="Button" parent="Levels/MarginContainer/MarginContainer/GridContainer" unique_id=531068391]
+[node name="Button" type="Button" parent="Levels/MarginContainer/MarginContainer/GridContainer" unique_id=531068391 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -472,6 +540,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
 script = ExtResource("4_tuscg")
 level_scene = ExtResource("16_74jid")
+level_save_name = "level_1"
+high_score_label = NodePath("MarginContainer/VBoxContainer/Label2")
 
 [node name="MarginContainer" type="MarginContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button" unique_id=1862678127]
 layout_mode = 1
@@ -485,10 +555,12 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 64
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer" unique_id=1598282118]
+[node name="VBoxContainer" type="VBoxContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer" unique_id=1290549733]
 layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
 
-[node name="Label" type="Label" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer/HBoxContainer" unique_id=744805509]
+[node name="Label" type="Label" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer/VBoxContainer" unique_id=1963745137]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -497,7 +569,16 @@ label_settings = SubResource("LabelSettings_e5wnf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button2" type="Button" parent="Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1807143752]
+[node name="Label2" type="Label" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button/MarginContainer/VBoxContainer" unique_id=714891038]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "High-Score 0"
+label_settings = SubResource("LabelSettings_nc37p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1807143752 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -507,6 +588,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
 script = ExtResource("4_tuscg")
 level_scene = ExtResource("17_f5b06")
+level_save_name = "level_2"
+high_score_label = NodePath("MarginContainer/VBoxContainer/Label2")
 
 [node name="MarginContainer" type="MarginContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button2" unique_id=1397892133]
 layout_mode = 1
@@ -520,10 +603,12 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 64
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer" unique_id=497414696]
+[node name="VBoxContainer" type="VBoxContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer" unique_id=699427047]
 layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
 
-[node name="Label" type="Label" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer/HBoxContainer" unique_id=1007725427]
+[node name="Label" type="Label" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer/VBoxContainer" unique_id=1925966035]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -532,7 +617,16 @@ label_settings = SubResource("LabelSettings_e5wnf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button3" type="Button" parent="Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1634262066]
+[node name="Label2" type="Label" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button2/MarginContainer/VBoxContainer" unique_id=1271159647]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "High-Score 0"
+label_settings = SubResource("LabelSettings_nc37p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button3" type="Button" parent="Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1634262066 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -542,6 +636,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
 script = ExtResource("4_tuscg")
 level_scene = ExtResource("18_4it42")
+level_save_name = "level_3"
+high_score_label = NodePath("MarginContainer/VBoxContainer/Label2")
 
 [node name="MarginContainer" type="MarginContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button3" unique_id=1601103230]
 layout_mode = 1
@@ -555,10 +651,12 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 64
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer" unique_id=1569519875]
+[node name="VBoxContainer" type="VBoxContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer" unique_id=662700918]
 layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
 
-[node name="Label" type="Label" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer/HBoxContainer" unique_id=2074277721]
+[node name="Label" type="Label" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer/VBoxContainer" unique_id=1653626974]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -567,7 +665,16 @@ label_settings = SubResource("LabelSettings_e5wnf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button4" type="Button" parent="Levels/MarginContainer/MarginContainer/GridContainer" unique_id=2083706246]
+[node name="Label2" type="Label" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button3/MarginContainer/VBoxContainer" unique_id=1924789277]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "High-Score 0"
+label_settings = SubResource("LabelSettings_nc37p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button4" type="Button" parent="Levels/MarginContainer/MarginContainer/GridContainer" unique_id=2083706246 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -577,6 +684,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ujbu7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_e545p")
 script = ExtResource("4_tuscg")
 level_scene = ExtResource("13_w3k4e")
+level_save_name = "level_4"
+high_score_label = NodePath("MarginContainer/VBoxContainer/Label2")
 
 [node name="MarginContainer" type="MarginContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button4" unique_id=2118807259]
 layout_mode = 1
@@ -590,14 +699,25 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 64
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer" unique_id=93724159]
+[node name="VBoxContainer" type="VBoxContainer" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer" unique_id=1439028506]
 layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
 
-[node name="Label" type="Label" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer/HBoxContainer" unique_id=127464389]
+[node name="Label" type="Label" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer/VBoxContainer" unique_id=446895661]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Level 4"
 label_settings = SubResource("LabelSettings_e5wnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button4/MarginContainer/VBoxContainer" unique_id=600735767]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "High-Score 0"
+label_settings = SubResource("LabelSettings_nc37p")
 horizontal_alignment = 1
 vertical_alignment = 1

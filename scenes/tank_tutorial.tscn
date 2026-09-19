@@ -68,3 +68,8 @@ initial_position = Vector2i(7, 4)
 
 [node name="Foreground" parent="." index="5" unique_id=832319535]
 tile_map_data = PackedByteArray("AAANAAEALgAAAAAAAAACAAcALgAAAAAAAAAMAAIALgAAAAAAAAAOAAAALgAAAAAAAAADAAYALgAAAAAAAAABAAgALgAAAAAAAAAEAAQALQAAAAAAAAALAAQALQAAAAAAAAAEAAMAJwAAAAAAAAALAAMAJwAAAAAAAAABAAEANwAAAAAAAAAOAAcANwAAAAAAAAA=")
+
+[node name="MarginContainer2" parent="Game UI" parent_id_path=PackedInt32Array(504079628) index="1" unique_id=604576462]
+level_save_name = "tutorial_2"
+
+[editable path="Game UI"]

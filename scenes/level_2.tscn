@@ -65,3 +65,8 @@ initial_position = Vector2i(4, 8)
 
 [node name="Character Controller4" parent="Characters" parent_id_path=PackedInt32Array(1611630907) index="1" unique_id=68438231 instance=ExtResource("6_que50")]
 initial_position = Vector2i(11, 0)
+
+[node name="MarginContainer2" parent="Game UI" parent_id_path=PackedInt32Array(504079628) index="1" unique_id=604576462]
+level_save_name = "level_2"
+
+[editable path="Game UI"]
