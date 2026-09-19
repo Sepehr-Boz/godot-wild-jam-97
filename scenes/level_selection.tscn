@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bqh4axa4krcif" path="res://scenes/level_2.tscn" id="17_f5b06"]
 [ext_resource type="PackedScene" uid="uid://dq26uko1u0p2s" path="res://scenes/level_3.tscn" id="18_4it42"]
 [ext_resource type="Script" uid="uid://dumma4nsm3mpa" path="res://scripts/save_manager.gd" id="20_lwmgr"]
+[ext_resource type="AudioStream" uid="uid://bt78wjqa8fkqw" path="res://audio/click1.ogg" id="21_7jkdw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wlwq"]
 bg_color = Color(0.29803923, 0.29803923, 0.29803923, 1)
@@ -321,6 +322,9 @@ label_settings = SubResource("LabelSettings_nc37p")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Click Audio" type="AudioStreamPlayer2D" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button" unique_id=56240592]
+stream = ExtResource("21_7jkdw")
+
 [node name="Button2" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1165268521 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -378,6 +382,9 @@ text = "High-Score 0"
 label_settings = SubResource("LabelSettings_nc37p")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Click Audio" type="AudioStreamPlayer2D" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button2" unique_id=1486489051]
+stream = ExtResource("21_7jkdw")
 
 [node name="Button3" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1621565426 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
@@ -437,6 +444,9 @@ label_settings = SubResource("LabelSettings_nc37p")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Click Audio" type="AudioStreamPlayer2D" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button3" unique_id=1836108350]
+stream = ExtResource("21_7jkdw")
+
 [node name="Button4" type="Button" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer" unique_id=714179744 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -494,6 +504,9 @@ text = "High-Score 0"
 label_settings = SubResource("LabelSettings_nc37p")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Click Audio" type="AudioStreamPlayer2D" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button4" unique_id=2091025025]
+stream = ExtResource("21_7jkdw")
 
 [node name="Levels" type="CanvasLayer" parent="." unique_id=2140302375]
 visible = false
@@ -578,6 +591,9 @@ label_settings = SubResource("LabelSettings_nc37p")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Click Audio" type="AudioStreamPlayer2D" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button" unique_id=283218670]
+stream = ExtResource("21_7jkdw")
+
 [node name="Button2" type="Button" parent="Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1807143752 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -625,6 +641,9 @@ text = "High-Score 0"
 label_settings = SubResource("LabelSettings_nc37p")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Click Audio" type="AudioStreamPlayer2D" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button2" unique_id=892946774]
+stream = ExtResource("21_7jkdw")
 
 [node name="Button3" type="Button" parent="Levels/MarginContainer/MarginContainer/GridContainer" unique_id=1634262066 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
@@ -674,6 +693,9 @@ label_settings = SubResource("LabelSettings_nc37p")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Click Audio" type="AudioStreamPlayer2D" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button3" unique_id=2036270215]
+stream = ExtResource("21_7jkdw")
+
 [node name="Button4" type="Button" parent="Levels/MarginContainer/MarginContainer/GridContainer" unique_id=2083706246 node_paths=PackedStringArray("high_score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -721,3 +743,9 @@ text = "High-Score 0"
 label_settings = SubResource("LabelSettings_nc37p")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Click Audio" type="AudioStreamPlayer2D" parent="Levels/MarginContainer/MarginContainer/GridContainer/Button4" unique_id=1044533647]
+stream = ExtResource("21_7jkdw")
+
+[node name="Click Audio" type="AudioStreamPlayer2D" parent="." unique_id=1050998021]
+stream = ExtResource("21_7jkdw")

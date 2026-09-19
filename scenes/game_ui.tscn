@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://dx6jv1w8hbuae"]
 
 [ext_resource type="Script" uid="uid://dv70vbuwrvf6f" path="res://scripts/time_slider.gd" id="1_u001w"]
+[ext_resource type="AudioStream" uid="uid://3y37wfgnlntw" path="res://audio/switch14.ogg" id="2_bt76a"]
 [ext_resource type="FontFile" uid="uid://msxl68d1s27q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_u2dgd"]
 [ext_resource type="Script" uid="uid://dpcfn5pahm5an" path="res://scripts/game_win_container.gd" id="3_bt76a"]
+[ext_resource type="AudioStream" uid="uid://bt78wjqa8fkqw" path="res://audio/click1.ogg" id="4_u2dgd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h2vd2"]
 font = ExtResource("2_u2dgd")
@@ -76,6 +78,12 @@ tick_count = 10
 ticks_on_borders = true
 script = ExtResource("1_u001w")
 
+[node name="Increment Audio" type="AudioStreamPlayer2D" parent="MarginContainer/HSlider" unique_id=1999828648]
+position = Vector2(-80, -16)
+stream = ExtResource("2_bt76a")
+volume_db = -10.0
+pitch_scale = 0.5
+
 [node name="Label" type="Label" parent="MarginContainer" unique_id=1924916859]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -140,3 +148,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_84d7x")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_gw8yf")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2e8ei")
 text = "Confirm Path?"
+
+[node name="Click Audio" type="AudioStreamPlayer2D" parent="MarginContainer2/HBoxContainer" unique_id=382047819]
+position = Vector2(-80, -814.5)
+stream = ExtResource("4_u2dgd")

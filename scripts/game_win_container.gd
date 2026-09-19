@@ -2,6 +2,7 @@ extends MarginContainer
 
 @export var level_save_name: String
 @onready var _confirm_button: Button = $HBoxContainer/Button
+@onready var _click_audio: AudioStreamPlayer2D = $"HBoxContainer/Click Audio"
 var _level_select_scene: PackedScene = load("res://scenes/level_selection.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -18,4 +19,6 @@ func _on_confirm_press() -> void:
 	config.load(SaveManager.SAVE_FILE_PATH)
 	config.set_value("Player", level_save_name, GameManager.instance.level_clear_time)
 	config.save(SaveManager.SAVE_FILE_PATH)
+	_click_audio.play()
+	await _click_audio.finished
 	get_tree().change_scene_to_packed(_level_select_scene)

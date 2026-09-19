@@ -3,6 +3,7 @@ extends Control
 @export var _slides: Array[CanvasLayer] = []
 @onready var _left_button: Button = $"Navigation Buttons/Left Button"
 @onready var _right_button: Button = $"Navigation Buttons/Right Button"
+@onready var _click_audio: AudioStreamPlayer2D = $"Click Audio"
 
 var current_slide: int = 0
 
@@ -19,6 +20,7 @@ func _ready() -> void:
 	_right_button.visible = len(_slides) > 1
 
 func _on_left_button_press() -> void:
+	_click_audio.play()
 	if current_slide == 0:
 		return
 	hide_slide(current_slide)
@@ -28,6 +30,7 @@ func _on_left_button_press() -> void:
 	_right_button.visible = current_slide != len(_slides) - 1
 
 func _on_right_button_press() -> void:
+	_click_audio.play()
 	if current_slide == len(_slides) - 1:
 		return
 	hide_slide(current_slide)
