@@ -23,6 +23,7 @@ func _ready() -> void:
 		func ():
 			_click_audio.play()
 			await _click_audio.finished
+			Engine.time_scale = 1
 			get_tree().change_scene_to_packed(_level_select_scene)
 	)
 	is_open = false
