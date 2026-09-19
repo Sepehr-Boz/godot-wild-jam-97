@@ -4,57 +4,7 @@
 [ext_resource type="Script" uid="uid://ba81hliobouyo" path="res://scripts/game_manager.gd" id="2_0ra3k"]
 [ext_resource type="TileSet" uid="uid://doqv7vurgjjsl" path="res://textures/objects.tres" id="3_0ra3k"]
 [ext_resource type="PackedScene" uid="uid://brrn8mv8dglf8" path="res://scenes/pause_menu.tscn" id="3_cdatj"]
-[ext_resource type="Script" uid="uid://dv70vbuwrvf6f" path="res://scripts/time_slider.gd" id="4_un07w"]
-[ext_resource type="FontFile" uid="uid://msxl68d1s27q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="5_t0jqh"]
-[ext_resource type="Script" uid="uid://dpcfn5pahm5an" path="res://scripts/game_win_container.gd" id="6_hj7jb"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_h2vd2"]
-font = ExtResource("5_t0jqh")
-
-[sub_resource type="LabelSettings" id="LabelSettings_8yqn4"]
-font = ExtResource("5_t0jqh")
-
-[sub_resource type="LabelSettings" id="LabelSettings_88dq5"]
-font = ExtResource("5_t0jqh")
-font_size = 32
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84d7x"]
-content_margin_left = 16.0
-content_margin_right = 16.0
-bg_color = Color(0, 0, 0, 1)
-skew = Vector2(0.165, 0)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.3529412, 0.8392157, 0.13725491, 1)
-shadow_color = Color(0, 0, 0, 0.24705882)
-shadow_size = 4
-shadow_offset = Vector2(0, 8)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gw8yf"]
-bg_color = Color(0.3529412, 0.8392157, 0.13725491, 1)
-skew = Vector2(0.165, 0)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.3529412, 0.8392157, 0.13725491, 1)
-shadow_color = Color(0, 0, 0, 0.24705882)
-shadow_size = 4
-shadow_offset = Vector2(0, 8)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2e8ei"]
-bg_color = Color(0.68307734, 0.6830774, 0.68307734, 1)
-skew = Vector2(0.165, 0)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.3529412, 0.8392157, 0.13725491, 1)
-shadow_color = Color(0, 0, 0, 0.24705882)
-shadow_size = 4
-shadow_offset = Vector2(0, 8)
+[ext_resource type="PackedScene" uid="uid://dx6jv1w8hbuae" path="res://scenes/game_ui.tscn" id="4_amll8"]
 
 [node name="Node2D" type="Node2D" unique_id=1000675191]
 
@@ -79,82 +29,6 @@ max_actions_allowed = 50
 tile_map_data = PackedByteArray("AAABAAIANgAAAAAAAAACAAEANgAAAAAAAAANAAEANgAAAAAAAAAOAAIANgAAAAAAAAAOAAYANgAAAAAAAAANAAcANgAAAAAAAAACAAcANgAAAAAAAAABAAYANgAAAAAAAAACAAYANwAAAAAAAAANAAYANwAAAAAAAAANAAIANwAAAAAAAAACAAIANwAAAAAAAAA=")
 tile_set = ExtResource("3_0ra3k")
 
-[node name="Game UI" type="CanvasLayer" parent="." unique_id=1946515490]
-
-[node name="MarginContainer" type="MarginContainer" parent="Game UI" unique_id=1024119671]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 80
-theme_override_constants/margin_bottom = 816
-
-[node name="HSlider" type="HSlider" parent="Game UI/MarginContainer" unique_id=1159132999]
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 50.0
-rounded = true
-scrollable = false
-tick_count = 10
-ticks_on_borders = true
-script = ExtResource("4_un07w")
-
-[node name="Label" type="Label" parent="Game UI/MarginContainer" unique_id=1594967772]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-offset_transform_enabled = true
-offset_transform_position = Vector2(2, 8)
-text = "0"
-label_settings = SubResource("LabelSettings_h2vd2")
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="Label2" type="Label" parent="Game UI/MarginContainer" unique_id=575438458]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-offset_transform_enabled = true
-offset_transform_position = Vector2(3.5, 8)
-text = "50"
-label_settings = SubResource("LabelSettings_8yqn4")
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="Game UI" unique_id=2144251562]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 816
-theme_override_constants/margin_right = 80
-theme_override_constants/margin_bottom = 16
-script = ExtResource("6_hj7jb")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Game UI/MarginContainer2" unique_id=1143074375]
-layout_mode = 2
-theme_override_constants/separation = 64
-alignment = 1
-
-[node name="Label" type="Label" parent="Game UI/MarginContainer2/HBoxContainer" unique_id=1530684243]
-layout_mode = 2
-text = "You Killed All Enemies!"
-label_settings = SubResource("LabelSettings_88dq5")
-
-[node name="Button" type="Button" parent="Game UI/MarginContainer2/HBoxContainer" unique_id=1908863412]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_t0jqh")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_84d7x")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_gw8yf")
-theme_override_styles/hover = SubResource("StyleBoxFlat_2e8ei")
-text = "Confirm Path?"
+[node name="Game UI" parent="." unique_id=504079628 instance=ExtResource("4_amll8")]
 
 [node name="Pause Menu" parent="." unique_id=1920645430 instance=ExtResource("3_cdatj")]
