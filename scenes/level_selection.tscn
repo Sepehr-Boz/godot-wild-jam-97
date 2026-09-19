@@ -11,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://msxl68d1s27q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="6_qy6r0"]
 [ext_resource type="Texture2D" uid="uid://dj3vmnkl3v4s3" path="res://textures/tiny_dungeon/tile_0087.png" id="7_ujbu7"]
 [ext_resource type="Texture2D" uid="uid://b5u1q54mshcu5" path="res://textures/tiny_dungeon/tile_0084.png" id="8_e545p"]
+[ext_resource type="PackedScene" uid="uid://dhep8sxgm21jg" path="res://scenes/knight_tutorial.tscn" id="9_w3k4e"]
 [ext_resource type="PackedScene" uid="uid://cq2umkhj00tu1" path="res://scenes/level_example.tscn" id="13_w3k4e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wlwq"]
@@ -35,6 +36,7 @@ shadow_color = Color(0, 0, 0, 0.24705882)
 shadow_offset = Vector2(0, 10)
 
 [sub_resource type="LabelSettings" id="LabelSettings_0wlwq"]
+font = ExtResource("6_qy6r0")
 font_size = 42
 font_color = Color(0.72156864, 0.6117647, 1, 1)
 outline_size = 2
@@ -86,6 +88,7 @@ font_size = 64
 load_path = "res://.godot/imported/tile_0112.png-acbb9730e106fb1f72a48608a6cb531b.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_0rqca"]
+font = ExtResource("6_qy6r0")
 font_size = 42
 font_color = Color(0.5254902, 0.8392157, 1, 1)
 outline_size = 2
@@ -130,6 +133,7 @@ shadow_size = 4
 shadow_offset = Vector2(0, 8)
 
 [sub_resource type="LabelSettings" id="LabelSettings_2wv3l"]
+font = ExtResource("6_qy6r0")
 font_size = 42
 font_color = Color(0.96862745, 0.6627451, 0.20784314, 1)
 outline_size = 2
@@ -297,7 +301,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_myx47")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("13_w3k4e")
+level_scene = ExtResource("9_w3k4e")
 
 [node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button" unique_id=1743952352]
 layout_mode = 1
