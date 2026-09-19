@@ -15,11 +15,14 @@ static var time: int = 0
 # stores 'collidable' objects so prevent characters moving onto these
 # positions
 @export var occupied_positions: Array[Vector2i] = []
+# used to keep the level the same everytime its opened
+@export var rng_seed: int = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	instance = self
 	RNG = RandomNumberGenerator.new()
+	RNG.seed = rng_seed
 	enemies = []
 	characters = []
 	time = 0
