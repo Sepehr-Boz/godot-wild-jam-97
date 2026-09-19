@@ -3,6 +3,7 @@ extends HSlider
 
 @onready var _max_label: Label = $"../Label2"
 @onready var _value_label: Label = $"../Current Value"
+@onready var _increment_audio: AudioStreamPlayer2D = $"Increment Audio"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,11 +17,13 @@ func _ready() -> void:
 		func (x):
 			set_value_no_signal(x)
 			_value_label.text = "Time Step %d" % x
+			_increment_audio.play()
 	)
 	GameManager.instance.decrement_time.connect(
 		func (x):
 			set_value_no_signal(x)
 			_value_label.text = "Time Step %d" % x
+			_increment_audio.play()
 	)
 	value_changed.connect(_on_manual_change)
 

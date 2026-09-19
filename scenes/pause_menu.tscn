@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b3lax2ixh6nj2" path="res://scripts/pause_menu.gd" id="1_myx47"]
 [ext_resource type="Texture2D" uid="uid://dshsltrqp6pcu" path="res://textures/game_icons/barsHorizontal.png" id="2_kukqi"]
 [ext_resource type="FontFile" uid="uid://msxl68d1s27q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="3_kukqi"]
+[ext_resource type="AudioStream" uid="uid://bt78wjqa8fkqw" path="res://audio/click1.ogg" id="4_5d2l8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5wnf"]
 content_margin_left = 48.0
@@ -139,3 +140,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_kvuet")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_trtic")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ir15t")
 text = "Quit"
+
+[node name="Click Audio" type="AudioStreamPlayer2D" parent="." unique_id=1776941943]
+stream = ExtResource("4_5d2l8")

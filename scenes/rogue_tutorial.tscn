@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://dui5l7xdis3kd" path="res://textures/characters.tres" id="4_6hjpd"]
 [ext_resource type="PackedScene" uid="uid://82wg2pfneox0" path="res://scenes/archer.tscn" id="5_e5rvv"]
 [ext_resource type="Script" uid="uid://obbs6wvfk0q1" path="res://scripts/tutorial_panel.gd" id="6_lfmll"]
+[ext_resource type="AudioStream" uid="uid://bt78wjqa8fkqw" path="res://audio/click1.ogg" id="7_6hjpd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6hjpd"]
 bg_color = Color(0.18359044, 0.18359044, 0.18359044, 1)
@@ -123,5 +124,8 @@ bbcode_enabled = true
 text = "[font=res://fonts/Bungee/Bungee-Regular.ttf][font_size=24][color=cc2222ff]Click Anywhere to Begin[/color][/font_size][/font]"
 horizontal_alignment = 2
 vertical_alignment = 2
+
+[node name="Click Audio" type="AudioStreamPlayer2D" parent="Tutorial Popup" index="1" unique_id=2072030987]
+stream = ExtResource("7_6hjpd")
 
 [editable path="Game UI"]
