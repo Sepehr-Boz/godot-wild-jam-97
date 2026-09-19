@@ -5,6 +5,23 @@
 [ext_resource type="TileSet" uid="uid://dm6c4ho4yurov" path="res://textures/markers.tres" id="3_0yqio"]
 [ext_resource type="TileSet" uid="uid://dui5l7xdis3kd" path="res://textures/characters.tres" id="4_ba7d2"]
 [ext_resource type="PackedScene" uid="uid://bcth45kacap3e" path="res://scenes/knight.tscn" id="5_dpw4y"]
+[ext_resource type="Script" uid="uid://obbs6wvfk0q1" path="res://scripts/tutorial_panel.gd" id="6_0yqio"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wlwq"]
+bg_color = Color(0.18359044, 0.18359044, 0.18359044, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 2
+shadow_offset = Vector2(0, 8)
 
 [node name="Node2D" unique_id=1000675191 instance=ExtResource("1_khenl")]
 
@@ -79,5 +96,49 @@ tile_map_data = PackedByteArray("AAABAAIAIQAAAAAAAAACAAEAIAAAAAAAAAANAAEAIAAAAAA
 
 [node name="MarginContainer2" parent="Game UI" parent_id_path=PackedInt32Array(504079628) index="1" unique_id=604576462]
 level_save_name = "tutorial_1"
+
+[node name="Tutorial Popup" type="CanvasLayer" parent="." index="8" unique_id=2060574637]
+script = ExtResource("6_0yqio")
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial Popup" index="0" unique_id=1390301027]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_top = 160
+theme_override_constants/margin_right = 160
+theme_override_constants/margin_bottom = 160
+
+[node name="Panel" type="Panel" parent="Tutorial Popup/MarginContainer" index="0" unique_id=632766554]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0wlwq")
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial Popup/MarginContainer" index="1" unique_id=97725634]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 32
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tutorial Popup/MarginContainer/MarginContainer" index="0" unique_id=293275292]
+layout_mode = 2
+bbcode_enabled = true
+text = "[font=res://fonts/Bungee/Bungee-Regular.ttf][font_size=44]This is the [u][rainbow freq=1.0 sat=0.8 val=0.8 speed=0.2]Knight.[/rainbow][/u][/font_size]
+[font_size=24]He is able to move in all [color=11ee11ff]8 directions.[/color]
+[ul]The [color=11ee11ff]objective[/color] is to kill all the enemies by moving onto them within the least number of actions as possible.
+To [color=11ee11ff]move[/color] the character drag from the character to the destination spot to mark where it will move to. To cancel a move simply click on the character and it will stay stationary for the next time.
+Use the scroll wheel to [color=11ee11ff]increment and decrement the time[/color] in the level, and confirm your path once the objective has been reached[/ul][/font_size][/font]
+"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Tutorial Popup/MarginContainer/MarginContainer" index="1" unique_id=1254786369]
+layout_mode = 2
+bbcode_enabled = true
+text = "[font=res://fonts/Bungee/Bungee-Regular.ttf][font_size=24][color=cc2222ff]Click Anywhere to Begin[/color][/font_size][/font]"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [editable path="Game UI"]
