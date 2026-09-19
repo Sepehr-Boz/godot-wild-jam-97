@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://b5u1q54mshcu5" path="res://textures/tiny_dungeon/tile_0084.png" id="8_e545p"]
 [ext_resource type="PackedScene" uid="uid://dhep8sxgm21jg" path="res://scenes/knight_tutorial.tscn" id="9_w3k4e"]
 [ext_resource type="PackedScene" uid="uid://6vwc0ngwedst" path="res://scenes/tank_tutorial.tscn" id="11_ljdws"]
+[ext_resource type="PackedScene" uid="uid://2rbstkng4ao8" path="res://scenes/mage_tutorial.tscn" id="13_crhqw"]
 [ext_resource type="PackedScene" uid="uid://cq2umkhj00tu1" path="res://scenes/level_example.tscn" id="13_w3k4e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wlwq"]
@@ -388,7 +389,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_myx47")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_42rqe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rcujv")
 script = ExtResource("4_tuscg")
-level_scene = ExtResource("13_w3k4e")
+level_scene = ExtResource("13_crhqw")
 
 [node name="MarginContainer" type="MarginContainer" parent="Tutorial Levels/MarginContainer/MarginContainer/GridContainer/Button3" unique_id=2002359139]
 layout_mode = 1
